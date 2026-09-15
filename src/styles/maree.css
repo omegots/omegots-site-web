@@ -1,0 +1,298 @@
+/* --- Mini-jeu « La marée monte » --------------------------------------- */
+
+.maree {
+  padding: clamp(56px, 8vw, 96px) 0;
+}
+
+/* Texte à gauche, jeu à droite, même gabarit que Presse et Recyclage. */
+.maree-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.8fr) 1.2fr;
+  gap: clamp(28px, 5vw, 72px);
+  align-items: center;
+}
+
+.maree .section-head.maree-head {
+  margin-bottom: 0;
+}
+
+.maree-col {
+  min-width: 0;
+}
+
+.maree-jeu {
+  max-width: none;
+}
+
+.maree-plateau {
+  position: relative;
+  height: min(60svh, 460px);
+  min-height: 340px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  background: #efe5cf;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  box-shadow: var(--shadow);
+}
+
+/* Sable : trame très légère de dalles, dans la palette. */
+.maree-sable {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 79px,
+      rgba(26, 75, 110, 0.06) 79px 80px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 79px,
+      rgba(26, 75, 110, 0.06) 79px 80px
+    ),
+    linear-gradient(180deg, #f3ebd8 0%, #ebdfc5 100%);
+}
+
+.maree-megot {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  margin: -26px 0 0 -26px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  z-index: 2;
+  will-change: transform, opacity;
+}
+
+.maree-megot:disabled {
+  cursor: default;
+}
+
+.maree-megot svg {
+  width: 26px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 2px 2px rgba(26, 75, 110, 0.25));
+}
+
+.maree-megot:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: -4px;
+  border-radius: 50%;
+}
+
+.maree-megot.is-sauve,
+.maree-megot.is-eau {
+  pointer-events: none;
+}
+
+/* L'eau, qui monte depuis le bas. */
+.maree-eau {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+  background: var(--vert);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.maree-crete {
+  position: absolute;
+  left: 0;
+  top: -30px;
+  width: 200%;
+  height: 32px;
+  animation: maree-drift 9s linear infinite;
+}
+
+.maree-ligne {
+  position: absolute;
+  left: 0;
+  top: 24px;
+  width: 200%;
+  height: 20px;
+  animation: maree-drift 13s linear infinite reverse;
+}
+
+@keyframes maree-drift {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.maree-score {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.maree-score span {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.9);
+  border: 1px solid var(--rule);
+  font-size: 13px;
+  color: var(--ink2);
+  font-variant-numeric: tabular-nums;
+}
+
+.maree-score b {
+  font-size: 18px;
+  color: var(--ink);
+  min-width: 1.4ch;
+  text-align: right;
+}
+
+.maree-score span:last-child b {
+  color: var(--orange);
+}
+
+/* Voiles : départ et résultat. */
+.maree-voile {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+  text-align: center;
+  background: rgba(245, 239, 224, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.maree-voile-kicker {
+  font: 600 12px/1.4 var(--font-body);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink2);
+}
+
+.maree-resultat h3 {
+  font-size: clamp(22px, 3vw, 32px);
+  color: var(--ink);
+  max-width: 18ch;
+  text-wrap: balance;
+  outline: none;
+}
+
+.maree-resultat p {
+  max-width: 44ch;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink2);
+}
+
+.maree-resultat p b {
+  color: var(--vert-deep);
+  font-weight: 600;
+}
+
+.maree-resultat p b + b,
+.maree-resultat p b:nth-of-type(2) {
+  color: var(--orange-hover);
+}
+
+.maree-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.maree-actions .btn.ghost {
+  color: var(--ink);
+}
+
+.maree-share {
+  background: none;
+  border: 0;
+  padding: 8px 4px;
+  font: 600 14px var(--font-body);
+  color: var(--vert);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Page /jeu : plateau plus haut. */
+.jeu-page {
+  padding: 40px 0 80px;
+}
+
+.jeu-page .jeu-head {
+  max-width: 680px;
+  margin-bottom: 28px;
+}
+
+.jeu-page .jeu-head h1 {
+  font-size: clamp(30px, 4.4vw, 48px);
+  margin-bottom: 12px;
+}
+
+.jeu-page .maree-jeu {
+  max-width: none;
+}
+
+.jeu-page .maree-plateau {
+  height: min(66svh, 560px);
+}
+
+@media (max-width: 960px) {
+  .maree-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+@media (max-width: 520px) {
+  .maree-plateau {
+    height: 62svh;
+    min-height: 380px;
+    border-radius: 12px;
+  }
+
+  .maree-megot {
+    width: 48px;
+    height: 48px;
+    margin: -24px 0 0 -24px;
+  }
+
+  .maree-score {
+    gap: 6px;
+  }
+
+  .maree-score span {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .maree-actions .btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .maree-crete,
+  .maree-ligne {
+    animation: none;
+  }
+}

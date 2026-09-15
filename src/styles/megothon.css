@@ -1,0 +1,202 @@
+/* Styles de la fonctionnalité « megothon », chargés après globals.css. */
+
+/* --- Compteurs : les spans internes au chiffre gardent la taille du chiffre */
+
+.megothon-stats b span {
+  font: inherit;
+  color: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+}
+
+/* --- Contenants : niveau piloté par Motion (plus d'animation CSS ni de --dl) */
+
+.jars .jar-lvl {
+  animation: none;
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+
+.jar-slot {
+  position: relative;
+  display: inline-flex;
+  width: 38px;
+  line-height: 0;
+}
+
+.jar-float {
+  position: absolute;
+  left: 50%;
+  bottom: 55%;
+  translate: -50% 0;
+  font: 600 12px/1 var(--font-body);
+  font-variant-numeric: tabular-nums;
+  color: var(--orange);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* --- Le contenant fantôme (bouton) */
+
+.jars .jar-ghost {
+  appearance: none;
+  display: inline-flex;
+  width: 38px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  line-height: 0;
+  color: var(--ink);
+  cursor: pointer;
+  opacity: 0.3;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.jars .jar-ghost:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 4px;
+}
+
+.jar-ghost .jar {
+  display: block;
+}
+
+.jar-ghost-plus {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.jar-ghost.is-awake .jar-ghost-plus {
+  stroke: var(--orange);
+}
+
+.jar-ghost-ring {
+  fill: none;
+  stroke: var(--orange);
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+  stroke-dasharray: 4 3;
+  opacity: 0;
+  transition: opacity 0.25s var(--ease-out);
+}
+
+.jar-ghost.is-awake .jar-ghost-ring {
+  opacity: 1;
+  animation: jar-ring-pulse 1.1s linear infinite;
+}
+
+.jar-ghost.is-inscrit .jar-ghost-ring {
+  animation: none;
+  stroke-dasharray: none;
+}
+
+@keyframes jar-ring-pulse {
+  to {
+    stroke-dashoffset: -14;
+  }
+}
+
+/* --- Note et micro-texte, superposés pour ne pas déplacer la mise en page */
+
+.jars-foot {
+  position: relative;
+  margin-top: 14px;
+}
+
+.jars-block .jars-note {
+  margin-top: 0;
+}
+
+.jars-hint {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  font: 600 14px/1.4 var(--font-body);
+  color: var(--orange);
+}
+
+/* --- Stat « eau » : bascule des équivalences */
+
+.megothon-stats .stat-eau-num {
+  position: relative;
+  perspective: 500px;
+}
+
+.stat-eau-face {
+  display: inline-block;
+  min-width: 11ch;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.megothon-stats .stat-eau-toggle {
+  display: block;
+  margin-top: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: 600 13px/1.2 var(--font-body);
+  color: var(--orange);
+  cursor: pointer;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+  transition: color 0.2s var(--ease-out);
+}
+
+.megothon-stats .stat-eau-toggle:hover {
+  color: var(--orange-hover);
+}
+
+.megothon-stats .stat-eau-toggle:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* --- Formulaire : bouton qui devient coche puis « C'est noté » */
+
+.prevenir-form .prevenir-btn {
+  position: relative;
+  white-space: nowrap;
+}
+
+.prevenir-form .prevenir-btn.is-ok {
+  background: var(--vert);
+  border-color: var(--vert);
+  box-shadow: 0 8px 22px rgba(42, 140, 126, 0.28);
+  cursor: default;
+  translate: none;
+}
+
+.prevenir-btn-ok {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.prevenir-check {
+  display: block;
+  flex: none;
+}
+
+.prevenir-form input[type="email"]:read-only {
+  color: var(--ink2);
+  background: color-mix(in srgb, var(--vert) 6%, #fff);
+}
+
+.prevenir-ok {
+  margin-top: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jar-ghost-ring,
+  .jar-ghost.is-awake .jar-ghost-ring {
+    animation: none;
+    transition: none;
+  }
+}

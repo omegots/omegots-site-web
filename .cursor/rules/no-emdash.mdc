@@ -1,0 +1,13 @@
+---
+description: Pas de tiret cadratin ni demi-cadratin dans les textes du site
+alwaysApply: true
+---
+
+# Typographie O'Mégots
+
+Interdit sur le site (contenu visible et copy) :
+- tiret cadratin `—`
+- tiret demi-cadratin `–`
+
+À la place : virgule, point, deux-points, ou reformulation.
+Le point médian `·` (séparateur léger) reste autorisé.

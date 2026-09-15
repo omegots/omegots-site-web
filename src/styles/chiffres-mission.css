@@ -1,0 +1,764 @@
+/* Styles de la fonctionnalité « chiffres-mission », chargés après globals.css. */
+
+/* --- Chiffres : choisir son unité -------------------------------------- */
+
+/* Au repos, rien ne change : on réserve seulement la hauteur de la ligne
+   pour que le passage à « 1 000 bouteilles » (nombre plus petit, unité en
+   toutes lettres qui passe à la ligne) ne fasse pas bouger la suite. */
+.chiffres .chiffres-big {
+  min-height: calc(0.9 * clamp(96px, 15vw, 190px));
+  transition: font-size 0.45s var(--ease-out);
+}
+
+.chiffres .chiffres-big.is-unite {
+  flex-wrap: wrap;
+  align-content: flex-start;
+  row-gap: 0.08em;
+  font-size: clamp(60px, 9.6vw, 122px);
+}
+
+/* Pendant le morphing seulement : le nombre garde une largeur stable
+   (3ch d'Unbounded dépasse la largeur naturelle de « 500 » au repos). */
+.chiffres .chiffres-big.is-unite .chiffres-num {
+  min-width: 3ch;
+}
+
+.chiffres .chiffres-unit {
+  display: inline-grid;
+  overflow: hidden;
+}
+
+.chiffres .chiffres-unit-mot {
+  grid-area: 1 / 1;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.chiffres .chiffres-big.is-unite .chiffres-unit {
+  font-size: 0.3em;
+  line-height: 1.1;
+  flex-basis: 100%;
+}
+
+/* Pastilles : mêmes cotes que les <li> d'origine, portées par le bouton. */
+.chiffres .chiffres-eq li {
+  padding: 0;
+  border: 0;
+}
+
+.chiffres .chiffres-eq-btn {
+  font: inherit;
+  font-size: 14px;
+  line-height: inherit;
+  padding: 9px 14px;
+  border: 1px solid rgba(245, 239, 224, 0.25);
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(245, 239, 224, 0.85);
+  cursor: pointer;
+  min-height: 40px;
+  transition:
+    border-color 0.22s var(--ease-out),
+    background 0.22s var(--ease-out),
+    color 0.22s var(--ease-out);
+}
+
+.chiffres .chiffres-eq-btn:hover {
+  border-color: rgba(245, 239, 224, 0.55);
+  color: var(--cream);
+}
+
+.chiffres .chiffres-eq-btn[aria-pressed="true"] {
+  border-color: var(--orange);
+  background: rgba(221, 138, 46, 0.14);
+  color: var(--cream);
+}
+
+.chiffres .chiffres-eq-btn:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 3px;
+}
+
+@media (max-width: 860px) {
+  .chiffres .chiffres-big {
+    min-height: calc(0.9 * clamp(88px, 26vw, 120px));
+  }
+
+  .chiffres .chiffres-big.is-unite {
+    font-size: clamp(56px, 17vw, 80px);
+  }
+}
+
+/* --- Mission : icônes vivantes ----------------------------------------- */
+
+.mission .mission-icon {
+  position: relative;
+}
+
+.mission .mission-icon svg {
+  overflow: visible;
+}
+
+.mission .mission-tick {
+  position: absolute;
+  right: -10px;
+  bottom: -9px;
+  font: 600 10px/1 var(--font-display);
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  color: var(--vert);
+  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--vert) 35%, transparent);
+  border-radius: 999px;
+  padding: 3px 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* --- Mission : les principes qui répondent ----------------------------- */
+
+.mission .mission-principes ul {
+  align-items: flex-start;
+}
+
+.mission .mission-principes li {
+  display: block;
+  padding: 0;
+  background: none;
+  max-width: 100%;
+}
+
+.mission .mission-principes li::before {
+  content: none;
+}
+
+.mission .mission-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  margin: 0;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+  text-align: left;
+  padding: 9px 14px 9px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.22s var(--ease-out);
+}
+
+.mission .mission-chip:hover,
+.mission .mission-principes li.is-open .mission-chip {
+  background: color-mix(in srgb, var(--ink) 10%, transparent);
+}
+
+.mission .mission-chip:focus-visible {
+  outline: 2px solid var(--vert);
+  outline-offset: 2px;
+}
+
+.mission .mission-chip-mark {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  color: var(--orange);
+}
+
+.mission .mission-chip-court {
+  white-space: nowrap;
+}
+
+.mission .mission-chip-detail {
+  display: grid;
+  grid-template-columns: 0fr;
+  min-width: 0;
+}
+
+.mission .mission-chip-detail > span {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-left: 10px;
+  border-left: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+  color: var(--ink2);
+  font-weight: 400;
+}
+
+.mission .mission-principes-detail {
+  display: none;
+  flex-basis: 100%;
+  min-width: 0;
+}
+
+.mission .mission-principes-detail p {
+  overflow: hidden;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink2);
+}
+
+@media (max-width: 860px) {
+  .mission .mission-chip-detail {
+    display: none;
+  }
+
+  .mission .mission-principes-detail {
+    display: block;
+  }
+}
+
+/* --- La cigarette qui devient mégot ------------------------------------ */
+
+.cig {
+  position: relative;
+}
+
+.cig-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.cig-num {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 34px;
+  letter-spacing: -0.02em;
+  fill: var(--orange);
+}
+
+.cig-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13.5px;
+  fill: rgba(245, 239, 224, 0.88);
+}
+
+.cig-callout {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.cig-callout.is-on {
+  opacity: 1;
+}
+
+/* Fumée */
+.cig-fumee {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.cig-fumee.is-on {
+  opacity: 1;
+}
+
+.cig-volute {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cig-volute 1.6s ease-out infinite;
+}
+
+.cig-fumee:not(.is-on) .cig-volute {
+  animation-play-state: paused;
+}
+
+@keyframes cig-volute {
+  0% {
+    transform: translate(2px, -6px) scale(0.5);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.42;
+  }
+  100% {
+    transform: translate(26px, -96px) scale(2.1);
+    opacity: 0;
+  }
+}
+
+/* Braise */
+.cig-braise {
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.cig-braise.is-on {
+  opacity: 1;
+}
+
+.cig-braise.is-out {
+  opacity: 0;
+  transition-duration: 0.7s;
+}
+
+.cig-braise-halo {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cig-halo 0.9s ease-in-out infinite alternate;
+}
+
+.cig-braise-coeur {
+  animation: cig-coeur 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes cig-halo {
+  from {
+    transform: scale(0.85);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+@keyframes cig-coeur {
+  from {
+    fill: #ffb15c;
+  }
+  to {
+    fill: #ff7a1a;
+  }
+}
+
+/* Cendre accrochée et flocons */
+.cig-cendre {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cig-cendre.is-on {
+  opacity: 1;
+}
+
+.cig-flocon {
+  opacity: 0;
+}
+
+.cig-flocon.is-off {
+  animation: cig-tombe 1.2s cubic-bezier(0.4, 0, 0.8, 0.6) forwards;
+}
+
+@keyframes cig-tombe {
+  0% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+    /* la position de base est dans le style inline, on ajoute la chute */
+    translate: var(--dx, 0) 70px;
+    rotate: 140deg;
+  }
+}
+
+/* Bout cramé et contour du mégot */
+.cig-crame,
+.cig-tube-contour {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.cig-crame.is-on,
+.cig-tube-contour.is-on {
+  opacity: 1;
+}
+
+.cig-replay {
+  position: absolute;
+  right: 0;
+  bottom: -6px;
+  background: none;
+  border: 0;
+  padding: 6px 8px;
+  font: 600 12px var(--font-body);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mint);
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+.cig-replay:hover,
+.cig-replay:focus-visible {
+  opacity: 1;
+}
+
+/* Desktop : la cigarette et ses traits remplacent la liste. Mobile : liste. */
+@media (min-width: 761px) {
+  .chiffres .chiffres-list {
+    display: none;
+  }
+
+  .chiffres-grid {
+    grid-template-columns: 0.85fr 1.15fr;
+    align-items: center;
+  }
+}
+
+.cig-faits {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .cig-callouts,
+  .cig-replay {
+    display: none;
+  }
+
+  .cig-svg {
+    margin: 6px 0 4px;
+  }
+
+  .cig-faits {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .cig-fait {
+    display: grid;
+    grid-template-columns: minmax(96px, auto) 1fr;
+    gap: 14px;
+    align-items: baseline;
+    padding: 14px 0;
+    border-top: 1px solid rgba(245, 239, 224, 0.18);
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease;
+  }
+
+  .cig-fait:last-child {
+    border-bottom: 1px solid rgba(245, 239, 224, 0.18);
+  }
+
+  .cig-fait.is-on {
+    opacity: 1;
+    transform: none;
+  }
+
+  .cig-fait b {
+    font-size: 26px;
+    color: var(--orange);
+    white-space: nowrap;
+  }
+
+  .cig-fait span {
+    font-size: 14.5px;
+    line-height: 1.4;
+    color: rgba(245, 239, 224, 0.85);
+  }
+
+  .chiffres-main {
+    text-align: center;
+  }
+
+  .chiffres-big {
+    font-size: clamp(104px, 34vw, 150px);
+    justify-content: center;
+  }
+
+  .chiffres-lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cig-callout {
+    opacity: 1;
+  }
+
+  .cig-crame,
+  .cig-tube-contour {
+    opacity: 1;
+  }
+}
+
+/* --- Le parcours d'un mégot (section « Ce qu'on fait ») ---------------- */
+
+.parcours {
+  margin-top: 8px;
+}
+
+.parcours-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* La ligne se trace de gauche à droite */
+.parcours-ligne {
+  stroke-dasharray: 6 10;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.parcours.is-trace .parcours-ligne {
+  opacity: 0.5;
+  animation: parcours-trace 1.1s ease-out forwards;
+}
+
+@keyframes parcours-trace {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.parcours-poste {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: opacity 0.5s ease;
+}
+
+.parcours-poste.is-on {
+  opacity: 1;
+}
+
+/* Poste 1 : la main descend ramasser, le mégot au sol disparaît */
+.poste-main-glove {
+  transform: translateY(-4px);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.3, 1);
+}
+
+.poste-main.is-play .poste-main-glove {
+  animation: poste-ramasse 1.5s cubic-bezier(0.4, 0, 0.3, 1) forwards;
+}
+
+@keyframes poste-ramasse {
+  0% {
+    transform: translateY(-4px);
+  }
+  45% {
+    transform: translateY(44px);
+  }
+  60% {
+    transform: translateY(44px);
+  }
+  100% {
+    transform: translateY(-6px);
+  }
+}
+
+.poste-megot-sol {
+  transition: opacity 0.2s ease;
+}
+
+.poste-megot-sol.is-off {
+  opacity: 0;
+}
+
+/* Poste 2 : le niveau monte d'un cran quand le mégot arrive */
+.poste-niveau {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transform: scaleY(0.42);
+  transition: transform 0.6s cubic-bezier(0.3, 0.8, 0.3, 1);
+}
+
+.poste-jauge.is-full .poste-niveau {
+  transform: scaleY(0.66);
+}
+
+/* Poste 3 : les barres montent */
+.poste-barre {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transform: scaleY(0.12);
+  transition: transform 0.55s cubic-bezier(0.3, 0.8, 0.3, 1);
+}
+
+.poste-barres.is-up .poste-barre {
+  transform: scaleY(1);
+}
+
+/* Mégot en vol et impulsion */
+.parcours-vol,
+.parcours-pulse {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.parcours-vol.is-on,
+.parcours-pulse.is-on {
+  opacity: 1;
+}
+
+/* Les trois textes, centrés sous les postes */
+.parcours-etapes {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.parcours-etape {
+  text-align: center;
+  padding: 0 12px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.parcours-etape.is-on {
+  opacity: 1;
+  transform: none;
+}
+
+.parcours-mini {
+  display: none;
+}
+
+.parcours-n {
+  display: block;
+  font: 600 12px/1 var(--font-display);
+  letter-spacing: 0.12em;
+  color: var(--orange);
+  margin-bottom: 10px;
+}
+
+.parcours-etape h3 {
+  font: 600 clamp(20px, 2vw, 24px) / 1.2 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.parcours-etape p {
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--ink2);
+  max-width: 34ch;
+  margin: 0 auto;
+}
+
+@media (max-width: 760px) {
+  .parcours-svg {
+    display: none;
+  }
+
+  .parcours-etapes {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .parcours-etape {
+    text-align: left;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 4px 18px;
+    align-items: center;
+    opacity: 1;
+    transform: none;
+  }
+
+  .parcours-mini {
+    display: block;
+    grid-row: 1 / 4;
+    width: 96px;
+    height: 96px;
+  }
+
+  .parcours-etape p {
+    margin: 0;
+    max-width: none;
+  }
+}
+
+/* --- Ce qui nous guide : bandeau lent ---------------------------------- */
+
+.manifeste {
+  margin-top: clamp(40px, 5vw, 64px);
+  overflow: hidden;
+  padding: 18px 0;
+  border-top: 0;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.manifeste-track {
+  display: flex;
+  width: max-content;
+  animation: manifeste-defile 46s linear infinite;
+}
+
+.manifeste:hover .manifeste-track {
+  animation-play-state: paused;
+}
+
+.manifeste-run {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.manifeste-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  padding-right: 44px;
+  font: 600 clamp(18px, 1.7vw, 22px) / 1 var(--font-display);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.manifeste-megot {
+  width: 14px;
+  height: auto;
+  color: var(--orange);
+  transform: rotate(-100deg);
+  flex: none;
+}
+
+@keyframes manifeste-defile {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .manifeste {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .manifeste-track {
+    animation: none;
+    width: auto;
+    flex-wrap: wrap;
+  }
+
+  .manifeste-run[aria-hidden="true"] {
+    display: none;
+  }
+
+  .manifeste-run {
+    flex-wrap: wrap;
+    gap: 10px 0;
+    padding: 0 24px;
+  }
+}
