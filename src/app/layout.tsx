@@ -17,7 +17,7 @@ const poppins = Poppins({
 
 const unbounded = Unbounded({
   subsets: ["latin"],
-  weight: ["600"],
+  weight: ["600", "700", "800"],
   variable: "--font-unbounded",
   display: "swap",
 });

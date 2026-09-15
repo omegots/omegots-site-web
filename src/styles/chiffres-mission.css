@@ -718,8 +718,9 @@
 .manifeste-item {
   display: inline-flex;
   align-items: center;
-  gap: 18px;
-  padding-right: 44px;
+  /* Le mégot fait tiret : même distance de chaque côté. */
+  gap: 30px;
+  padding-right: 30px;
   font: 600 clamp(18px, 1.7vw, 22px) / 1 var(--font-display);
   letter-spacing: -0.01em;
   color: var(--ink);

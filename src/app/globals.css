@@ -100,7 +100,7 @@ img {
 
 .display {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.08;
 }
@@ -379,11 +379,12 @@ a:focus-visible {
 }
 
 .hero-copy {
-  max-width: 600px;
+  max-width: 660px;
 }
 
 .hero h1 {
-  font-size: clamp(38px, 5.6vw, 68px);
+  font-weight: 700;
+  font-size: clamp(38px, 5.3vw, 64px);
   letter-spacing: -0.03em;
   text-wrap: balance;
   color: var(--ink);
@@ -939,7 +940,7 @@ a:focus-visible {
 
 .megothon-next {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 460px);
+  grid-template-columns: minmax(0, 1fr) minmax(min(320px, 100%), 460px);
   align-items: center;
   gap: 18px 40px;
   margin-top: 48px;
@@ -972,7 +973,13 @@ a:focus-visible {
 
 .prevenir-form {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
+  max-width: 100%;
+}
+
+.megothon-next > * {
+  min-width: 0;
 }
 
 .prevenir-form input[type="email"] {
@@ -1481,6 +1488,12 @@ a:focus-visible {
 
   .prevenir-form {
     flex-direction: column;
+  }
+
+  .prevenir-form input[type="email"],
+  .prevenir-form .btn {
+    width: 100%;
+    flex: none;
   }
 
   .megothon-next {

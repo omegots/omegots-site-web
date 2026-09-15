@@ -598,6 +598,7 @@ section:target .eyebrow::before {
 
 /* Centre : contenu symétrique dessous (parcours, témoignages). */
 .section-head.is-center {
+  max-width: 780px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -734,5 +735,39 @@ section:target .eyebrow::before {
     width: 140px;
     margin-left: auto;
     margin-right: auto;
+  }
+}
+
+/* --- Footer : bloc marque équilibré (logo, texte, mentions) ------------ */
+
+.foot-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.foot-brand .foot-logo {
+  margin-bottom: 14px;
+}
+
+.foot-brand p {
+  margin-top: 0;
+}
+
+.foot-brand .foot-mentions {
+  margin-top: 14px;
+  font-size: 13px;
+  color: rgba(245, 239, 224, 0.7);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.foot-brand .foot-mentions:hover {
+  color: var(--cream);
+}
+
+@media (max-width: 760px) {
+  .foot-brand {
+    align-items: center;
   }
 }

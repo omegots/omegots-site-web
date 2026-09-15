@@ -172,7 +172,7 @@ export function Megothon() {
   return (
     <section className="megothon surface-card" id="actions">
       <div className="wrap">
-        <Reveal direction="rise" className="section-head">
+        <Reveal direction="rise" className="section-head is-center">
           <h2 className="display">
             {litres} litres de mégots en {premiere.duree}.
           </h2>

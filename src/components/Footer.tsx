@@ -10,7 +10,6 @@ const nav = [
   { href: "/ramassages", label: "Nos ramassages" },
   { href: "/recyclage", label: "Le recyclage" },
   { href: "/association", label: "L'association" },
-  { href: "/mentions-legales", label: "Mentions légales" },
 ];
 
 /**
@@ -76,6 +75,9 @@ export function Footer() {
             Association citoyenne loi 1901, engagée dans le ramassage et la
             valorisation des mégots à Saint-Nazaire et ses alentours.
           </p>
+          <Link href="/mentions-legales" className="foot-mentions">
+            Mentions légales
+          </Link>
         </div>
 
         <nav className="foot-nav" aria-label="Plan du site">
