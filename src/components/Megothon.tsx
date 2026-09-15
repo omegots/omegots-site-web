@@ -199,11 +199,11 @@ export function Megothon() {
               <ul className="megothon-stats">
                 <li>
                   <b className="display">{premiere.benevoles}</b>
-                  <span>bénévoles, de 7 à 77 ans</span>
+                  <span>bénévoles</span>
                 </li>
                 <li>
                   <b className="display">{premiere.duree}</b>
-                  <span>de ramassage, {premiere.lieu}</span>
+                  <span>de ramassage</span>
                 </li>
                 <li>
                   <b className="display" aria-hidden="true">
@@ -215,9 +215,7 @@ export function Megothon() {
                     {fr(megots)} mégots environ, à {fr(MEGOTS_PAR_LITRE)} par
                     litre
                   </span>
-                  <span aria-hidden="true">
-                    mégots environ, à {fr(MEGOTS_PAR_LITRE)} par litre
-                  </span>
+                  <span aria-hidden="true">mégots ramassés</span>
                 </li>
                 <StatEau eau={eau} spring={eauSpring} />
               </ul>

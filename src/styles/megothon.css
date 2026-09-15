@@ -200,3 +200,73 @@
     transition: none;
   }
 }
+
+/* --- Bilan en tuiles : quatre chiffres, courts, lisibles sur mobile ------ */
+
+.megothon-side .megothon-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.megothon-side .megothon-stats li,
+.megothon-side .megothon-stats li:nth-child(-n + 2) {
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--vert) 7%, var(--card));
+  padding: 18px 18px 16px;
+}
+
+.megothon-side .megothon-stats b {
+  font-size: clamp(28px, 2.8vw, 36px);
+  margin-bottom: 4px;
+}
+
+.megothon-side .megothon-stats span {
+  font-size: 14px;
+  color: var(--ink2);
+}
+
+.megothon-side .stat-eau-toggle {
+  margin-top: 8px;
+}
+
+@media (max-width: 520px) {
+  .megothon-side .megothon-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .megothon-side .megothon-stats li,
+  .megothon-side .megothon-stats li:nth-child(2) {
+    padding: 14px 14px 12px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .megothon-side .megothon-stats b {
+    font-size: 24px;
+  }
+
+  .megothon-side .megothon-stats span {
+    font-size: 13px;
+  }
+
+  .megothon-side .jars-block {
+    padding: 16px 14px 14px;
+  }
+
+  .megothon-side .jars {
+    gap: 6px;
+    flex-wrap: nowrap;
+  }
+
+  .megothon-side .jar-slot {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .megothon-side .jar {
+    width: 100%;
+    max-width: 34px;
+  }
+}

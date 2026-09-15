@@ -45,19 +45,19 @@ export function StatEau({ eau, spring }: StatEauProps) {
     { legende: string; phrase: string; bouton: string; label: string }
   > = {
     litres: {
-      legende: `d'eau douce préservés, à ${fr(LITRES_EAU_PAR_MEGOT)} litres par mégot`,
+      legende: "d'eau douce préservés",
       phrase: `${fr(eau)} litres d'eau douce préservés, à ${fr(LITRES_EAU_PAR_MEGOT)} litres par mégot`,
       bouton: "en litres ?",
       label: "Afficher l'équivalent en litres d'eau douce",
     },
     baignoires: {
-      legende: `baignoires de ${fr(LITRES_PAR_BAIGNOIRE)} L d'eau douce préservées`,
+      legende: `baignoires de ${fr(LITRES_PAR_BAIGNOIRE)} L préservées`,
       phrase: `${fr(baignoires)} baignoires de ${fr(LITRES_PAR_BAIGNOIRE)} litres d'eau douce préservées`,
       bouton: "en baignoires ?",
       label: `Afficher l'équivalent en baignoires de ${fr(LITRES_PAR_BAIGNOIRE)} litres`,
     },
     bouteilles: {
-      legende: `bouteilles de ${fr(LITRES_PAR_BOUTEILLE * 100)} cl d'eau douce préservées`,
+      legende: `bouteilles de ${fr(LITRES_PAR_BOUTEILLE * 100)} cl préservées`,
       phrase: `${fr(bouteilles)} bouteilles de ${fr(LITRES_PAR_BOUTEILLE * 100)} cl d'eau douce préservées`,
       bouton: "en bouteilles ?",
       label: `Afficher l'équivalent en bouteilles de ${fr(LITRES_PAR_BOUTEILLE * 100)} cl`,
