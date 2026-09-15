@@ -771,3 +771,38 @@ section:target .eyebrow::before {
     align-items: center;
   }
 }
+
+/* --- Mobile : tous les titres de section et leur texte centrés ---------- */
+
+@media (max-width: 760px) {
+  .section-head,
+  .section-head.is-right,
+  .page-head-inner,
+  .jeu-head,
+  .voie-form,
+  .presse-head,
+  .devenir-head,
+  .maree-head {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-head .lede,
+  .page-head-inner .lede,
+  .jeu-head .lede,
+  .voie-form .lede {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-head .btn,
+  .devenir-head .btn {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .voie-contact {
+    text-align: center;
+  }
+}
