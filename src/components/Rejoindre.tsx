@@ -6,7 +6,7 @@ import { MagneticButton } from "./motion/MagneticButton";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const SECOND_LINE_DELAY = 0.45;
+const SECOND_LINE_DELAY = 1;
 
 export function Rejoindre() {
   const reduce = useReducedMotion();

@@ -100,7 +100,7 @@ img {
 
 .display {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.08;
 }
@@ -383,8 +383,8 @@ a:focus-visible {
 }
 
 .hero h1 {
-  font-weight: 700;
-  font-size: clamp(38px, 5.3vw, 64px);
+  font-weight: 800;
+  font-size: clamp(38px, 5.1vw, 62px);
   letter-spacing: -0.03em;
   text-wrap: balance;
   color: var(--ink);
