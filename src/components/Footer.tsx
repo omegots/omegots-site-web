@@ -10,6 +10,7 @@ const nav = [
   { href: "/ramassages", label: "Nos ramassages" },
   { href: "/recyclage", label: "Le recyclage" },
   { href: "/association", label: "L'association" },
+  { href: "/mentions-legales", label: "Mentions légales" },
 ];
 
 /**
@@ -115,9 +116,6 @@ export function Footer() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo/ghis-blanc.png" alt="GHIS!" width={110} height={40} />
           </a>
-          <p>
-            <Link href="/mentions-legales">Mentions légales</Link>
-          </p>
         </div>
       </FondMarin>
     </footer>

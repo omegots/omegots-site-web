@@ -319,8 +319,8 @@ section:target .eyebrow::before {
   right: 0;
   bottom: 10px;
   z-index: 2;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 8px 24px;
   font-size: 13px;
