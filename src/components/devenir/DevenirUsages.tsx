@@ -135,25 +135,31 @@ export function DevenirUsages() {
                   <h3>{u.title}</h3>
                   <p>{u.text}</p>
                   <p className="devenir-rank">
-                    <span className="devenir-gauge" aria-hidden="true">
-                      <motion.i
-                        style={{ width: `${u.share * 100}%` }}
-                        variants={{
-                          hidden: { scaleX: 0 },
-                          show: {
-                            scaleX: 1,
-                            transition: {
-                              duration: reduce ? 0 : 0.7,
-                              delay: reduce ? 0 : i * 0.12,
-                              ease,
+                    <span className="devenir-scale" aria-hidden="true">
+                      {[0, 1, 2, 3].map((k) => (
+                        <motion.i
+                          key={k}
+                          className={k < 5 - u.rank ? "is-on" : undefined}
+                          variants={{
+                            hidden: { opacity: 0, scaleY: 0.4 },
+                            show: {
+                              opacity: 1,
+                              scaleY: 1,
+                              transition: {
+                                duration: reduce ? 0 : 0.35,
+                                delay: reduce ? 0 : 0.2 + i * 0.1 + k * 0.08,
+                                ease,
+                              },
                             },
-                          },
-                        }}
-                      />
+                          }}
+                        />
+                      ))}
                     </span>
                     <span className="devenir-rank-label">
-                      <span className="sr-only">Rang de la filière : </span>
-                      <span className="devenir-rank-badge">Priorité {u.rank}</span>
+                      <span className="devenir-rank-title">
+                        <span className="sr-only">Rang de la filière : </span>
+                        Priorité {u.rank} sur 4
+                      </span>
                       <span className="devenir-rank-text">{u.rankText}</span>
                     </span>
                   </p>
