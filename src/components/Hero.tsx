@@ -84,6 +84,14 @@ export function Hero() {
                 strokeWidth="2.8"
                 strokeLinecap="round"
               />
+              {/* Le tablier file jusqu'aux bords de l'écran, bien au-delà du cadre */}
+              <path
+                className="ext"
+                d="M-100,12.5 C-160,12.5 -260,9 -900,3 M100,12.5 C160,12.5 260,9 900,3"
+                fill="none"
+                strokeWidth="2.8"
+                strokeLinecap="round"
+              />
               <rect className="pyl" x="-21.3" y="-38" width="4.6" height="60" rx="2.3" stroke="none" />
               <rect className="pyl" x="16.7" y="-38" width="4.6" height="60" rx="2.3" stroke="none" />
             </g>

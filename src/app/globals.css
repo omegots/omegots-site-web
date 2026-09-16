@@ -834,19 +834,38 @@ a:focus-visible {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(300px, 0.95fr);
   gap: clamp(28px, 5vw, 64px);
-  align-items: start;
+  align-items: stretch;
 }
 
 .megothon-photo {
+  position: relative;
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow);
+  min-height: 100%;
+  height: 100%;
+  align-self: stretch;
 }
 
 .megothon-photo img {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  height: 100%;
+  min-height: 420px;
   object-fit: cover;
+  display: block;
+}
+
+.megothon-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 100%;
+  height: 100%;
+  align-self: stretch;
+}
+
+.megothon-side > :first-child {
+  width: 100%;
 }
 
 .megothon-stats {
@@ -856,6 +875,7 @@ a:focus-visible {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0;
+  width: 100%;
 }
 
 .megothon-stats li {
@@ -885,7 +905,9 @@ a:focus-visible {
 }
 
 .jars-block {
-  margin-top: 28px;
+  margin-top: auto;
+  width: 100%;
+  box-sizing: border-box;
   padding: 22px 22px 20px;
   border: 1px dashed color-mix(in srgb, var(--vert) 45%, var(--rule));
   border-radius: var(--radius);
@@ -1420,6 +1442,24 @@ a:focus-visible {
 
   .megothon-grid {
     grid-template-columns: 1fr;
+  }
+
+  .megothon-photo {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  .megothon-photo img {
+    min-height: 0;
+  }
+
+  .megothon-side {
+    height: auto;
+  }
+
+  .megothon-side .jars-block {
+    margin-top: 8px;
   }
 
   .temoignages-grid {

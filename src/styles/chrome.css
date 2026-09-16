@@ -743,7 +743,13 @@ section:target .eyebrow::before {
 .foot-brand {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
+}
+
+.foot-brand p {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .foot-brand .foot-logo {

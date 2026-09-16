@@ -236,3 +236,22 @@
     margin: 0 auto;
   }
 }
+
+/* Prolongements du tablier : apparaissent une fois le tronçon central tracé. */
+.hero-bridge .ext {
+  opacity: 0;
+  animation: ext-in 0.8s 1.5s ease-out forwards;
+}
+
+@keyframes ext-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bridge .ext {
+    opacity: 1;
+    animation: none;
+  }
+}
