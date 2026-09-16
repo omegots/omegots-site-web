@@ -113,7 +113,8 @@ export function Footer() {
           <p>© 2026 O&apos;Mégots</p>
           <a href="https://ghis.fr" className="foot-ghis">
             <span>
-              <span className="foot-ghis-site">Site </span>réalisé par
+              <span className="foot-ghis-site">Site réalisé par</span>
+              <span className="foot-ghis-short">Réalisé par</span>
             </span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo/ghis-blanc.png" alt="GHIS!" width={110} height={40} />

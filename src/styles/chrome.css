@@ -812,3 +812,14 @@ section:target .eyebrow::before {
     text-align: center;
   }
 }
+
+/* Crédit GHIS! : « Site réalisé par » en large, « Réalisé par » sur téléphone. */
+.foot-ghis-short {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .foot-ghis-short {
+    display: inline;
+  }
+}
