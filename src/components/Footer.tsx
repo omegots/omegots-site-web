@@ -112,10 +112,7 @@ export function Footer() {
         <div className="wrap foot-legal">
           <p>© 2026 O&apos;Mégots</p>
           <a href="https://ghis.fr" className="foot-ghis">
-            <span>
-              <span className="foot-ghis-site">Site réalisé par</span>
-              <span className="foot-ghis-short">Réalisé par</span>
-            </span>
+            <span>Site réalisé par</span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo/ghis-blanc.png" alt="GHIS!" width={110} height={40} />
           </a>

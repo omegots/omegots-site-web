@@ -711,8 +711,8 @@ section:target .eyebrow::before {
     height: 16px;
   }
 
-  .foot-ghis-site {
-    display: none;
+  .foot-legal .foot-ghis {
+    gap: 6px;
   }
 
   .foot-fond .foot-top {
@@ -810,16 +810,5 @@ section:target .eyebrow::before {
 
   .voie-contact {
     text-align: center;
-  }
-}
-
-/* Crédit GHIS! : « Site réalisé par » en large, « Réalisé par » sur téléphone. */
-.foot-ghis-short {
-  display: none;
-}
-
-@media (max-width: 760px) {
-  .foot-ghis-short {
-    display: inline;
   }
 }
