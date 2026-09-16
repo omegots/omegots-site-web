@@ -49,7 +49,7 @@ export default function MentionsLegalesPage() {
           <h2>Conception et réalisation</h2>
           <p>
             Le site a été conçu et réalisé par{" "}
-            <a href="https://ghis.fr">GHIS!</a>, studio de création de sites
+            <a href="https://ghis.fr">GHIS</a>, studio de création de sites
             et d&apos;outils numériques, dans le cadre d&apos;un partenariat
             associatif.
           </p>

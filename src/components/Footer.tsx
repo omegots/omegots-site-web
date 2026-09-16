@@ -114,7 +114,7 @@ export function Footer() {
           <a href="https://ghis.fr" className="foot-ghis">
             <span>Site réalisé par</span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo/ghis-blanc.png" alt="GHIS!" width={110} height={40} />
+            <img src="/logo/ghis-blanc.png" alt="GHIS" width={110} height={40} />
           </a>
         </div>
       </FondMarin>
