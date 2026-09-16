@@ -413,3 +413,55 @@ mark.presse-hl {
     white-space: nowrap;
   }
 }
+
+/* --- Devenir : priorités lisibles, alignées en bas des cartes ----------- */
+
+.devenir-list .devenir-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.devenir-item .devenir-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.devenir-item .devenir-rank {
+  margin-top: auto;
+  padding-top: 16px;
+  flex-direction: column-reverse;
+  gap: 8px;
+}
+
+.devenir-rank-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0;
+}
+
+.devenir-rank-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--vert) 14%, transparent);
+  color: var(--vert-deep);
+  font: 700 11px/1 var(--font-body);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.devenir-rank-text {
+  font: 500 12.5px/1.3 var(--font-body);
+  color: var(--ink2);
+}
+
+@media (max-width: 560px) {
+  .devenir-rank-label {
+    flex-wrap: wrap;
+    gap: 4px 8px;
+  }
+}

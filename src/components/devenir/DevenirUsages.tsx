@@ -14,7 +14,9 @@ type Usage = {
   title: string;
   text: string;
   /** Rang de préférence (1 = le plus vertueux), affiché comme tel, pas une mesure. */
-  rankLabel: string;
+  /** Rang (1 = le plus vertueux) et sa raison. */
+  rank: number;
+  rankText: string;
   /** Remplissage de la jauge (décroissant : 4/4 puis 3/4, 2/4, 1/4). */
   share: number;
 };
@@ -23,25 +25,29 @@ const usages: Usage[] = [
   {
     title: "Mobilier urbain",
     text: "Bancs, bacs à fleurs, potelets fabriqués à partir du plastique des filtres.",
-    rankLabel: "Priorité 1 · réemploi matière",
+    rank: 1,
+    rankText: "Réemploi matière",
     share: 4 / 4,
   },
   {
     title: "Cendriers",
     text: "Les mégots servent à fabriquer de nouveaux cendriers. La boucle est bouclée.",
-    rankLabel: "Priorité 2 · réemploi matière",
+    rank: 2,
+    rankText: "Réemploi matière",
     share: 3 / 4,
   },
   {
     title: "Emballages",
     text: "Matière régénérée intégrée dans des emballages industriels.",
-    rankLabel: "Priorité 3 · matière régénérée",
+    rank: 3,
+    rankText: "Matière régénérée",
     share: 2 / 4,
   },
   {
     title: "Énergie",
     text: "Valorisation énergétique, en dernier recours seulement.",
-    rankLabel: "Priorité 4 · dernier recours",
+    rank: 4,
+    rankText: "Dernier recours",
     share: 1 / 4,
   },
 ];
@@ -147,7 +153,8 @@ export function DevenirUsages() {
                     </span>
                     <span className="devenir-rank-label">
                       <span className="sr-only">Rang de la filière : </span>
-                      {u.rankLabel}
+                      <span className="devenir-rank-badge">Priorité {u.rank}</span>
+                      <span className="devenir-rank-text">{u.rankText}</span>
                     </span>
                   </p>
                 </div>
