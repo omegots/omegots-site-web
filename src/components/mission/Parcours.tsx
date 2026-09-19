@@ -1,6 +1,6 @@
 "use client";
 
-import { MEGOTS_PAR_LITRE } from "@/data/ramassages";
+import { megotsParLitre } from "@/data/ramassages";
 import { useInView, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { fr } from "../motion/useCountUp";
@@ -16,17 +16,17 @@ const ETAPES = [
   {
     n: "01",
     title: "On ramasse",
-    text: "Des sorties dans les rues, les parcs et sur les plages de Saint-Nazaire et ses environs. Gratuites, ouvertes à toutes et tous, de 7 à 77 ans.",
+    text: "Des sorties dans les rues, les parcs et sur les plages de Saint-Nazaire et ses environs. Gratuites, ouvertes à toutes et tous, pour tous les âges.",
   },
   {
     n: "02",
     title: "On compte",
-    text: `Chaque sortie est mesurée dans un contenant gradué. Un litre plein, c'est environ ${fr(MEGOTS_PAR_LITRE)} mégots qui ne finiront pas dans l'eau.`,
+    text: `Chaque sortie est mesurée dans un contenant gradué. Un litre plein, c'est environ ${fr(megotsParLitre())} mégots qui ne finiront pas dans l'eau.`,
   },
   {
     n: "03",
     title: "On partage",
-    text: "Les chiffres sont publiés ici, sortie après sortie. Pour faire prendre conscience de ce qui traîne vraiment sur nos trottoirs.",
+    text: "Les chiffres sont publiés ici, sortie après sortie. Pour faire prendre conscience de ce qui traîne vraiment dans la nature.",
   },
 ];
 

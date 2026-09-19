@@ -31,10 +31,10 @@ export function Hero() {
             </span>
           </motion.h1>
           <motion.p className="hero-sub" {...up(0.3)}>
-            Association citoyenne à Saint-Nazaire, on ramasse les mégots dans
-            les rues, les parcs et sur les plages. On les compte, on publie les
-            chiffres. Sans juger personne : le mégot est un déchet, pas une
-            faute.
+            Association citoyenne à Saint-Nazaire et ses alentours, on dépollue
+            les rues, les parcs et les plages des mégots. On les compte, on
+            publie les chiffres. Sans juger personne : le mégot est un déchet,
+            pas une faute.
           </motion.p>
           <motion.div className="hero-cta" {...up(0.42)}>
             <HeroCta />

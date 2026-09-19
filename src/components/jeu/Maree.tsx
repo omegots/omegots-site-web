@@ -18,7 +18,7 @@ import {
 } from "react";
 import {
   LITRES_EAU_PAR_MEGOT,
-  MEGOTS_PAR_LITRE,
+  megotsParLitre,
   ramassages,
   totals,
 } from "@/data/ramassages";
@@ -263,7 +263,7 @@ export function Maree() {
               <b>{fr(litresPreserves)} L</b> d&apos;eau préservés,{" "}
               <b>{fr(litresPollues)} L</b> pollués. Le {premiere.date},{" "}
               {premiere.benevoles} bénévoles en ont ramassé environ {fr(megots)}{" "}
-              en {premiere.duree}, à {fr(MEGOTS_PAR_LITRE)} par litre.
+              en {premiere.duree}, à {fr(megotsParLitre())} par litre.
             </p>
             <div className="maree-actions">
               <button type="button" className="btn ghost" onClick={start}>

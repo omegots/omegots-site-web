@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { FormPrevenir } from "@/components/FormPrevenir";
 import { PageShell } from "@/components/PageShell";
+import { Reseaux } from "@/components/Reseaux";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { WaveDivider } from "@/components/WaveDivider";
 import { Rejoindre } from "@/components/Rejoindre";
@@ -16,7 +17,7 @@ const EMAIL = "association.o.megots@gmail.com";
 const voies = [
   {
     title: "Venir ramasser",
-    text: "Gratuit et ouvert à toutes et tous, de 7 à 77 ans. Des gants, une bouteille vide, et c'est parti. Laissez votre e-mail pour être prévenu·e de la prochaine date.",
+    text: "Gratuit et ouvert à toutes et tous, à tous les âges. Des gants, une bouteille vide, et c'est parti. Laissez votre e-mail pour être prévenu·e de la prochaine date.",
   },
   {
     title: "Adhérer pour 1 €",
@@ -65,6 +66,15 @@ export default function RejoindrePage() {
               Une question, un lieu à signaler, un partenariat ?{" "}
               <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
             </p>
+          </Reveal>
+
+          <Reveal className="voie-reseaux" delay={0.1}>
+            <h2 className="display">On se retrouve aussi ici.</h2>
+            <p className="lede">
+              Les photos, les dates et les annonces passent d&apos;abord par
+              nos réseaux.
+            </p>
+            <Reseaux variant="cartes" />
           </Reveal>
         </div>
       </section>

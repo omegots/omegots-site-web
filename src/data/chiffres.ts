@@ -16,7 +16,7 @@ export const chiffreCle = {
   valeur: 500,
   unite: "L",
   uniteLongue: "litres",
-  texte: "d'eau douce polluée par un seul mégot jeté par terre.",
+  texte: "d'eau polluée par un mégot jeté.",
   equivalences: [
     { id: "baignoire", nom: "baignoires", capaciteL: 200 },
     { id: "bouteille", nom: "bouteilles", capaciteL: 0.5 },
@@ -55,7 +55,7 @@ export const chiffres = [
   },
   {
     valeur: "4 500",
-    label: "substances toxiques libérées pendant sa dégradation",
+    label: "substances toxiques libérées pendant sa décomposition",
   },
   {
     valeur: "N° 1",

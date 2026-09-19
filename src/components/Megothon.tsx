@@ -2,7 +2,7 @@
 
 import {
   LITRES_EAU_PAR_MEGOT,
-  MEGOTS_PAR_LITRE,
+  megotsParLitre,
   ramassages,
   totals,
 } from "@/data/ramassages";
@@ -88,7 +88,7 @@ function Jar({ index, master, reduce }: JarProps) {
             transition={{ duration: 0.45, ease }}
             onAnimationComplete={() => setFlying(false)}
           >
-            +{fr(MEGOTS_PAR_LITRE)}
+            +{fr(megotsParLitre())}
           </motion.span>
         )}
       </AnimatePresence>
@@ -117,8 +117,8 @@ export function Megothon() {
     const n = Math.floor(v + 1e-6);
     if (n === palier.current) return;
     palier.current = n;
-    megotsSrc.set(n * MEGOTS_PAR_LITRE);
-    eauSrc.set(n * MEGOTS_PAR_LITRE * LITRES_EAU_PAR_MEGOT);
+    megotsSrc.set(n * megotsParLitre());
+    eauSrc.set(n * megotsParLitre() * LITRES_EAU_PAR_MEGOT);
   });
 
   useMotionValueEvent(megotsSpring, "change", (v) => {
@@ -212,7 +212,7 @@ export function Megothon() {
                     </span>
                   </b>
                   <span className="sr-only">
-                    {fr(megots)} mégots environ, à {fr(MEGOTS_PAR_LITRE)} par
+                    {fr(megots)} mégots environ, à {fr(megotsParLitre())} par
                     litre
                   </span>
                   <span aria-hidden="true">mégots ramassés</span>

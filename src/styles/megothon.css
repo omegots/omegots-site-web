@@ -2,7 +2,10 @@
 
 /* --- Compteurs : les spans internes au chiffre gardent la taille du chiffre */
 
-.megothon-stats b span {
+/* Les <span> dans les grands chiffres (compteurs) héritent du <b> : la règle
+   « .megothon-side .megothon-stats span » (14 px, gris) ne doit pas les rattraper. */
+.megothon-stats b span,
+.megothon-side .megothon-stats b span {
   font: inherit;
   color: inherit;
   line-height: inherit;
@@ -128,8 +131,8 @@
 }
 
 .stat-eau-face {
-  display: inline-block;
-  min-width: 11ch;
+  display: block;
+  width: 100%;
   transform-style: preserve-3d;
   backface-visibility: hidden;
 }
@@ -205,7 +208,8 @@
 
 .megothon-side .megothon-stats {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* minmax(0, …) : une colonne ne s'élargit jamais pour un chiffre long, elle le contient. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 12px;
   width: 100%;
 }
@@ -217,15 +221,29 @@
 
 .megothon-side .megothon-stats li,
 .megothon-side .megothon-stats li:nth-child(-n + 2) {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
   border: 1px solid var(--rule);
   border-radius: 14px;
   background: color-mix(in srgb, var(--vert) 7%, var(--card));
-  padding: 18px 18px 16px;
+  padding: 16px 18px 14px;
 }
 
+/* Quatre chiffres à la même taille, calibrée sur le plus long (« 2 400 000 L »). */
 .megothon-side .megothon-stats b {
-  font-size: clamp(28px, 2.8vw, 36px);
-  margin-bottom: 4px;
+  font-size: clamp(22px, 2.1vw, 28px);
+  line-height: 1.05;
+  margin-bottom: 6px;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+/* Le bouton de bascule se cale en bas de sa tuile, aligné avec le bas des autres. */
+.megothon-side .stat-eau .stat-eau-toggle {
+  margin-top: auto;
+  padding-top: 8px;
+  align-self: flex-start;
 }
 
 .megothon-side .megothon-stats span {
@@ -250,7 +268,7 @@
   }
 
   .megothon-side .megothon-stats b {
-    font-size: 24px;
+    font-size: clamp(18px, 5.2vw, 22px);
   }
 
   .megothon-side .megothon-stats span {

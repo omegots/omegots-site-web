@@ -647,10 +647,12 @@ a:focus-visible {
 }
 
 .chiffres-lead {
-  font-size: clamp(19px, 2vw, 24px);
-  font-weight: 500;
-  max-width: 24ch;
-  line-height: 1.35;
+  font-size: clamp(22px, 2.6vw, 32px);
+  font-weight: 600;
+  max-width: 17ch;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
   color: var(--cream);
 }
 
@@ -852,6 +854,8 @@ a:focus-visible {
   height: 100%;
   min-height: 420px;
   object-fit: cover;
+  /* Cadré vers le haut : les bénévoles de la mosaïque restent entiers. */
+  object-position: 50% 0;
   display: block;
 }
 

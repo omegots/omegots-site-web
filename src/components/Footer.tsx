@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { FondMarin } from "./footer/FondMarin";
+import { Reseaux } from "./Reseaux";
 
 const nav = [
   { href: "/", label: "Accueil" },
@@ -104,6 +105,7 @@ export function Footer() {
             </li>
             <li>Besné, Loire-Atlantique</li>
           </ul>
+          <Reseaux variant="icones" />
         </div>
       </div>
 

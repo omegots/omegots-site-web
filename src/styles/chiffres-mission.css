@@ -411,9 +411,15 @@
 }
 
 @media (max-width: 760px) {
-  .cig-callouts,
-  .cig-replay {
+  .cig-callouts {
     display: none;
+  }
+
+  /* Le bouton « Revoir » passe en haut à droite, au-dessus du mégot. */
+  .cig-replay {
+    top: -4px;
+    right: 0;
+    bottom: auto;
   }
 
   .cig-svg {

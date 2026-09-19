@@ -5,7 +5,7 @@ import { Reveal } from "./Reveal";
 const principes = [
   "Toujours dans la bonne humeur",
   "Sans juger les fumeurs",
-  "Pour tous les âges, de 7 à 77 ans",
+  "Pour tous les âges",
   "Avec les acteurs locaux",
   "Ouverts aux assos et aux entreprises",
   "On mesure, on documente, on partage",

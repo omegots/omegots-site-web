@@ -187,14 +187,7 @@
   min-width: 0;
 }
 
-.hero-photo-cap .hero-cap-cycle {
-  position: relative;
-  display: grid;
-  overflow: hidden;
-}
-
 .hero-photo-cap .hero-cap-line {
-  grid-area: 1 / 1;
   display: block;
 }
 

@@ -9,6 +9,8 @@ export const metadata: Metadata = {
 };
 
 const EMAIL = "association.o.megots@gmail.com";
+const TEL = "07 80 39 48 78";
+const TEL_HREF = "tel:+33780394878";
 
 export default function MentionsLegalesPage() {
   return (
@@ -28,6 +30,9 @@ export default function MentionsLegalesPage() {
             <li>Siège social : Besné (44160), Loire-Atlantique</li>
             <li>
               Adresse e-mail : <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            </li>
+            <li>
+              Téléphone : <a href={TEL_HREF}>{TEL}</a>
             </li>
             <li>Site web : omegots.fr</li>
           </ul>

@@ -48,7 +48,7 @@ const CALLOUTS = [
     // bout cramé : les substances libérées
     fait: 1,
     from: [X_MEGOT + 10, CY - 26] as const,
-    to: [150, 74] as const,
+    to: [214, 114] as const,
     label: [40, 66] as const,
     anchor: "start" as const,
   },
@@ -56,7 +56,7 @@ const CALLOUTS = [
     // filtre : le plastique, 12 ans
     fait: 0,
     from: [JONCTION + 34, CY + 4] as const,
-    to: [JONCTION + 34, 74] as const,
+    to: [JONCTION + 34, 114] as const,
     label: [600, 66] as const,
     anchor: "end" as const,
   },
@@ -64,7 +64,7 @@ const CALLOUTS = [
     // sous le mégot : l'eau, les plages
     fait: 2,
     from: [JONCTION - 60, CY + 38] as const,
-    to: [360, 292] as const,
+    to: [362, 270] as const,
     label: [330, 306] as const,
     anchor: "middle" as const,
   },
@@ -230,45 +230,6 @@ export function Cigarette() {
           </filter>
         </defs>
 
-        {/* Traits et chiffres, une fois le mégot posé (desktop seulement) */}
-        <g className="cig-callouts">
-          {CALLOUTS.map((c, i) => {
-            const fait = chiffres[c.fait];
-            if (!fait) return null;
-            const lignes = couperLabel(fait.label);
-            return (
-              <g key={i} className={`cig-callout${shown > i ? " is-on" : ""}`}>
-                <motion.path
-                  ref={i === 0 ? trait0Ref : undefined}
-                  d={`M${c.from[0]},${c.from[1]} L${c.to[0]},${c.to[1]}`}
-                  fill="none"
-                  stroke="#7fd6c6"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  initial={false}
-                  animate={{ pathLength: shown > i ? 1 : 0, opacity: shown > i ? 1 : 0 }}
-                  transition={{ duration: reduce ? 0 : 0.55, ease: [0.22, 1, 0.36, 1] }}
-                />
-                <circle ref={i === 0 ? point0Ref : undefined} cx={c.from[0]} cy={c.from[1]} r="4" fill="#7fd6c6" />
-                <text className="cig-num" x={c.label[0]} y={c.label[1]} textAnchor={c.anchor}>
-                  {fait.valeur}
-                </text>
-                {lignes.map((l, j) => (
-                  <text
-                    key={j}
-                    className="cig-label"
-                    x={c.label[0]}
-                    y={c.label[1] + 20 + j * 16}
-                    textAnchor={c.anchor}
-                  >
-                    {l}
-                  </text>
-                ))}
-              </g>
-            );
-          })}
-        </g>
-
         {/* Fumée : quelques volutes qui montent depuis la braise */}
         <g ref={fumeeRef} className={`cig-fumee${lit ? " is-on" : ""}`} filter="url(#cig-flou)">
           {[0, 1, 2, 3].map((i) => (
@@ -351,6 +312,45 @@ export function Cigarette() {
           <rect x={-2} y={-H / 2 + 2} width={10} height={H - 4} fill="#2b2622" />
           <circle className="cig-braise-halo" cx={3} cy={0} r={26} fill="url(#cig-braise)" />
           <rect className="cig-braise-coeur" x={0} y={-H / 2 + 4} width={6} height={H - 8} fill="#ffb15c" />
+        </g>
+
+        {/* Traits et chiffres, par-dessus la cigarette pour que les points d'ancrage restent visibles (desktop seulement) */}
+        <g className="cig-callouts">
+          {CALLOUTS.map((c, i) => {
+            const fait = chiffres[c.fait];
+            if (!fait) return null;
+            const lignes = couperLabel(fait.label);
+            return (
+              <g key={i} className={`cig-callout${shown > i ? " is-on" : ""}`}>
+                <motion.path
+                  ref={i === 0 ? trait0Ref : undefined}
+                  d={`M${c.from[0]},${c.from[1]} L${c.to[0]},${c.to[1]}`}
+                  fill="none"
+                  stroke="#7fd6c6"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  initial={false}
+                  animate={{ pathLength: shown > i ? 1 : 0, opacity: shown > i ? 1 : 0 }}
+                  transition={{ duration: reduce ? 0 : 0.55, ease: [0.22, 1, 0.36, 1] }}
+                />
+                <circle ref={i === 0 ? point0Ref : undefined} cx={c.from[0]} cy={c.from[1]} r="4" fill="#7fd6c6" />
+                <text className="cig-num" x={c.label[0]} y={c.label[1]} textAnchor={c.anchor}>
+                  {fait.valeur}
+                </text>
+                {lignes.map((l, j) => (
+                  <text
+                    key={j}
+                    className="cig-label"
+                    x={c.label[0]}
+                    y={c.label[1] + 20 + j * 16}
+                    textAnchor={c.anchor}
+                  >
+                    {l}
+                  </text>
+                ))}
+              </g>
+            );
+          })}
         </g>
       </svg>
 
