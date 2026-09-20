@@ -1,5 +1,5 @@
 import { ramassages, totals } from "@/data/ramassages";
-import { fr } from "../motion/useCountUp";
+import { fr } from "@/data/format";
 
 /**
  * Légende de la photo du hero : le « 6 L » à gauche, une seule phrase fixe à

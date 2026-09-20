@@ -162,7 +162,7 @@ mark.presse-hl {
 .temoignage .temoignage-mark {
   position: static;
   display: inline;
-  font: 700 1.35em/0 var(--font-display);
+  font: 800 1.35em/0 var(--font-display);
   color: var(--orange);
   vertical-align: -0.08em;
   margin-right: 0.18em;
@@ -374,7 +374,7 @@ mark.presse-hl {
 }
 
 .temoignage-vide-titre {
-  font: 600 clamp(20px, 2vw, 24px) / 1.2 var(--font-display);
+  font: 800 clamp(20px, 2vw, 24px) / 1.2 var(--font-display);
   letter-spacing: -0.02em;
 }
 
@@ -384,16 +384,10 @@ mark.presse-hl {
   color: rgba(245, 239, 224, 0.82);
 }
 
-.temoignage-vide .btn.ghost.temoignage-vide-btn {
+/* Bouton plein (orange, texte bleu nuit) : un contour seul ne se lit pas comme un appel à l'action. */
+.temoignage-vide .btn.temoignage-vide-btn {
   align-self: flex-start;
   margin-top: 6px;
-  color: var(--cream);
-  border-color: rgba(245, 239, 224, 0.8);
-}
-
-.temoignage-vide:hover .btn.ghost.temoignage-vide-btn {
-  background: rgba(245, 239, 224, 0.12);
-  border-color: var(--cream);
 }
 
 @media (max-width: 960px) {

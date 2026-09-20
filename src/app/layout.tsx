@@ -7,6 +7,7 @@ import "../styles/chrome.css";
 import "../styles/cta-devenir-presse.css";
 import "../styles/chiffres-mission.css";
 import "../styles/maree.css";
+import "../styles/faq.css";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -17,7 +18,9 @@ const poppins = Poppins({
 
 const unbounded = Unbounded({
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  // Une seule graisse : instance statique de 22 Ko au lieu de la police variable
+  // (51 Ko) que Google renvoie dès que deux graisses sont demandées.
+  weight: ["800"],
   variable: "--font-unbounded",
   display: "swap",
 });

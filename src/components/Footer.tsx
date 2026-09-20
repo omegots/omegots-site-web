@@ -71,12 +71,13 @@ export function Footer() {
             className="foot-logo"
             width={160}
             height={138}
+            loading="lazy"
           />
           <p>
             Association citoyenne loi 1901, engagée dans le ramassage et la
             valorisation des mégots à Saint-Nazaire et ses alentours.
           </p>
-          <Link href="/mentions-legales" className="foot-mentions">
+          <Link href="/mentions-legales" prefetch={false} className="foot-mentions">
             Mentions légales
           </Link>
         </div>
@@ -86,7 +87,7 @@ export function Footer() {
           <ul>
             {nav.map((l) => (
               <li key={l.href}>
-                <Link href={l.href}>{l.label}</Link>
+                <Link href={l.href} prefetch={false}>{l.label}</Link>
               </li>
             ))}
           </ul>
@@ -96,7 +97,7 @@ export function Footer() {
           <p className="foot-label">Contact</p>
           <ul>
             <li>
-              <Link href="/rejoindre">Nous rejoindre</Link>
+              <Link href="/rejoindre" prefetch={false}>Nous rejoindre</Link>
             </li>
             <li>
               <a href="mailto:association.o.megots@gmail.com">
@@ -116,7 +117,7 @@ export function Footer() {
           <a href="https://ghis.fr" className="foot-ghis">
             <span>Site réalisé par</span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo/ghis-blanc.png" alt="GHIS" width={110} height={40} />
+            <img src="/logo/ghis-blanc.svg" alt="GHIS" width={110} height={40} loading="lazy" />
           </a>
         </div>
       </FondMarin>

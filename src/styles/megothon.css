@@ -120,7 +120,7 @@
   inset: 0;
   margin: 0;
   font: 600 14px/1.4 var(--font-body);
-  color: var(--orange);
+  color: var(--orange-ink);
 }
 
 /* --- Stat « eau » : bascule des équivalences */
@@ -144,7 +144,7 @@
   border: 0;
   background: none;
   font: 600 13px/1.2 var(--font-body);
-  color: var(--orange);
+  color: var(--orange-ink);
   cursor: pointer;
   text-decoration: underline dotted;
   text-underline-offset: 3px;
@@ -152,7 +152,7 @@
 }
 
 .megothon-stats .stat-eau-toggle:hover {
-  color: var(--orange-hover);
+  color: var(--ink);
 }
 
 .megothon-stats .stat-eau-toggle:focus-visible {
@@ -226,7 +226,7 @@
   min-width: 0;
   border: 1px solid var(--rule);
   border-radius: 14px;
-  background: color-mix(in srgb, var(--vert) 7%, var(--card));
+  background: var(--card);
   padding: 16px 18px 14px;
 }
 

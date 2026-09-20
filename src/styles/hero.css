@@ -195,7 +195,7 @@
   display: block;
   margin-top: 2px;
   font-size: 12.5px;
-  color: color-mix(in srgb, var(--ink2) 78%, transparent);
+  color: var(--ink2);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -246,5 +246,31 @@
   .hero-bridge .ext {
     opacity: 1;
     animation: none;
+  }
+}
+
+/* --- Entrée du hero en CSS ------------------------------------------------
+   Titre, texte, boutons et photo glissent en place dès le premier rendu, sans
+   attendre le JavaScript. Aucun fondu (opacity) : Chrome ne compte un élément
+   pour le LCP qu'à la fin de son animation d'opacité, ce qui retardait la
+   mesure d'une seconde. `--d` porte le délai propre à chaque bloc (Hero.tsx). */
+.hero-in {
+  animation: hero-in 0.7s var(--ease-out) both;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes hero-in {
+  from {
+    transform: translateY(24px);
+  }
+}
+
+.hero-photo-in {
+  animation: hero-photo-in 0.9s var(--ease-out) 0.35s both;
+}
+
+@keyframes hero-photo-in {
+  from {
+    transform: translateY(30px) rotate(1.5deg);
   }
 }

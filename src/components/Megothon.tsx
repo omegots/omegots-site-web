@@ -170,7 +170,7 @@ export function Megothon() {
       : null;
 
   return (
-    <section className="megothon surface-card" id="actions">
+    <section className="megothon surface-navy" id="actions">
       <div className="wrap">
         <Reveal direction="rise" className="section-head is-center">
           <h2 className="display">
@@ -189,6 +189,7 @@ export function Megothon() {
               src="/photos/megothon-2026-05.jpg"
               alt="Mosaïque du Mégothon : les bénévoles devant la mairie de Saint-Nazaire, les bouteilles remplies de mégots, et le ramassage au sol."
               fill
+              quality={65}
               sizes="(max-width: 860px) 100vw, 560px"
               style={{ objectFit: "cover" }}
             />
@@ -267,7 +268,7 @@ export function Megothon() {
             </p>
             <p className="megothon-next-text">
               Date à fixer. Laissez votre adresse, on vous écrit dès
-              qu&apos;elle l&apos;est. Rien d&apos;autre, promis.
+              que la date est fixée. Rien d&apos;autre, promis.
             </p>
           </div>
           <FormPrevenir onFocusChange={setFocused} onEtatChange={setEtat} />

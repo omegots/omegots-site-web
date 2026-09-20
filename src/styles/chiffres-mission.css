@@ -103,7 +103,7 @@
   position: absolute;
   right: -10px;
   bottom: -9px;
-  font: 600 10px/1 var(--font-display);
+  font: 800 10px/1 var(--font-display);
   letter-spacing: -0.01em;
   font-variant-numeric: tabular-nums;
   color: var(--vert);
@@ -640,14 +640,14 @@
 
 .parcours-n {
   display: block;
-  font: 600 12px/1 var(--font-display);
+  font: 800 12px/1 var(--font-display);
   letter-spacing: 0.12em;
-  color: var(--orange);
+  color: var(--vert);
   margin-bottom: 10px;
 }
 
 .parcours-etape h3 {
-  font: 600 clamp(20px, 2vw, 24px) / 1.2 var(--font-display);
+  font: 800 clamp(20px, 2vw, 24px) / 1.2 var(--font-display);
   letter-spacing: -0.02em;
   color: var(--ink);
   margin-bottom: 8px;
@@ -719,6 +719,10 @@
 .manifeste-run {
   display: flex;
   flex-shrink: 0;
+  /* La première copie est un <ul> : on efface la mise en forme de liste. */
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .manifeste-item {
@@ -727,7 +731,7 @@
   /* Le mégot fait tiret : même distance de chaque côté. */
   gap: 30px;
   padding-right: 30px;
-  font: 600 clamp(18px, 1.7vw, 22px) / 1 var(--font-display);
+  font: 800 clamp(18px, 1.7vw, 22px) / 1 var(--font-display);
   letter-spacing: -0.01em;
   color: var(--ink);
   white-space: nowrap;

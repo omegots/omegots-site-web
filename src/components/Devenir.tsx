@@ -3,7 +3,7 @@ import { DevenirUsages } from "./devenir/DevenirUsages";
 
 export function Devenir() {
   return (
-    <section className="devenir surface-card" id="devenir">
+    <section className="devenir surface-navy" id="devenir">
       <div className="wrap devenir-grid">
         <Reveal direction="rise" className="section-head devenir-head is-center">
           <h2 className="display">Ramasser c&apos;est bien, recycler c&apos;est mieux.</h2>
@@ -12,7 +12,7 @@ export function Devenir() {
             les mégots ramassés deviennent autre chose qu&apos;un déchet.
           </p>
           <a
-            className="btn ghost"
+            className="btn"
             href="mailto:association.o.megots@gmail.com?subject=Proposer%20un%20partenariat"
           >
             Proposer un partenariat

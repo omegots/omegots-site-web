@@ -11,6 +11,15 @@ const principes = [
   "On mesure, on documente, on partage",
 ];
 
+/** Le mégot monochrome qui sert de tiret entre les principes. */
+function Megot() {
+  return (
+    <svg className="manifeste-megot" viewBox="-16 -30 32 52" aria-hidden="true">
+      <use href="#megot-mono" />
+    </svg>
+  );
+}
+
 export function Mission() {
   return (
     <section className="mission" id="mission">
@@ -27,20 +36,26 @@ export function Mission() {
       </div>
 
       {/* Ce qui nous guide : un bandeau qui défile lentement, sans rien à cliquer. */}
-      <div className="manifeste" role="list" aria-label="Ce qui nous guide">
-        <div className="manifeste-track" aria-hidden="false">
-          {[0, 1].map((copie) => (
-            <div className="manifeste-run" key={copie} aria-hidden={copie === 1 ? true : undefined}>
-              {principes.map((texte) => (
-                <span className="manifeste-item" role={copie === 0 ? "listitem" : undefined} key={texte}>
-                  <svg className="manifeste-megot" viewBox="-16 -30 32 52" aria-hidden="true">
-                    <use href="#megot-mono" />
-                  </svg>
-                  {texte}
-                </span>
-              ))}
-            </div>
-          ))}
+      <div className="manifeste">
+        <div className="manifeste-track">
+          {/* La vraie liste : un <ul> dont les <li> sont les seuls enfants (arbre d'accessibilité bien formé). */}
+          <ul className="manifeste-run" role="list" aria-label="Ce qui nous guide">
+            {principes.map((texte) => (
+              <li className="manifeste-item" key={texte}>
+                <Megot />
+                {texte}
+              </li>
+            ))}
+          </ul>
+          {/* Copie purement visuelle pour boucler le défilement, ignorée des technologies d'assistance. */}
+          <div className="manifeste-run" aria-hidden="true">
+            {principes.map((texte) => (
+              <span className="manifeste-item" key={texte}>
+                <Megot />
+                {texte}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>

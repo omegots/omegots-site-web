@@ -13,7 +13,6 @@ import { useRef } from "react";
 
 const COLORS = {
   bg: "#F5EFE0",
-  card: "#FFFDF8",
   navy: "#0F3550",
   navyDeep: "#0B2A40",
   vert: "#2A8C7E",

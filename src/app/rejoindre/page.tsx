@@ -59,7 +59,7 @@ export default function RejoindrePage() {
             <h2 className="display">Le prochain ramassage arrive.</h2>
             <p className="lede">
               Date à fixer. Laissez votre adresse, on vous écrit dès
-              qu&apos;elle l&apos;est. Rien d&apos;autre, promis.
+              que la date est fixée. Rien d&apos;autre, promis.
             </p>
             <FormPrevenir />
             <p className="voie-contact">

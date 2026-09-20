@@ -15,9 +15,9 @@ export default function RamassagesPage() {
       title="Nos ramassages."
       lede="Des sorties gratuites, ouvertes à toutes et tous, dans les rues, les parcs et sur les plages de Saint-Nazaire et ses alentours. On ramasse, on mesure, on publie."
     >
-      <WaveDivider from="bg" to="card" />
+      <WaveDivider from="bg" to="navy" />
       <Megothon />
-      <WaveDivider from="card" to="bg" />
+      <WaveDivider from="navy" to="bg" />
       <section className="page-note">
         <div className="wrap">
           <p className="lede">

@@ -158,7 +158,7 @@
 }
 
 .maree-score span:last-child b {
-  color: var(--orange);
+  color: var(--orange-ink);
 }
 
 /* Voiles : départ et résultat. */
@@ -207,7 +207,7 @@
 
 .maree-resultat p b + b,
 .maree-resultat p b:nth-of-type(2) {
-  color: var(--orange-hover);
+  color: var(--orange-ink);
 }
 
 .maree-actions {
@@ -227,7 +227,7 @@
   border: 0;
   padding: 8px 4px;
   font: 600 14px var(--font-body);
-  color: var(--vert);
+  color: var(--vert-ink);
   cursor: pointer;
   text-decoration: underline;
   text-underline-offset: 3px;

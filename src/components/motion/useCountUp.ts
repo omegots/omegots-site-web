@@ -25,6 +25,5 @@ export function useCountUp(target: number, active: boolean, duration = 1400) {
   return reduce && active ? target : value;
 }
 
-export function fr(n: number) {
-  return n.toLocaleString("fr-FR");
-}
+// Le formateur vit dans src/data/format.ts (module partagé serveur/client) ; réexport pour les composants client existants.
+export { fr } from "@/data/format";

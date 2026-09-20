@@ -51,7 +51,7 @@ export function Rejoindre() {
               Viens ramasser
             </MagneticButton>
             <MagneticButton
-              className="btn btn-lg ghost"
+              className="btn btn-lg btn-cream"
               href="mailto:association.o.megots@gmail.com?subject=Rejoindre%20O%27M%C3%A9gots"
             >
               Nous écrire

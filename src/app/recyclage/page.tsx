@@ -15,9 +15,9 @@ export default function RecyclagePage() {
       title="Le recyclage des mégots."
       lede="Ramasser c'est bien, recycler c'est mieux. Comment un mégot ramassé peut devenir autre chose qu'un déchet, et ce que l'association vise."
     >
-      <WaveDivider from="bg" to="card" />
+      <WaveDivider from="bg" to="navy" />
       <Devenir />
-      <WaveDivider from="card" to="bg" />
+      <WaveDivider from="navy" to="bg" />
       <section className="page-note">
         <div className="wrap">
           <p className="lede">

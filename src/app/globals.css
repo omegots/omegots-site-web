@@ -9,7 +9,10 @@
   --font-body: var(--font-poppins), "Segoe UI", system-ui, sans-serif;
 
   --bg: #f5efe0;
-  --card: #fffdf8;
+  /* Une seule couleur claire, le crème de la charte : les tuiles (--card) la
+     partagent et se détachent par leur ombre, jamais par du blanc. Les sections
+     alternent crème, bleu nuit, vert d'eau et orange. */
+  --card: #f5efe0;
   --ink: #1a4b6e;
   --ink2: #4e6675;
   --navy: #0f3550;
@@ -18,7 +21,15 @@
   --vert-deep: #1f6e63;
   --mint: #7fd6c6;
   --orange: #dd8a2e;
-  --orange-hover: #c9781f;
+  /* Boutons : l'orange exact de la charte, texte blanc (décision du 20/09/2026).
+     Contraste 2,7:1, sous le seuil AA de 4,5 : Lighthouse le signale, l'utilisateur l'assume. */
+  --orange-btn: var(--orange);
+  --orange-btn-hover: #c9781f;
+  /* Textes orange sur fond clair : l'orange exact de la charte, décision du
+     20/09/2026 (2,4:1 sur crème, sous le seuil AA ; un orange foncé #96520f passait
+     mais n'était « pas le bon jaune »). Le token reste pour changer d'avis d'un coup. */
+  --orange-ink: var(--orange);
+  --vert-ink: #1f6e63;
   --rule: #ded5c0;
   --cream: #f5efe0;
 
@@ -110,7 +121,7 @@ img {
   font: 600 12px/1 var(--font-body);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--vert);
+  color: var(--vert-ink);
 }
 
 .eyebrow-mint {
@@ -118,7 +129,7 @@ img {
 }
 
 .eyebrow-orange {
-  color: var(--orange);
+  color: var(--orange-ink);
 }
 
 .eyebrow-cream {
@@ -150,13 +161,13 @@ img {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: var(--orange);
+  background: var(--orange-btn);
   color: #fff;
   font: 600 14px/1 var(--font-body);
   padding: 14px 24px;
   border-radius: 999px;
   text-decoration: none;
-  border: 2px solid var(--orange);
+  border: 2px solid var(--orange-btn);
   cursor: pointer;
   transition:
     background 0.22s var(--ease-out),
@@ -168,8 +179,8 @@ img {
 }
 
 .btn:hover {
-  background: var(--orange-hover);
-  border-color: var(--orange-hover);
+  background: var(--orange-btn-hover);
+  border-color: var(--orange-btn-hover);
   translate: 0 -2px;
   box-shadow: 0 12px 28px rgba(221, 138, 46, 0.36);
 }
@@ -214,15 +225,12 @@ img {
 .btn:focus-visible,
 button:focus-visible,
 a:focus-visible {
-  outline: 3px solid var(--orange);
+  outline: 3px solid var(--navy);
   outline-offset: 3px;
+  box-shadow: 0 0 0 3px var(--cream);
 }
 
 /* --- Surfaces ---------------------------------------------------------- */
-
-.surface-card {
-  background: var(--card);
-}
 
 .surface-navy {
   background: var(--navy);
@@ -440,7 +448,7 @@ a:focus-visible {
 
 .hero-photo-num {
   font-size: 30px;
-  color: var(--orange);
+  color: var(--orange-ink);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -587,7 +595,7 @@ a:focus-visible {
 .hero-photo-num,
 .jars-label b {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .chiffres {
@@ -762,13 +770,13 @@ a:focus-visible {
   position: absolute;
   top: 28px;
   right: 26px;
-  font: 600 12px/1 var(--font-display);
+  font: 800 12px/1 var(--font-display);
   letter-spacing: 0.1em;
   color: color-mix(in srgb, var(--ink) 30%, transparent);
 }
 
 .mission-card h3 {
-  font: 600 clamp(20px, 2vw, 24px) / 1.2 var(--font-display);
+  font: 800 clamp(20px, 2vw, 24px) / 1.2 var(--font-display);
   letter-spacing: -0.02em;
   margin-bottom: 10px;
 }
@@ -922,7 +930,7 @@ a:focus-visible {
   font: 600 12px/1 var(--font-body);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--vert);
+  color: var(--vert-ink);
   margin-bottom: 16px;
 }
 
@@ -972,7 +980,7 @@ a:focus-visible {
   margin-top: 48px;
   padding: 30px 32px;
   border-radius: var(--radius);
-  background: color-mix(in srgb, var(--orange) 10%, var(--card));
+  background: var(--card);
   border: 1px solid color-mix(in srgb, var(--orange) 35%, var(--rule));
 }
 
@@ -980,7 +988,7 @@ a:focus-visible {
   font: 600 12px/1 var(--font-body);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--orange);
+  color: var(--orange-ink);
   margin-bottom: 8px;
 }
 
@@ -1041,7 +1049,7 @@ a:focus-visible {
 }
 
 .prevenir-err a {
-  color: var(--vert);
+  color: var(--vert-ink);
   font-weight: 500;
 }
 
@@ -1076,7 +1084,7 @@ a:focus-visible {
   position: absolute;
   top: 8px;
   left: 22px;
-  font: 700 72px/1 var(--font-display);
+  font: 800 72px/1 var(--font-display);
   color: var(--orange);
   opacity: 0.9;
 }
@@ -1141,7 +1149,7 @@ a:focus-visible {
   font: 600 12px/1.3 var(--font-body);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--orange);
+  color: var(--orange-ink);
 }
 
 .presse-title {
@@ -1151,7 +1159,7 @@ a:focus-visible {
 
 .presse-cta {
   font: 600 14px var(--font-body);
-  color: var(--vert);
+  color: var(--vert-ink);
   white-space: nowrap;
 }
 
@@ -1282,14 +1290,19 @@ a:focus-visible {
   margin-top: 40px;
 }
 
-.rejoindre-actions .btn.ghost {
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.8);
+/* Second bouton de la section orange : plein crème, texte bleu nuit. Un contour
+   seul sur l'orange ne ressort pas. */
+.btn-cream {
+  background: var(--cream);
+  border-color: var(--cream);
+  color: var(--navy);
+  box-shadow: 0 10px 26px rgba(15, 53, 80, 0.18);
 }
 
-.rejoindre-actions .btn.ghost:hover {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: #fff;
+.btn-cream:hover {
+  background: var(--cream);
+  border-color: var(--cream);
+  box-shadow: 0 14px 32px rgba(15, 53, 80, 0.24);
 }
 
 /* --- Pied de page ------------------------------------------------------ */
@@ -1633,4 +1646,54 @@ a:focus-visible {
   .jar-lvl {
     transform: none;
   }
+}
+
+/* --- Entrée de page ---------------------------------------------------- */
+
+/* Glissé court à chaque navigation (template.tsx remonte ce conteneur à chaque
+   route). En CSS, donc visible dès le HTML, sans attendre l'hydratation, et
+   sans opacité : un fondu retarderait la mesure du LCP jusqu'à sa fin. */
+.page-enter {
+  animation: page-enter 0.3s var(--ease-out) both;
+}
+
+@keyframes page-enter {
+  from {
+    transform: translateY(8px);
+  }
+}
+
+/* --- Textes sur fond sombre ------------------------------------------- */
+
+/* Les sections bleu nuit et vert d'eau héritent du crème ; le chapeau et les
+   sur-titres suivent, au lieu des bleus prévus pour le crème. */
+.surface-navy .lede,
+.surface-vert .lede {
+  color: color-mix(in srgb, var(--cream) 82%, transparent);
+}
+
+.surface-navy .eyebrow {
+  color: var(--mint);
+}
+
+/* Bouton contour sur fond sombre : crème, sinon il disparaît (bleu sur bleu). */
+.surface-navy .btn.ghost,
+.surface-vert .btn.ghost {
+  color: var(--cream);
+  border-color: rgba(245, 239, 224, 0.75);
+}
+
+.surface-navy .btn.ghost:hover,
+.surface-vert .btn.ghost:hover {
+  background: rgba(245, 239, 224, 0.12);
+  border-color: var(--cream);
+}
+
+/* Bloc des contenants et note du Mégothon sur bleu nuit. */
+.surface-navy .jars-label {
+  color: var(--mint);
+}
+
+.surface-navy .jars-note {
+  color: rgba(245, 239, 224, 0.75);
 }

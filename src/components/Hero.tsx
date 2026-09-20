@@ -1,65 +1,64 @@
-"use client";
-
-import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import { totals } from "@/data/ramassages";
 import { ApostropheMegot } from "./hero/ApostropheMegot";
 import { CaptionCycle } from "./hero/CaptionCycle";
 import { HeroCta } from "./hero/HeroCta";
 import { MegotField } from "./hero/MegotField";
 
-const ease = [0.22, 1, 0.36, 1] as const;
+/** Délai d'entrée d'un bloc du hero, en secondes (animation CSS `hero-in`, hero.css). */
+const entree = (delay: number): CSSProperties => ({ ["--d" as string]: `${delay}s` });
 
+/**
+ * Hero rendu côté serveur, sans Motion : titre, texte, boutons et photo glissent
+ * en place par animation CSS (hero.css), dès le premier rendu et sans attendre
+ * l'hydratation. Aucun fondu : Chrome ne compte un élément pour le LCP qu'à la
+ * fin de son animation d'opacité.
+ */
 export function Hero() {
-  const reduce = useReducedMotion();
   const { litres } = totals();
-
-  const up = (delay: number) => ({
-    initial: reduce ? false : { opacity: 0, y: 24 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.7, delay, ease },
-  });
 
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="wrap hero-grid">
         <div className="hero-copy">
-          <motion.h1 id="hero-title" className="display" {...up(0.15)}>
+          <h1 id="hero-title" className="display hero-in" style={entree(0.15)}>
             Un territoire sans mégots,{" "}
             <span className="accent">
-              <span className="cest">c<ApostropheMegot delay={0.15 + 0.65} />est</span> possible.
+              <span className="cest">
+                c<ApostropheMegot delay={0.15 + 0.65} />
+                est
+              </span>{" "}
+              possible.
             </span>
-          </motion.h1>
-          <motion.p className="hero-sub" {...up(0.3)}>
+          </h1>
+          <p className="hero-sub hero-in" style={entree(0.3)}>
             Association citoyenne à Saint-Nazaire et ses alentours, on dépollue
             les rues, les parcs et les plages des mégots. On les compte, on
             publie les chiffres. Sans juger personne : le mégot est un déchet,
             pas une faute.
-          </motion.p>
-          <motion.div className="hero-cta" {...up(0.42)}>
+          </p>
+          <div className="hero-cta hero-in" style={entree(0.42)}>
             <HeroCta />
-          </motion.div>
+          </div>
         </div>
 
-        <motion.figure
-          className="hero-photo"
-          initial={reduce ? false : { opacity: 0, y: 30, rotate: 1.5 }}
-          animate={{ opacity: 1, y: 0, rotate: 0 }}
-          transition={{ duration: 0.9, delay: 0.35, ease }}
-        >
+        <figure className="hero-photo hero-photo-in">
           <Image
             src="/photos/megothon-bouteilles.jpg"
             alt="Six bouteilles remplies de mégots ramassés dans le centre-ville de Saint-Nazaire, posées sur un muret."
             width={1200}
             height={1026}
             priority
+            fetchPriority="high"
+            quality={65}
             sizes="(max-width: 860px) 100vw, 520px"
           />
           <figcaption className="hero-photo-cap">
             <span className="hero-photo-num display">{litres} L</span>
             <CaptionCycle />
           </figcaption>
-        </motion.figure>
+        </figure>
       </div>
 
       {/* Décor (pont, eau) masqué aux lecteurs d'écran ; les mégots à ramasser restent des boutons accessibles. */}

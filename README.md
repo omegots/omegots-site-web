@@ -73,3 +73,36 @@ clip sur un enfant et observe le parent.
 
 Les composants de la V1 (hero épinglé, 500 L épinglé, pipeline, carte, citation
 défilante) sont archivés dans `../maquette/composants-v1-archive/`.
+
+## Performance, accessibilité, FAQ (20/09/2026)
+
+Build de production audité avec Lighthouse 12 : desktop 100 / 100 / 100 / 100,
+mobile 88 à 92 en performance (le reste à 100). Ce qui a été fait, et pourquoi :
+
+- **Entrées du hero et de la page en CSS, sans opacité.** `template.tsx` et `Hero.tsx` sont
+  des composants serveur ; les blocs glissent en place (`.hero-in`, `.page-enter`). Chrome ne
+  compte un élément pour le LCP qu'à la fin de son animation d'opacité : un fondu Motion après
+  hydratation décalait la mesure de 2,5 s.
+- **Images** : AVIF puis WebP (`next.config.ts`), qualité 65 pour les photos (Next 16 n'accepte
+  que les qualités listées dans `images.qualities`), `fetchPriority="high"` sur la photo du hero,
+  logo GHIS en SVG (`public/logo/ghis-blanc.svg`) au lieu d'un PNG de 1 800 px.
+- **Polices** : Unbounded en une seule graisse (800) : Google renvoie la police variable de 51 Ko
+  dès que deux graisses sont demandées, contre 22 Ko pour une instance statique. Les anciens
+  `600`/`700` de la police titre sont passés en 800, les questions de la FAQ sont en Poppins 600.
+- **Liens** : `prefetch={false}` sur le menu et le pied de page (préchargement au survol seulement).
+- **Limite connue sur mobile** : Lighthouse simule un réseau 4G lent et compte tout fichier
+  téléchargé avant le LCP, JavaScript compris (React + Next ≈ 120 Ko gz, Motion ≈ 45 Ko). Le 100
+  mobile demanderait de retirer Motion ou de ne plus hydrater la page d'accueil.
+- **Accessibilité 100** : une seule liste `<ul role="list">` dans le bandeau « Ce qui nous guide »
+  (la copie de défilement est `aria-hidden`), boutons dans l'orange exact de la charte
+  `#DD8A2E` avec texte blanc, choix assumé : ce blanc fait 2,7:1, sous le seuil AA de 4,5, Lighthouse
+  signale donc « color-contrast » sur les boutons (accessibilité 92 au lieu de 100 ; le bleu nuit sur
+  orange passait mais ne ressortait pas), `--orange-ink` et `--vert-ink` pour les textes orange
+  et vert d'eau sur fond clair, anneau de focus bleu nuit + crème lisible sur tous les fonds.
+- **Palette** : une seule couleur claire, le crème `#F5EFE0` (`--card` = `--bg`) ; plus de blanc ni
+  de teinte intermédiaire. Les sections alternent crème, bleu nuit (`surface-navy`, Mégothon et
+  Recyclage y compris), vert d'eau et orange. Les boutons seuls dans leur section sont pleins.
+- **FAQ** (`Faq.tsx`, `data/faq.ts`, `styles/faq.css`) après la section orange : `<details name="faq">`
+  natifs, une réponse ouverte à la fois, balisage `FAQPage` (schema.org) dans `page.tsx`. Les
+  réponses ne reprennent que des faits déjà publiés par l'association.
+- `fr()` (format des nombres) vit dans `src/data/format.ts`, importable côté serveur.

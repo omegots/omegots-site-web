@@ -42,7 +42,7 @@ export function Temoignages() {
                 Vous étiez là, ou vous viendrez ? Racontez-nous votre
                 ramassage en une phrase, elle rejoindra celles-ci.
               </span>
-              <span className="btn ghost temoignage-vide-btn">Témoigner</span>
+              <span className="btn temoignage-vide-btn">Témoigner</span>
             </a>
           </StaggerItem>
         </Stagger>

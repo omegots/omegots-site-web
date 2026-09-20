@@ -79,7 +79,7 @@ export function Header() {
   return (
     <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
       <div className="wrap nav">
-        <Link href="/#top" className="nav-brand" aria-label="Accueil O'Mégots">
+        <Link href="/#top" prefetch={false} className="nav-brand" aria-label="Accueil O'Mégots">
           <Logo />
         </Link>
 
@@ -114,6 +114,7 @@ export function Header() {
                       <motion.li key={l.href} variants={reduce || !mobile ? undefined : itemVariants}>
                         <Link
                           href={l.href}
+                          prefetch={false}
                           className={isActive ? "is-active" : undefined}
                           aria-current={isActive ? "page" : undefined}
                           onClick={() => setOpen(false)}
@@ -132,7 +133,7 @@ export function Header() {
                     );
                   })}
                   <motion.li variants={reduce || !mobile ? undefined : itemVariants}>
-                    <Link href="/rejoindre" className="btn" onClick={() => setOpen(false)}>
+                    <Link href="/rejoindre" prefetch={false} className="btn" onClick={() => setOpen(false)}>
                       Nous rejoindre
                     </Link>
                   </motion.li>
