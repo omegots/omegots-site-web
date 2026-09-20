@@ -193,12 +193,12 @@ export function Megothon() {
         <div className="megothon-grid">
           <Reveal direction="left" className="megothon-photo">
             <Image
-              src="/photos/megothon-2026-05.jpg"
+              src="/photos/megothon-2026-05-800.jpg"
               alt="Mosaïque du Mégothon : les bénévoles devant la mairie de Saint-Nazaire, les bouteilles remplies de mégots, et le ramassage au sol."
               fill
-              quality={60}
-              sizes="(max-width: 480px) 360px, (max-width: 860px) 420px, 560px"
-              style={{ objectFit: "cover" }}
+              quality={55}
+              sizes="(max-width: 480px) 376px, (max-width: 860px) 420px, 560px"
+              style={{ objectFit: "cover", objectPosition: "50% 0" }}
             />
           </Reveal>
 

@@ -9,10 +9,10 @@
     "lint": "eslint"
   },
   "browserslist": [
-    "chrome >= 111",
-    "edge >= 111",
-    "firefox >= 111",
-    "safari >= 16.4"
+    "chrome 111",
+    "edge 111",
+    "firefox 111",
+    "safari 16.4"
   ],
   "dependencies": {
     "motion": "^13.2.0",
