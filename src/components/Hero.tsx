@@ -4,7 +4,7 @@ import { totals } from "@/data/ramassages";
 import { ApostropheMegot } from "./hero/ApostropheMegot";
 import { CaptionCycle } from "./hero/CaptionCycle";
 import { HeroCta } from "./hero/HeroCta";
-import { MegotField } from "./hero/MegotField";
+import { MegotFieldLazy } from "./hero/MegotFieldLazy";
 
 /** Délai d'entrée d'un bloc du hero, en secondes (animation CSS `hero-in`, hero.css). */
 const entree = (delay: number): CSSProperties => ({ ["--d" as string]: `${delay}s` });
@@ -51,8 +51,8 @@ export function Hero() {
             height={1026}
             priority
             fetchPriority="high"
-            quality={65}
-            sizes="(max-width: 860px) 100vw, 520px"
+            quality={60}
+            sizes="(max-width: 480px) 100vw, (max-width: 860px) 92vw, 520px"
           />
           <figcaption className="hero-photo-cap">
             <span className="hero-photo-num display">{litres} L</span>
@@ -134,7 +134,7 @@ export function Hero() {
               opacity=".35"
             />
           </svg>
-          <MegotField />
+          <MegotFieldLazy />
         </div>
       </div>
     </section>

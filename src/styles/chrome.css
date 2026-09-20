@@ -32,6 +32,14 @@
   animation-play-state: paused;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .wave-divider-svg,
+  .wave-divider-svg.is-back {
+    animation: none !important;
+    width: 100%;
+  }
+}
+
 /* --- Le tablier (en-tête) ---------------------------------------------- */
 
 .site-header .nav {

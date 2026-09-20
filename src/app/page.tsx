@@ -1,18 +1,37 @@
-import { Chiffres } from "@/components/Chiffres";
-import { Devenir } from "@/components/Devenir";
+import dynamic from "next/dynamic";
 import { Faq } from "@/components/Faq";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
-import { MareeSection } from "@/components/MareeSection";
-import { Megothon } from "@/components/Megothon";
-import { Mission } from "@/components/Mission";
-import { Presse } from "@/components/Presse";
-import { Rejoindre } from "@/components/Rejoindre";
 import { SvgSprites } from "@/components/SvgSprites";
-import { Temoignages } from "@/components/Temoignages";
 import { WaveDivider } from "@/components/WaveDivider";
 import { faq } from "@/data/faq";
+
+/** Sections sous le hero : chunks JS séparés, hors du chemin critique mobile. */
+const Chiffres = dynamic(() =>
+  import("@/components/Chiffres").then((m) => ({ default: m.Chiffres })),
+);
+const Mission = dynamic(() =>
+  import("@/components/Mission").then((m) => ({ default: m.Mission })),
+);
+const Megothon = dynamic(() =>
+  import("@/components/Megothon").then((m) => ({ default: m.Megothon })),
+);
+const MareeSection = dynamic(() =>
+  import("@/components/MareeSection").then((m) => ({ default: m.MareeSection })),
+);
+const Temoignages = dynamic(() =>
+  import("@/components/Temoignages").then((m) => ({ default: m.Temoignages })),
+);
+const Presse = dynamic(() =>
+  import("@/components/Presse").then((m) => ({ default: m.Presse })),
+);
+const Devenir = dynamic(() =>
+  import("@/components/Devenir").then((m) => ({ default: m.Devenir })),
+);
+const Rejoindre = dynamic(() =>
+  import("@/components/Rejoindre").then((m) => ({ default: m.Rejoindre })),
+);
 
 /** Balisage FAQPage (schema.org) : les mêmes questions et réponses que la section. */
 const faqJsonLd = JSON.stringify({

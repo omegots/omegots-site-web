@@ -189,8 +189,8 @@ export function Megothon() {
               src="/photos/megothon-2026-05.jpg"
               alt="Mosaïque du Mégothon : les bénévoles devant la mairie de Saint-Nazaire, les bouteilles remplies de mégots, et le ramassage au sol."
               fill
-              quality={65}
-              sizes="(max-width: 860px) 100vw, 560px"
+              quality={60}
+              sizes="(max-width: 480px) 100vw, (max-width: 860px) 92vw, 560px"
               style={{ objectFit: "cover" }}
             />
           </Reveal>
