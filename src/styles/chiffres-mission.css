@@ -642,7 +642,7 @@
   display: block;
   font: 800 12px/1 var(--font-display);
   letter-spacing: 0.12em;
-  color: var(--vert);
+  color: var(--vert-ink);
   margin-bottom: 10px;
 }
 
