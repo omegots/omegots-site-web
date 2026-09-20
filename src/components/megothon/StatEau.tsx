@@ -8,7 +8,7 @@ import {
   useReducedMotion,
   type MotionValue,
 } from "motion/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fr } from "../motion/useCountUp";
 
 /** Équivalences de sensibilisation : une baignoire, une petite bouteille. */
@@ -31,6 +31,12 @@ export function StatEau({ eau, spring }: StatEauProps) {
   const reduce = useReducedMotion();
   const [mode, setMode] = useState<Mode>("litres");
   const ref = useRef<HTMLSpanElement>(null);
+
+  // Le HTML sert la valeur finale ; côté client, zéro juste avant l'animation.
+  useEffect(() => {
+    if (reduce) return;
+    if (ref.current && spring.get() === 0) ref.current.textContent = fr(0);
+  }, [reduce, spring]);
 
   useMotionValueEvent(spring, "change", (v) => {
     if (ref.current) ref.current.textContent = fr(Math.round(v));
@@ -81,7 +87,7 @@ export function StatEau({ eau, spring }: StatEauProps) {
           >
             {mode === "litres" && (
               <>
-                <span ref={ref}>{fr(Math.round(spring.get()))}</span> L
+                <span ref={ref}>{fr(eau)}</span> L
               </>
             )}
             {mode === "baignoires" && fr(baignoires)}

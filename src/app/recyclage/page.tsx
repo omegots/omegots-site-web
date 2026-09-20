@@ -4,6 +4,7 @@ import { PageShell } from "@/components/PageShell";
 import { WaveDivider } from "@/components/WaveDivider";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/recyclage" },
   title: "Le recyclage des mégots · O'Mégots",
   description:
     "Que deviennent les mégots ramassés ? Collecte, tri, dépollution, matière régénérée : la filière de recyclage des mégots et l'ambition d'O'Mégots.",

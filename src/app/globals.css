@@ -1441,6 +1441,12 @@ a:focus-visible {
 
   .hero-photo {
     max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* Sur une colonne, la photo passe en bandeau 16/9 pour laisser le pont visible. */
+  .hero-photo img {
+    aspect-ratio: 16 / 9;
   }
 
   .hero-bridge svg {
@@ -1487,7 +1493,8 @@ a:focus-visible {
   }
 }
 
-@media (max-width: 760px) {
+/* Menu mobile jusqu'à 900 px : entre 761 et 900 px, le menu horizontal ne tient pas. */
+@media (max-width: 900px) {
   .nav-toggle {
     display: inline-flex;
   }
@@ -1532,7 +1539,9 @@ a:focus-visible {
   .nav-menu .btn {
     margin-top: 14px;
   }
+}
 
+@media (max-width: 760px) {
   .presse-row {
     grid-template-columns: 1fr;
     gap: 6px;
@@ -1699,4 +1708,12 @@ a:focus-visible {
 
 .surface-navy .jars-note {
   color: rgba(245, 239, 224, 0.75);
+}
+
+/* Bandeau « Prochaine sortie » : texte au-dessus du formulaire dès 900 px,
+   sinon le titre se casse sur trois lignes à côté du champ. */
+@media (max-width: 900px) {
+  .megothon-next {
+    grid-template-columns: 1fr;
+  }
 }

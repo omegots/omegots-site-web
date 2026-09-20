@@ -4,6 +4,7 @@ import { PageShell } from "@/components/PageShell";
 import { WaveDivider } from "@/components/WaveDivider";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/ramassages" },
   title: "Nos ramassages de mégots à Saint-Nazaire · O'Mégots",
   description:
     "Les sorties de ramassage de mégots d'O'Mégots à Saint-Nazaire et ses alentours : bilans chiffrés, photos, prochaine date, comment participer.",

@@ -32,6 +32,8 @@ const SINE_BACK = sinePath(200);
  * layout, meilleur Speed Index mobile.
  */
 export function WaveDivider({ from, to }: { from: Tone; to: Tone }) {
+  // Sur un fond sombre vers l'orange, la crête arrière translucide fait une bande brune : on la retire.
+  const sansArriere = to === "orange" && from !== "bg" && from !== "orange";
   return (
     <div
       className="wave-divider"
@@ -41,13 +43,15 @@ export function WaveDivider({ from, to }: { from: Tone; to: Tone }) {
       aria-hidden="true"
     >
       <div className="wave-divider-body">
-        <svg
-          className="wave-divider-svg is-back"
-          viewBox="0 0 2400 64"
-          preserveAspectRatio="none"
-        >
-          <path d={`${SINE_BACK} L2400,64 L0,64 Z`} fill={COLORS[to]} opacity="0.35" />
-        </svg>
+        {!sansArriere && (
+          <svg
+            className="wave-divider-svg is-back"
+            viewBox="0 0 2400 64"
+            preserveAspectRatio="none"
+          >
+            <path d={`${SINE_BACK} L2400,64 L0,64 Z`} fill={COLORS[to]} opacity="0.35" />
+          </svg>
+        )}
         <svg className="wave-divider-svg" viewBox="0 0 2400 64" preserveAspectRatio="none">
           <path d={`${SINE} L2400,64 L0,64 Z`} fill={COLORS[to]} />
         </svg>

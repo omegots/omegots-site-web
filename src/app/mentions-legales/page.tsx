@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageShell } from "@/components/PageShell";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/mentions-legales" },
   title: "Mentions légales · O'Mégots",
   description:
     "Informations légales relatives au site omegots.fr et à l'association O'Mégots : éditeur, directeur de la publication, hébergement, données personnelles.",

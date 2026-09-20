@@ -395,7 +395,7 @@
 }
 
 /* Desktop : la cigarette et ses traits remplacent la liste. Mobile : liste. */
-@media (min-width: 761px) {
+@media (min-width: 901px) {
   .chiffres .chiffres-list {
     display: none;
   }
@@ -410,7 +410,7 @@
   display: none;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .cig-callouts {
     display: none;
   }
@@ -771,5 +771,12 @@
     flex-wrap: wrap;
     gap: 10px 0;
     padding: 0 24px;
+  }
+}
+
+/* Mobile : moins de vide sous la liste des chiffres, avant la vague. */
+@media (max-width: 900px) {
+  .chiffres {
+    padding-bottom: 36px;
   }
 }

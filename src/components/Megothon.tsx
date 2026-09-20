@@ -113,6 +113,13 @@ export function Megothon() {
   const megotsRef = useRef<HTMLSpanElement>(null);
   const palier = useRef(0);
 
+  // Le HTML sert la valeur finale (robots, agents) ; côté client, le compteur
+  // repart de zéro juste avant l'animation.
+  useEffect(() => {
+    if (reduce || inView) return;
+    if (megotsRef.current) megotsRef.current.textContent = fr(0);
+  }, [reduce, inView]);
+
   useMotionValueEvent(master, "change", (v) => {
     const n = Math.floor(v + 1e-6);
     if (n === palier.current) return;
@@ -208,9 +215,7 @@ export function Megothon() {
                 </li>
                 <li>
                   <b className="display" aria-hidden="true">
-                    <span ref={megotsRef}>
-                      {fr(Math.round(megotsSpring.get()))}
-                    </span>
+                    <span ref={megotsRef}>{fr(megots)}</span>
                   </b>
                   <span className="sr-only">
                     {fr(megots)} mégots environ, à {fr(megotsParLitre())} par

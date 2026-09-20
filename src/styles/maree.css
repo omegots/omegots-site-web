@@ -296,3 +296,15 @@
     animation: none;
   }
 }
+
+/* Sur une colonne, l'en-tête se centre comme les sections voisines. */
+@media (max-width: 960px) {
+  .maree .maree-head {
+    text-align: center;
+    margin-inline: auto;
+  }
+
+  .maree .maree-head .lede {
+    margin-inline: auto;
+  }
+}

@@ -42,7 +42,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const reduce = useReducedMotion();
-  const mobile = useMediaQuery("(max-width: 760px)");
+  const mobile = useMediaQuery("(max-width: 900px)");
   const pathname = usePathname();
 
   /* Le tablier : ligne vert d'eau qui se remplit avec le défilement. */

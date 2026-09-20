@@ -36,14 +36,16 @@ type Props = {
 };
 
 /**
- * Liens vers les réseaux. Tant qu'un lien n'est pas renseigné dans reseaux.ts,
- * l'entrée s'affiche sans lien (aucune adresse inventée).
+ * Liens vers les réseaux. Une entrée sans URL dans reseaux.ts n'est pas affichée
+ * (aucune adresse inventée) ; sans aucune URL, le composant ne rend rien.
  */
 export function Reseaux({ variant }: Props) {
   const cartes = variant === "cartes";
+  const actifs = reseaux.filter((r) => r.href);
+  if (actifs.length === 0) return null;
   return (
     <ul className={`reseaux is-${variant}`}>
-      {reseaux.map((r) => {
+      {actifs.map((r) => {
         const inner = (
           <>
             <span className="reseau-icone">

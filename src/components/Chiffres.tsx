@@ -61,6 +61,7 @@ export function Chiffres() {
 
   return (
     <section className="chiffres surface-navy" id="pourquoi">
+      <h2 className="sr-only">Pourquoi un mégot, ça compte</h2>
       <div className="wrap chiffres-grid">
         <div className="chiffres-main" ref={ref}>
           <p className="chiffres-big display">

@@ -6,6 +6,7 @@ import { Maree, MAREE_DUREE_S } from "@/components/jeu/Maree";
 import { LITRES_EAU_PAR_MEGOT } from "@/data/ramassages";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/jeu" },
   title: "Mini-jeu : ramassez avant la marée · O'Mégots",
   description:
     "La marée monte, les mégots au sol vont finir dans l'eau. Touchez-les avant la vague : chaque mégot sauvé, c'est 500 litres d'eau préservés.",

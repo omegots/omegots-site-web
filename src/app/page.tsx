@@ -6,6 +6,8 @@ import { Hero } from "@/components/Hero";
 import { SvgSprites } from "@/components/SvgSprites";
 import { WaveDivider } from "@/components/WaveDivider";
 import { faq } from "@/data/faq";
+import { articlesPresse } from "@/data/presse";
+import { SITE_URL } from "@/data/site";
 
 /** Sections sous le hero : chunks JS séparés, hors du chemin critique mobile. */
 const Chiffres = dynamic(() =>
@@ -32,6 +34,30 @@ const Devenir = dynamic(() =>
 const Rejoindre = dynamic(() =>
   import("@/components/Rejoindre").then((m) => ({ default: m.Rejoindre })),
 );
+
+/** Fiche de l'association (schema.org NGO) : uniquement des faits publiés (mentions légales, presse). */
+const ngoJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  name: "O'Mégots",
+  url: SITE_URL,
+  logo: `${SITE_URL}/favicon/favicon-512.png`,
+  email: "association.o.megots@gmail.com",
+  description:
+    "Association citoyenne loi 1901 : ramassage et comptage des mégots à Saint-Nazaire et ses alentours, chiffres publiés, sensibilisation sans jugement.",
+  address: { "@type": "PostalAddress", addressLocality: "Besné", postalCode: "44160", addressCountry: "FR" },
+  areaServed: { "@type": "City", name: "Saint-Nazaire" },
+  identifier: [
+    { "@type": "PropertyValue", propertyID: "RNA", value: "W443012511" },
+    { "@type": "PropertyValue", propertyID: "SIRET", value: "10448840800014" },
+  ],
+  subjectOf: articlesPresse.map((a) => ({
+    "@type": "NewsArticle",
+    headline: a.title,
+    url: a.href,
+    publisher: { "@type": "Organization", name: a.media },
+  })),
+}).replace(/</g, "\u003c");
 
 /** Balisage FAQPage (schema.org) : les mêmes questions et réponses que la section. */
 const faqJsonLd = JSON.stringify({
@@ -74,6 +100,7 @@ export default function HomePage() {
         </main>
         <Footer />
       </div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ngoJsonLd }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqJsonLd }} />
     </>
   );

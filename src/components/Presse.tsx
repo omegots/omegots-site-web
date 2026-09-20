@@ -17,6 +17,7 @@ export function Presse() {
               <a
                 className="presse-row"
                 href={a.href}
+                aria-label={`Lire : ${a.title} (${a.media})`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

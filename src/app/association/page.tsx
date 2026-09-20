@@ -6,6 +6,7 @@ import { Temoignages } from "@/components/Temoignages";
 import { WaveDivider } from "@/components/WaveDivider";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/association" },
   title: "L'association O'Mégots · Saint-Nazaire",
   description:
     "O'Mégots, association citoyenne loi 1901 créée à Saint-Nazaire : notre mission, ce qui nous guide, les bénévoles, la presse et le contact.",

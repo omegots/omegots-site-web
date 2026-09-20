@@ -4,6 +4,7 @@ import { PageShell } from "@/components/PageShell";
 import { WaveDivider } from "@/components/WaveDivider";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/le-megot" },
   title: "Le mégot, un déchet toxique · O'Mégots",
   description:
     "De quoi est fait un mégot, ce qu'il libère dans l'eau, combien de temps il met à disparaître et pourquoi c'est le déchet le plus ramassé sur les plages.",

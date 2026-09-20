@@ -7,6 +7,7 @@ import { WaveDivider } from "@/components/WaveDivider";
 import { Rejoindre } from "@/components/Rejoindre";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/rejoindre" },
   title: "Nous rejoindre · O'Mégots",
   description:
     "Venir ramasser, adhérer pour 1 €, faire un don, proposer un partenariat : toutes les façons de rejoindre O'Mégots à Saint-Nazaire.",

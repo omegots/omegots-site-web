@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins, Unbounded } from "next/font/google";
+import { NOINDEX, SITE_URL } from "@/data/site";
 import "./globals.css";
 import "../styles/hero.css";
 import "../styles/megothon.css";
@@ -29,7 +30,10 @@ export const metadata: Metadata = {
   title: "O'Mégots · Ramassage et valorisation des mégots à Saint-Nazaire",
   description:
     "O'Mégots, association citoyenne de Saint-Nazaire : on ramasse les mégots, on les mesure, on publie les chiffres. Rejoignez un ramassage.",
-  metadataBase: new URL("https://omegots.fr"),
+  metadataBase: new URL(SITE_URL),
+  alternates: { canonical: "/" },
+  // Démo (SITE_NOINDEX=1) : aucune indexation, le vrai site reste omegots.fr.
+  robots: NOINDEX ? { index: false, follow: false } : undefined,
   openGraph: {
     title: "O'Mégots · Saint-Nazaire",
     description:
