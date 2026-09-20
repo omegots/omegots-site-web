@@ -1,0 +1,726 @@
+/* Styles de la page « Le mégot », importés par src/app/le-megot/page.tsx. */
+
+/* --- Communs à la page ------------------------------------------------ */
+
+.megot-section {
+  padding: clamp(64px, 9vw, 104px) 0;
+}
+
+.megot-section .section-head {
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+
+.megot-section .section-head h2 {
+  font-size: clamp(30px, 4vw, 46px);
+  text-wrap: balance;
+}
+
+/* Appels de source en exposant : petits, cliquables, lisibles sur tous les fonds. */
+.ref {
+  font-size: 0.68em;
+  line-height: 0;
+  margin-left: 0.15em;
+  font-weight: 600;
+  vertical-align: super;
+}
+
+.ref a {
+  color: inherit;
+  opacity: 0.75;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding: 0 1px;
+  border-radius: 2px;
+}
+
+.ref a:hover {
+  opacity: 1;
+}
+
+.megot-h3 {
+  font: 800 clamp(20px, 2vw, 24px) / 1.2 var(--font-display);
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+
+/* --- Anatomie (fond bleu nuit) ----------------------------------------- */
+
+.anat {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+
+.anat-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.anat-part {
+  transition:
+    opacity 0.35s var(--ease-out),
+    filter 0.35s var(--ease-out);
+  opacity: 0.55;
+}
+
+.anat-part.is-on {
+  opacity: 1;
+  filter: drop-shadow(0 0 14px rgba(245, 239, 224, 0.45));
+}
+
+.anat-repere {
+  transition: transform 0.35s var(--ease-out);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.anat-repere.is-on {
+  transform: scale(1.25);
+}
+
+.anat-repere.is-on circle {
+  fill: var(--orange);
+}
+
+.anat-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.anat-tab {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(245, 239, 224, 0.28);
+  background: transparent;
+  color: var(--cream);
+  font: 600 14px/1.25 var(--font-body);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background 0.22s var(--ease-out),
+    border-color 0.22s var(--ease-out);
+}
+
+.anat-tab:hover {
+  border-color: var(--cream);
+}
+
+.anat-tab.is-on {
+  background: var(--cream);
+  border-color: var(--cream);
+  color: var(--navy);
+}
+
+.anat-tab-n {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--mint);
+}
+
+.anat-tab.is-on .anat-tab-n {
+  color: var(--vert);
+}
+
+.anat-texte h3 {
+  font: 800 clamp(22px, 2.4vw, 30px) / 1.15 var(--font-display);
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  color: var(--cream);
+}
+
+.anat-texte p {
+  color: rgba(245, 239, 224, 0.85);
+  line-height: 1.6;
+  animation: megot-fondu 0.4s var(--ease-out) both;
+}
+
+.anat-texte h3 {
+  animation: megot-fondu 0.4s var(--ease-out) both;
+}
+
+@keyframes megot-fondu {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* --- Le bocal d'un litre (fond crème) ----------------------------------- */
+
+.bocal {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+
+.bocal-visuel {
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+
+.bocal-svg {
+  width: min(100%, 300px);
+  height: auto;
+  display: block;
+}
+
+.bocal-trouble {
+  transition: opacity 0.6s var(--ease-out);
+}
+
+.bocal-houle {
+  animation: bocal-houle 6s ease-in-out infinite alternate;
+}
+
+@keyframes bocal-houle {
+  to {
+    transform: translateX(-30px);
+  }
+}
+
+.bocal-megot {
+  animation: bocal-chute 0.7s var(--ease-out) both;
+  overflow: visible;
+}
+
+@keyframes bocal-chute {
+  from {
+    transform: translateY(-140px);
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+}
+
+.bocal-poissons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 10px;
+  max-width: 300px;
+  color: var(--vert);
+}
+
+.bocal-poisson {
+  width: 30px;
+  height: 20px;
+  animation: bocal-nage 0.5s var(--ease-out) both;
+  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+}
+
+.bocal-poisson.is-mort {
+  color: var(--ink2);
+  opacity: 0.35;
+  transform: scaleY(-1);
+}
+
+@keyframes bocal-nage {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+}
+
+.bocal-choix {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.bocal-btn {
+  padding: 11px 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font: 600 14px/1 var(--font-body);
+  cursor: pointer;
+  transition:
+    background 0.22s var(--ease-out),
+    color 0.22s var(--ease-out);
+}
+
+.bocal-btn:hover {
+  background: rgba(26, 75, 110, 0.08);
+}
+
+.bocal-btn.is-on {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--cream);
+}
+
+.bocal-chiffre {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+
+.bocal-chiffre b {
+  font-size: clamp(48px, 6vw, 72px);
+  line-height: 1;
+  color: var(--vert);
+  font-variant-numeric: tabular-nums;
+}
+
+.bocal-chiffre span {
+  font: 600 clamp(16px, 1.4vw, 19px) / 1.3 var(--font-body);
+  max-width: 26ch;
+}
+
+.bocal-texte {
+  color: var(--ink2);
+  line-height: 1.6;
+  max-width: 56ch;
+}
+
+.bocal-note {
+  margin-top: 12px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink2);
+  max-width: 56ch;
+}
+
+/* --- Les 500 litres, remis à leur place --------------------------------- */
+
+.cinq-cents {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 48px);
+  align-items: start;
+  margin-top: clamp(40px, 6vw, 72px);
+  padding-top: clamp(32px, 5vw, 56px);
+  border-top: 1px solid var(--rule);
+}
+
+.cinq-cents p {
+  color: var(--ink2);
+  line-height: 1.6;
+}
+
+.cinq-cents p + p {
+  margin-top: 12px;
+}
+
+.equiv {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.equiv li {
+  list-style: none;
+  padding: 18px 16px;
+  border-radius: 14px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  box-shadow: var(--shadow);
+}
+
+.equiv b {
+  display: block;
+  font: 800 clamp(26px, 3vw, 36px) / 1 var(--font-display);
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.equiv span {
+  font-size: 14px;
+  color: var(--ink2);
+  line-height: 1.4;
+}
+
+/* --- La ligne du temps (fond vert d'eau) --------------------------------- */
+
+.temps {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+
+.temps-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.temps-svg g {
+  transition: opacity 0.3s var(--ease-out);
+}
+
+.temps-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: rgba(245, 239, 224, 0.85);
+}
+
+.temps-label b {
+  font-size: clamp(22px, 2.4vw, 30px);
+  color: var(--cream);
+  font-variant-numeric: tabular-nums;
+}
+
+.temps-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--orange) var(--p, 0%), rgba(245, 239, 224, 0.3) var(--p, 0%));
+  outline: none;
+  cursor: pointer;
+}
+
+.temps-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 3px solid var(--navy);
+  box-shadow: 0 6px 16px rgba(11, 42, 64, 0.3);
+  cursor: grab;
+}
+
+.temps-range::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 3px solid var(--navy);
+  cursor: grab;
+}
+
+.temps-range:focus-visible {
+  outline: 3px solid var(--navy);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 3px var(--cream);
+}
+
+.temps-reperes {
+  position: relative;
+  height: 18px;
+  margin: 6px 14px 18px;
+  padding: 0;
+  list-style: none;
+}
+
+.temps-reperes li {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.temps-reperes li span {
+  display: block;
+  width: 6px;
+  height: 14px;
+  border-radius: 3px;
+  background: rgba(245, 239, 224, 0.4);
+  transition: background 0.3s var(--ease-out);
+}
+
+.temps-reperes li.is-passe span {
+  background: var(--cream);
+}
+
+.temps-etape h3 {
+  font: 800 clamp(22px, 2.4vw, 30px) / 1.15 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--cream);
+  margin-bottom: 10px;
+  animation: megot-fondu 0.4s var(--ease-out) both;
+}
+
+.temps-etape p {
+  color: rgba(245, 239, 224, 0.88);
+  line-height: 1.6;
+  min-height: 3.2em;
+  animation: megot-fondu 0.4s var(--ease-out) both;
+}
+
+.temps-date {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(245, 239, 224, 0.3);
+  color: var(--cream);
+  line-height: 1.55;
+}
+
+.temps-date b {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--orange);
+}
+
+/* --- Le trajet (fond crème) ---------------------------------------------- */
+
+.trajet-fil {
+  position: relative;
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+.trajet-fil > svg:first-child {
+  width: 100%;
+  height: 40px;
+  display: block;
+}
+
+.trajet-megot {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 34px;
+  height: 24px;
+  overflow: visible;
+  animation: trajet-derive 22s linear infinite;
+}
+
+@keyframes trajet-derive {
+  from {
+    left: 0;
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(14deg);
+  }
+  to {
+    left: calc(100% - 34px);
+    transform: rotate(-6deg);
+  }
+}
+
+.trajet-etapes {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.trajet-etape {
+  padding-top: 14px;
+  border-top: 2px solid var(--vert);
+}
+
+.trajet-n {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--vert-ink);
+  margin-bottom: 10px;
+}
+
+.trajet-etape h3 {
+  font: 800 clamp(17px, 1.5vw, 20px) / 1.2 var(--font-display);
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  text-wrap: balance;
+}
+
+.trajet-etape p {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink2);
+}
+
+/* --- Chiffres sourcés (fond bleu nuit) ----------------------------------- */
+
+.cs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cs-tuile {
+  padding: 24px 22px 22px;
+  border-radius: var(--radius);
+  background: var(--cream);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.cs-tuile b {
+  display: block;
+  font-size: clamp(34px, 3.6vw, 46px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.cs-tuile sup {
+  font-size: 0.45em;
+  vertical-align: top;
+  line-height: 1;
+}
+
+.cs-tuile p {
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--ink2);
+}
+
+/* --- Et à Saint-Nazaire (fond crème) ------------------------------------- */
+
+.megot-local {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+
+.megot-local-chiffre {
+  font: 800 clamp(56px, 8vw, 104px) / 0.95 var(--font-display);
+  letter-spacing: -0.03em;
+  color: var(--vert);
+}
+
+.megot-local-chiffre small {
+  display: block;
+  font: 600 clamp(15px, 1.3vw, 17px) / 1.4 var(--font-body);
+  letter-spacing: 0;
+  color: var(--ink2);
+  margin-top: 10px;
+  max-width: 34ch;
+}
+
+.megot-local p {
+  color: var(--ink2);
+  line-height: 1.6;
+  max-width: 54ch;
+}
+
+.megot-local .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* --- Sources ------------------------------------------------------------- */
+
+.sources {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+  max-width: 900px;
+}
+
+.sources li {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 12px 0;
+  border-top: 1px solid var(--rule);
+  scroll-margin-top: calc(var(--header-h) + 24px);
+}
+
+.sources li:target {
+  background: rgba(42, 140, 126, 0.08);
+  border-radius: 8px;
+}
+
+.sources-n {
+  font-size: 13px;
+  color: var(--vert-ink);
+  padding-top: 3px;
+}
+
+.sources-corps {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink2);
+}
+
+.sources-auteur {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.sources-corps a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  border-radius: 4px;
+}
+
+.sources-support {
+  font-style: italic;
+}
+
+/* --- Réduction de mouvement ---------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .trajet-megot {
+    animation: none;
+    left: 50%;
+  }
+}
+
+/* --- Tablette et mobile -------------------------------------------------- */
+
+@media (max-width: 960px) {
+  .anat,
+  .bocal,
+  .temps,
+  .megot-local,
+  .cinq-cents {
+    grid-template-columns: 1fr;
+  }
+
+  .trajet-etapes {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cs-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .anat-tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .trajet-etapes,
+  .equiv,
+  .cs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trajet-fil {
+    display: none;
+  }
+
+  .megot-local .actions .btn {
+    width: 100%;
+  }
+}

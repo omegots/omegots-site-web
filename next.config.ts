@@ -7,8 +7,8 @@ const nextConfig: NextConfig = {
   experimental: {
     // Charge seulement les modules Motion réellement importés (bundle client plus léger).
     optimizePackageImports: ["motion", "motion/react"],
-    // CSS dans le HTML : supprime la requête render-blocking (~300 ms sur Slow 4G).
-    inlineCss: true,
+    // Pas d'inlineCss : ~14 Ko de CSS dans chaque HTML dégrade le TTFB / LCP
+    // sur Slow 4G (score redescendu de 94 à 92). Le <link> CSS reste cacheable.
   },
 
   images: {
