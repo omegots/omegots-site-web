@@ -21,13 +21,12 @@
   --vert-deep: #1f6e63;
   --mint: #7fd6c6;
   --orange: #dd8a2e;
-  /* Boutons : l'orange exact de la charte, texte blanc (décision du 20/09/2026).
-     Contraste 2,7:1, sous le seuil AA de 4,5 : Lighthouse le signale, l'utilisateur l'assume. */
+  /* Boutons : orange exact mégot. Blanc dessus échoue (~2,7:1). On met un
+     brun très foncé (pas le navy) pour garder la teinte charte et rester AA. */
   --orange-btn: var(--orange);
   --orange-btn-hover: #c9781f;
-  /* Textes orange sur fond clair : l'orange exact de la charte, décision du
-     20/09/2026 (2,4:1 sur crème, sous le seuil AA ; un orange foncé #96520f passait
-     mais n'était « pas le bon jaune »). Le token reste pour changer d'avis d'un coup. */
+  --orange-btn-text: #1c1008;
+  /* Accents texte orange (liens, kickers) : teinte charte. */
   --orange-ink: var(--orange);
   --vert-ink: #1f6e63;
   --rule: #ded5c0;
@@ -162,7 +161,7 @@ img {
   justify-content: center;
   gap: 8px;
   background: var(--orange-btn);
-  color: #fff;
+  color: var(--orange-btn-text);
   font: 600 14px/1 var(--font-body);
   padding: 14px 24px;
   border-radius: 999px;
@@ -441,16 +440,20 @@ a:focus-visible {
   padding: 16px 18px;
   font-size: 14px;
   line-height: 1.4;
-  color: var(--ink2);
+  color: var(--ink);
   background: var(--card);
   border-top: 1px solid var(--rule);
 }
 
 .hero-photo-num {
   font-size: 30px;
-  color: var(--orange-ink);
+  color: var(--orange-btn-text);
+  background: var(--orange);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+  padding: 4px 12px 6px;
+  border-radius: 10px;
+  line-height: 1;
 }
 
 /* Scène : le pont se dessine, l'eau dérive, un mégot flotte. */
