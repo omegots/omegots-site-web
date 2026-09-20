@@ -1,0 +1,697 @@
+/* Styles de la page « Nos ramassages », importés par src/app/ramassages/page.tsx.
+   Les règles communes (.megot-section, .ref, .sources) viennent de megot.css. */
+
+/* --- Scène du hero : les contenants qui se remplissent (préfixe hs-) ------ */
+
+.hs-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* Une seule timeline de 12 s pour tout le monde : les six contenants partent vides,
+   se remplissent l'un après l'autre (10 % de la boucle chacun), restent pleins,
+   puis se vident ensemble à la fin. Un jeu de keyframes par contenant. */
+.hs-lvl {
+  transform-origin: 50% 100%;
+  transform-box: fill-box;
+  animation: hs-lvl-0 12s linear infinite;
+}
+
+.hs-jar:nth-child(3) .hs-lvl {
+  animation-name: hs-lvl-1;
+}
+
+.hs-jar:nth-child(4) .hs-lvl {
+  animation-name: hs-lvl-2;
+}
+
+.hs-jar:nth-child(5) .hs-lvl {
+  animation-name: hs-lvl-3;
+}
+
+.hs-jar:nth-child(6) .hs-lvl {
+  animation-name: hs-lvl-4;
+}
+
+.hs-jar:nth-child(7) .hs-lvl {
+  animation-name: hs-lvl-5;
+}
+
+@keyframes hs-lvl-0 {
+  0%,
+  4% {
+    transform: scaleY(0);
+  }
+  9%,
+  84% {
+    transform: scaleY(1);
+  }
+  88%,
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes hs-lvl-1 {
+  0%,
+  14% {
+    transform: scaleY(0);
+  }
+  19%,
+  84% {
+    transform: scaleY(1);
+  }
+  88%,
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes hs-lvl-2 {
+  0%,
+  24% {
+    transform: scaleY(0);
+  }
+  29%,
+  84% {
+    transform: scaleY(1);
+  }
+  88%,
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes hs-lvl-3 {
+  0%,
+  34% {
+    transform: scaleY(0);
+  }
+  39%,
+  84% {
+    transform: scaleY(1);
+  }
+  88%,
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes hs-lvl-4 {
+  0%,
+  44% {
+    transform: scaleY(0);
+  }
+  49%,
+  84% {
+    transform: scaleY(1);
+  }
+  88%,
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes hs-lvl-5 {
+  0%,
+  54% {
+    transform: scaleY(0);
+  }
+  59%,
+  84% {
+    transform: scaleY(1);
+  }
+  88%,
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+/* Le mégot tombe dans le contenant en cours, puis disparaît pendant que tout se vide. */
+.hs-megot {
+  animation: hs-megot 12s linear infinite;
+}
+
+@keyframes hs-megot {
+  0% {
+    transform: translate(66px, 40px) rotate(-30deg);
+    opacity: 1;
+  }
+  6% {
+    transform: translate(66px, 150px) rotate(20deg);
+    opacity: 1;
+  }
+  8% {
+    transform: translate(66px, 150px) rotate(20deg);
+    opacity: 0;
+  }
+  10% {
+    transform: translate(152px, 40px) rotate(-30deg);
+    opacity: 1;
+  }
+  16% {
+    transform: translate(152px, 150px) rotate(20deg);
+    opacity: 1;
+  }
+  18% {
+    transform: translate(152px, 150px) rotate(20deg);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(238px, 40px) rotate(-30deg);
+    opacity: 1;
+  }
+  26% {
+    transform: translate(238px, 150px) rotate(20deg);
+    opacity: 1;
+  }
+  28% {
+    transform: translate(238px, 150px) rotate(20deg);
+    opacity: 0;
+  }
+  30% {
+    transform: translate(324px, 40px) rotate(-30deg);
+    opacity: 1;
+  }
+  36% {
+    transform: translate(324px, 150px) rotate(20deg);
+    opacity: 1;
+  }
+  38% {
+    transform: translate(324px, 150px) rotate(20deg);
+    opacity: 0;
+  }
+  40% {
+    transform: translate(410px, 40px) rotate(-30deg);
+    opacity: 1;
+  }
+  46% {
+    transform: translate(410px, 150px) rotate(20deg);
+    opacity: 1;
+  }
+  48% {
+    transform: translate(410px, 150px) rotate(20deg);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(496px, 40px) rotate(-30deg);
+    opacity: 1;
+  }
+  56% {
+    transform: translate(496px, 150px) rotate(20deg);
+    opacity: 1;
+  }
+  58% {
+    transform: translate(496px, 150px) rotate(20deg);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hs-lvl {
+    animation: none;
+    transform: scaleY(1);
+  }
+
+  .hs-megot {
+    display: none;
+  }
+}
+
+/* --- Prochaine sortie (bandeau repris de l'accueil) ---------------------- */
+
+.prochaine {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(min(320px, 100%), 460px);
+  gap: 24px 40px;
+  align-items: center;
+  padding: 32px 34px;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--orange) 35%, var(--rule));
+  box-shadow: var(--shadow);
+}
+
+.prochaine-quand {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--ink2);
+}
+
+.prochaine-quand b {
+  color: var(--ink);
+}
+
+/* --- Totaux, toutes sorties confondues ------------------------------------ */
+
+.totaux {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  list-style: none;
+  margin: 0 0 clamp(32px, 4vw, 48px);
+  padding: 0;
+}
+
+.totaux li {
+  padding: 22px 20px;
+  border-radius: var(--radius);
+  background: var(--cream);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.totaux b {
+  display: block;
+  font-size: clamp(30px, 3.2vw, 42px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+.totaux span {
+  font-size: 14px;
+  color: var(--ink2);
+}
+
+/* --- Fiche d'une sortie ---------------------------------------------------- */
+
+.fiche + .fiche {
+  margin-top: clamp(40px, 6vw, 72px);
+  padding-top: clamp(40px, 6vw, 72px);
+  border-top: 1px solid rgba(245, 239, 224, 0.2);
+}
+
+.fiche-tete {
+  max-width: 720px;
+  margin-bottom: clamp(24px, 3vw, 36px);
+}
+
+.fiche-date {
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mint);
+  margin-bottom: 10px;
+}
+
+.fiche-tete h3 {
+  font-size: clamp(26px, 3.2vw, 40px);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  color: var(--cream);
+}
+
+.fiche-note {
+  margin-top: 10px;
+  color: rgba(245, 239, 224, 0.85);
+}
+
+.fiche-corps {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: start;
+}
+
+.fiche-chiffres ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.fiche-chiffres > ul:first-child {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.fiche-chiffres > ul:first-child li {
+  padding: 18px 18px 16px;
+  border-radius: 14px;
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.fiche-chiffres > ul:first-child b {
+  display: block;
+  font-size: clamp(26px, 2.6vw, 34px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.fiche-chiffres > ul:first-child span {
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--ink2);
+}
+
+.fiche-equiv {
+  margin-top: 16px !important;
+  display: grid;
+  gap: 8px;
+}
+
+.fiche-equiv li {
+  padding: 10px 0;
+  border-top: 1px solid rgba(245, 239, 224, 0.2);
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: rgba(245, 239, 224, 0.85);
+}
+
+.fiche-equiv b {
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+.fiche-presse {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(245, 239, 224, 0.08);
+  border: 1px solid rgba(245, 239, 224, 0.25);
+  color: var(--cream);
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.fiche-presse:hover {
+  background: rgba(245, 239, 224, 0.14);
+}
+
+.fiche-presse-media {
+  font: 800 11px/1 var(--font-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mint);
+  white-space: nowrap;
+}
+
+.fiche-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 12px;
+}
+
+.fiche-photo {
+  margin: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.fiche-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+}
+
+.fiche-photo.is-1 {
+  grid-column: 1 / -1;
+}
+
+.fiche-photo.is-1 img {
+  aspect-ratio: 16 / 9;
+}
+
+/* --- Zones d'action ---------------------------------------------------- */
+
+.zones {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.zone {
+  padding: 0 0 22px;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.zone-illu {
+  padding: 12px 12px 0;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--cream) 70%, #fff) 0%, transparent 100%);
+}
+
+.zone-illu svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: calc(var(--radius) - 4px);
+}
+
+.zone h3 {
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  margin: 14px 22px 6px;
+}
+
+.zone p {
+  margin: 0 22px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink2);
+}
+
+.zones-signaler {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+/* --- Déroulé d'une sortie ----------------------------------------------- */
+
+.deroule {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.deroule-etape {
+  padding-top: 14px;
+  border-top: 2px solid rgba(245, 239, 224, 0.45);
+}
+
+.deroule-n {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--cream);
+  margin-bottom: 10px;
+}
+
+.deroule-etape h3 {
+  font: 800 clamp(17px, 1.5vw, 20px) / 1.2 var(--font-display);
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  color: var(--cream);
+}
+
+.deroule-etape p {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: rgba(245, 239, 224, 0.88);
+}
+
+.deroule-avert {
+  margin-top: 24px;
+  font-size: 13.5px;
+  color: rgba(245, 239, 224, 0.75);
+}
+
+/* --- Remplissez un litre (préfixe litre-) -------------------------------- */
+
+.litre {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+
+.litre-scene {
+  display: grid;
+  justify-items: center;
+}
+
+.litre-jar {
+  position: relative;
+  display: block;
+  width: min(100%, 260px);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  border-radius: 24px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.litre-jar:disabled {
+  cursor: default;
+}
+
+.litre-jar:focus-visible {
+  outline: 3px solid var(--cream);
+  outline-offset: 6px;
+}
+
+.litre-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.litre-lvl {
+  transform-origin: 50% 100%;
+  transform-box: fill-box;
+  transform: scaleY(var(--p, 0));
+  transition: transform 0.4s var(--ease-out);
+}
+
+.litre-megot {
+  animation: litre-megot 0.4s var(--ease-out) both;
+  overflow: visible;
+}
+
+@keyframes litre-megot {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+}
+
+.litre-invite {
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  transform: translateX(-50%);
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+  box-shadow: 0 10px 28px rgba(11, 42, 64, 0.3);
+  animation: aqua-pulse 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.litre-chiffre {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin-bottom: 12px;
+  color: var(--cream);
+}
+
+.litre-chiffre b {
+  font-size: clamp(56px, 7vw, 88px);
+  line-height: 1;
+  color: var(--orange);
+  font-variant-numeric: tabular-nums;
+}
+
+.litre-chiffre span {
+  font: 600 clamp(16px, 1.4vw, 19px) / 1.3 var(--font-body);
+  max-width: 22ch;
+}
+
+.litre-texte {
+  color: rgba(245, 239, 224, 0.88);
+  line-height: 1.6;
+  max-width: 50ch;
+  min-height: 4.8em;
+  animation: megot-fondu 0.4s var(--ease-out) both;
+}
+
+.litre-actions {
+  margin-top: 22px;
+}
+
+/* --- Mini-jeu, en une ligne ----------------------------------------------- */
+
+.jeu-ligne {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  padding: 24px 28px;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  box-shadow: var(--shadow);
+}
+
+.jeu-ligne p {
+  color: var(--ink2);
+  max-width: 60ch;
+}
+
+.jeu-ligne b {
+  display: block;
+  font: 800 20px/1.2 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+/* --- Tablette et mobile -------------------------------------------------- */
+
+@media (max-width: 960px) {
+  .fiche-corps,
+  .litre,
+  .prochaine {
+    grid-template-columns: 1fr;
+  }
+
+  .totaux,
+  .deroule {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .zones {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .totaux,
+  .deroule,
+  .fiche-chiffres > ul:first-child {
+    grid-template-columns: 1fr;
+  }
+
+  .fiche-photos {
+    grid-template-columns: 1fr;
+  }
+
+  .prochaine {
+    padding: 24px 20px;
+  }
+}

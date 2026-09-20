@@ -59,17 +59,6 @@ const ngoJsonLd = JSON.stringify({
   })),
 }).replace(/</g, "\u003c");
 
-/** Balisage FAQPage (schema.org) : les mêmes questions et réponses que la section. */
-const faqJsonLd = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faq.map((item) => ({
-    "@type": "Question",
-    name: item.question,
-    acceptedAnswer: { "@type": "Answer", text: item.reponse },
-  })),
-}).replace(/</g, "\\u003c");
-
 export default function HomePage() {
   return (
     <>
@@ -95,13 +84,16 @@ export default function HomePage() {
           <WaveDivider from="navy" to="orange" />
           <Rejoindre />
           <WaveDivider from="orange" to="bg" />
-          <Faq />
+          <Faq
+            items={faq}
+            titre="FAQ : avant de venir ramasser"
+            lede="Ce qu'on nous demande le plus souvent. Il manque la vôtre ? Écrivez-nous, on répond à tout le monde."
+          />
           <WaveDivider from="bg" to="navy" />
         </main>
         <Footer />
       </div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ngoJsonLd }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqJsonLd }} />
     </>
   );
 }

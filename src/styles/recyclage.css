@@ -1,0 +1,703 @@
+/* Styles de la page « Le recyclage », importés par src/app/recyclage/page.tsx.
+   Les règles communes (.megot-section, .ref, .sources, .anat-*) viennent de megot.css. */
+
+/* --- Scène du hero : mégots, plaque, banc (préfixe hr-) ------------------ */
+
+.hr-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* Trois états qui se relaient sur 12 s : chacun visible un tiers du temps. */
+.hr-etape {
+  opacity: 0;
+  animation: hr-relais 12s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.hr-plaque {
+  animation-delay: 4s;
+}
+
+.hr-banc {
+  animation-delay: 8s;
+}
+
+@keyframes hr-relais {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  6% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  36% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.hr-fleche path:first-child {
+  animation: hr-fleche 1.4s linear infinite;
+}
+
+@keyframes hr-fleche {
+  to {
+    stroke-dashoffset: -16;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hr-etape {
+    animation: none;
+  }
+
+  .hr-banc {
+    opacity: 1;
+  }
+}
+
+/* --- Aujourd'hui : trois tuiles ------------------------------------------ */
+
+.rec-auj .cs-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Sur bleu nuit, les tuiles passent en crème (sur l'accueil du mégot elles sont sur crème, donc navy). */
+.rec-auj .cs-tuile {
+  background: var(--cream);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.rec-auj .cs-tuile b {
+  color: var(--ink);
+}
+
+.rec-auj .cs-tuile p {
+  color: var(--ink2);
+}
+
+/* --- La filière, étape par étape (préfixe fil-) --------------------------- */
+
+.fil-stations {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: clamp(24px, 3vw, 36px);
+}
+
+.fil-ligne {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 22px;
+  height: 3px;
+  background: var(--rule);
+  border-radius: 2px;
+}
+
+.fil-ligne-fait {
+  display: block;
+  height: 100%;
+  background: var(--vert);
+  border-radius: 2px;
+  transition: width 0.4s var(--ease-out);
+}
+
+.fil-station {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink2);
+  font: 600 13px/1.25 var(--font-body);
+  text-align: center;
+  cursor: pointer;
+}
+
+.fil-station-n {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 3px solid var(--rule);
+  color: var(--ink);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  transition:
+    background 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out),
+    color 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out);
+}
+
+.fil-station:hover .fil-station-n {
+  border-color: var(--vert);
+}
+
+.fil-station.is-fait .fil-station-n {
+  border-color: var(--vert);
+  color: var(--vert-ink);
+}
+
+.fil-station.is-on {
+  color: var(--ink);
+}
+
+.fil-station.is-on .fil-station-n {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--cream);
+  transform: scale(1.12);
+}
+
+.fil-station:focus-visible {
+  outline: 3px solid var(--navy);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 3px var(--cream);
+  border-radius: 12px;
+}
+
+.fil-corps {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+
+.fil-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.fil-scene {
+  animation: megot-fondu 0.45s var(--ease-out) both;
+}
+
+.fil-chute {
+  animation: fil-chute 2.7s ease-in infinite;
+}
+
+@keyframes fil-chute {
+  0% {
+    transform: translateY(0) rotate(-10deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  55% {
+    transform: translateY(78px) rotate(14deg);
+    opacity: 1;
+  }
+  62% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.fil-intrus {
+  animation: fil-intrus 2.4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes fil-intrus {
+  0%,
+  40% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+}
+
+.fil-tapis {
+  animation: fil-tapis 1.2s linear infinite;
+}
+
+@keyframes fil-tapis {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+.fil-bulle {
+  animation: fil-bulle 2.2s ease-in infinite;
+}
+
+@keyframes fil-bulle {
+  from {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  to {
+    transform: translateY(-70px);
+    opacity: 0;
+  }
+}
+
+.fil-texte h3 {
+  font: 800 clamp(22px, 2.4vw, 30px) / 1.15 var(--font-display);
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  animation: megot-fondu 0.4s var(--ease-out) both;
+}
+
+.fil-texte p {
+  color: var(--ink2);
+  line-height: 1.6;
+  min-height: 6.4em;
+  animation: megot-fondu 0.4s var(--ease-out) both;
+}
+
+.fil-nav {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+/* --- Ce que ça devient : les usages (grille de la page d'accueil) --------- */
+
+.rec-usages.devenir {
+  padding: 0;
+}
+
+.rec-usages .devenir-list {
+  margin-top: 0;
+}
+
+/* --- Compteur de bancs (préfixe bancs-) ---------------------------------- */
+
+.bancs {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+
+.bancs-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: rgba(245, 239, 224, 0.85);
+}
+
+.bancs-label b {
+  font-size: clamp(20px, 2.2vw, 26px);
+  color: var(--cream);
+  font-variant-numeric: tabular-nums;
+}
+
+.bancs-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--orange) var(--p, 0%), rgba(245, 239, 224, 0.3) var(--p, 0%));
+  outline: none;
+  cursor: pointer;
+  margin-bottom: 22px;
+}
+
+.bancs-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 3px solid var(--navy);
+  box-shadow: 0 6px 16px rgba(11, 42, 64, 0.3);
+  cursor: grab;
+}
+
+.bancs-range::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 3px solid var(--navy);
+  cursor: grab;
+}
+
+.bancs-range:focus-visible {
+  outline: 3px solid var(--navy);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 3px var(--cream);
+}
+
+.bancs-chiffre {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin-bottom: 12px;
+  color: var(--cream);
+}
+
+.bancs-chiffre b {
+  font-size: clamp(56px, 7vw, 88px);
+  line-height: 1;
+  color: var(--orange);
+  font-variant-numeric: tabular-nums;
+}
+
+.bancs-chiffre span {
+  font: 600 clamp(16px, 1.4vw, 19px) / 1.3 var(--font-body);
+  max-width: 22ch;
+}
+
+.bancs-texte {
+  color: rgba(245, 239, 224, 0.85);
+  line-height: 1.6;
+  max-width: 52ch;
+}
+
+.bancs-grille {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  align-content: center;
+  min-height: 120px;
+}
+
+.bancs-banc {
+  width: 96px;
+  height: 60px;
+  animation: bancs-pose 0.4s var(--ease-out) both;
+}
+
+@keyframes bancs-pose {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+  }
+}
+
+.bancs-banc.is-fantome {
+  opacity: 0.3;
+  animation: none;
+}
+
+/* Le banc en cours : la version pleine est rognée à la fraction restante. */
+.bancs-reste {
+  position: relative;
+  display: inline-block;
+  width: 96px;
+  height: 60px;
+}
+
+.bancs-reste .bancs-banc {
+  position: absolute;
+  inset: 0;
+}
+
+.bancs-reste-fill {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  width: calc(var(--reste, 0) * 100%);
+  transition: width 0.3s var(--ease-out);
+}
+
+.bancs-reste-fill .bancs-banc {
+  width: 96px;
+  animation: none;
+}
+
+/* --- Ce que dit la loi (préfixe loi-) ----------------------------------- */
+
+.loi {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.loi-carte {
+  padding: 24px 22px;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  box-shadow: var(--shadow);
+}
+
+.loi-date {
+  display: block;
+  font: 800 clamp(24px, 2.4vw, 30px) / 1 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--vert);
+  margin-bottom: 12px;
+}
+
+.loi-carte h3 {
+  font: 800 18px/1.25 var(--font-display);
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.loi-carte p {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink2);
+}
+
+/* Le pictogramme « plastique dans le produit », en version simplifiée */
+.loi-picto {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 6px 10px;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  font: 700 11px/1 var(--font-body);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.loi-picto svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* --- Les limites (préfixe lim-) ------------------------------------------ */
+
+.lim {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: start;
+}
+
+.lim-barres {
+  display: grid;
+  gap: 22px;
+}
+
+.lim-barre {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 16px;
+  align-items: center;
+}
+
+.lim-barre-label {
+  grid-column: 1 / -1;
+  font-size: 14px;
+  color: rgba(245, 239, 224, 0.85);
+}
+
+.lim-barre-piste {
+  display: block;
+  height: 26px;
+  border-radius: 999px;
+  background: rgba(245, 239, 224, 0.12);
+  overflow: hidden;
+}
+
+.lim-barre-fill {
+  display: block;
+  height: 100%;
+  width: var(--w);
+  min-width: 4px;
+  border-radius: 999px;
+  animation: lim-grandir 1.2s var(--ease-out) both;
+  transform-origin: left center;
+}
+
+.lim-barre-fill.is-total {
+  background: var(--orange);
+}
+
+.lim-barre-fill.is-mego {
+  background: var(--mint);
+}
+
+@keyframes lim-grandir {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.lim-barre-val {
+  font-size: 18px;
+  color: var(--cream);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.lim-ratio {
+  padding: 22px 24px;
+  border-radius: var(--radius);
+  background: rgba(245, 239, 224, 0.08);
+  border: 1px solid rgba(245, 239, 224, 0.2);
+}
+
+.lim-ratio-chiffre {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: clamp(40px, 4.6vw, 60px);
+  line-height: 1;
+  color: var(--mint);
+  margin-bottom: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.lim-ratio-chiffre span {
+  font: 600 16px/1 var(--font-body);
+  color: rgba(245, 239, 224, 0.85);
+}
+
+.lim-ratio-texte {
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgba(245, 239, 224, 0.88);
+}
+
+.lim-points {
+  grid-column: 1 / -1;
+}
+
+.lim-points ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.lim-points li {
+  padding: 18px 0 0;
+  border-top: 2px solid var(--vert);
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: rgba(245, 239, 224, 0.85);
+}
+
+.lim-points b {
+  display: block;
+  color: var(--cream);
+  font: 800 16px/1.3 var(--font-display);
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+
+/* --- Et à Saint-Nazaire ------------------------------------------------ */
+
+.rec-local {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+
+.rec-local p {
+  color: var(--ink2);
+  line-height: 1.6;
+  max-width: 54ch;
+}
+
+.rec-local .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.rec-local-objectif {
+  padding: 28px 30px;
+  border-radius: var(--radius);
+  background: var(--navy);
+  color: var(--cream);
+}
+
+.rec-local-objectif b {
+  display: block;
+  font: 800 clamp(40px, 5vw, 64px) / 1 var(--font-display);
+  letter-spacing: -0.03em;
+  color: var(--orange);
+  margin-bottom: 10px;
+}
+
+.rec-local-objectif p {
+  color: rgba(245, 239, 224, 0.88);
+}
+
+/* --- Tablette et mobile -------------------------------------------------- */
+
+@media (max-width: 960px) {
+  .fil-corps,
+  .bancs,
+  .lim,
+  .rec-local {
+    grid-template-columns: 1fr;
+  }
+
+  .loi,
+  .lim-points ul,
+  .rec-auj .cs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .fil-stations {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+  }
+
+  .fil-station-nom {
+    display: none;
+  }
+
+  .fil-station-n {
+    width: 40px;
+    height: 40px;
+    font-size: 12px;
+  }
+
+  .fil-ligne {
+    top: 19px;
+  }
+
+  .fil-texte p {
+    min-height: 0;
+  }
+
+  .fil-nav .btn {
+    flex: 1;
+  }
+}

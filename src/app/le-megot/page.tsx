@@ -1,18 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Faq } from "@/components/Faq";
 import { PageShell } from "@/components/PageShell";
+import { Rejoindre } from "@/components/Rejoindre";
 import { Reveal } from "@/components/Reveal";
 import { WaveDivider } from "@/components/WaveDivider";
 import { Anatomie } from "@/components/megot/Anatomie";
 import { Bocal } from "@/components/megot/Bocal";
 import { ChiffresSources } from "@/components/megot/ChiffresSources";
+import { HeroMegot } from "@/components/megot/HeroMegot";
 import { Ref } from "@/components/megot/Ref";
 import { Sources } from "@/components/megot/Sources";
 import { Temps } from "@/components/megot/Temps";
 import { Trajet } from "@/components/megot/Trajet";
 import { chiffreCle, formatNombre, libelleEquivalence, quantite } from "@/data/chiffres";
 import { fr } from "@/data/format";
-import { MEGOTS_PAR_METRE } from "@/data/megot";
+import { faqMegot, MEGOTS_PAR_METRE } from "@/data/megot";
 import { LITRES_EAU_PAR_MEGOT, ramassages, totals } from "@/data/ramassages";
 import "@/styles/megot.css";
 
@@ -34,13 +37,35 @@ export default function LeMegotPage() {
     <PageShell
       title="Un petit déchet, un gros pollueur."
       lede="Un mégot n'est pas un bout de tabac qui se décompose dans un coin. C'est un filtre en plastique imbibé de milliers de substances, qui part avec la pluie jusqu'à l'estuaire. Voici ce qu'on en sait, avec les sources."
+      actions={
+        <>
+          <Link className="btn btn-lg" href="/rejoindre">
+            Venir ramasser
+          </Link>
+          <a className="btn btn-lg ghost" href="#eau">
+            Ce qu&apos;il fait dans l&apos;eau
+            <span className="btn-arrow" aria-hidden="true">
+              ↓
+            </span>
+          </a>
+        </>
+      }
+      visuel={<HeroMegot />}
+      sommaire={[
+        { href: "#anatomie", label: "De quoi il est fait" },
+        { href: "#eau", label: "Dans un litre d'eau" },
+        { href: "#cinq-cents", label: "Les 500 litres" },
+        { href: "#trajet", label: "Du trottoir à l'estuaire" },
+        { href: "#temps", label: "Combien de temps il reste" },
+        { href: "#chiffres", label: "L'échelle du problème" },
+      ]}
     >
       <WaveDivider from="bg" to="navy" />
 
       {/* 1. Anatomie */}
       <section className="megot-section surface-navy" id="anatomie" aria-labelledby="anat-titre">
         <div className="wrap">
-          <Reveal direction="rise" className="section-head">
+          <Reveal direction="rise" className="section-head is-center">
             <h2 id="anat-titre" className="display">
               De quoi est fait un mégot
             </h2>
@@ -59,22 +84,31 @@ export default function LeMegotPage() {
       {/* 2. Dans l'eau */}
       <section className="megot-section" id="eau" aria-labelledby="eau-titre">
         <div className="wrap">
-          <Reveal direction="rise" className="section-head">
-            <h2 id="eau-titre" className="display">
-              Ce qu&apos;il fait dans un litre d&apos;eau
-            </h2>
-            <p className="lede">
-              Une équipe de l&apos;université de San Diego a mis des mégots dans l&apos;eau de poissons pendant quatre
-              jours. Voici ce qu&apos;il en faut pour en tuer la moitié.
-            </p>
-          </Reveal>
           <Reveal delay={0.1}>
-            <Bocal />
+            <Bocal
+              titre={
+                <h2 id="eau-titre" className="display aqua-titre">
+                  Ce qu&apos;il fait dans un litre d&apos;eau
+                </h2>
+              }
+            />
           </Reveal>
 
+        </div>
+      </section>
+
+      <WaveDivider from="bg" to="vert" />
+
+      {/* 3. Les 500 litres */}
+      <section className="megot-section surface-vert" id="cinq-cents" aria-labelledby="cinq-titre">
+        <div className="wrap">
+          <Reveal direction="rise" className="section-head">
+            <h2 id="cinq-titre" className="display">
+              Et les 500 litres, alors ?
+            </h2>
+          </Reveal>
           <Reveal className="cinq-cents" delay={0.05}>
             <div>
-              <h3 className="megot-h3">Et les 500 litres, alors ?</h3>
               <p>
                 « Un mégot pollue jusqu&apos;à {fr(LITRES_EAU_PAR_MEGOT)} litres d&apos;eau » : c&apos;est le chiffre que
                 nous reprenons sur nos affiches, et c&apos;est celui du ministère de la Transition écologique quand
@@ -83,8 +117,7 @@ export default function LeMegotPage() {
               </p>
               <p>
                 Ce n&apos;est pas une mesure de laboratoire, c&apos;est un ordre de grandeur : la quantité d&apos;eau
-                dans laquelle les substances d&apos;un seul mégot restent détectables. L&apos;essai du bocal, lui, dit
-                autre chose, de plus brutal : un litre suffit pour tuer.
+                dans laquelle les substances d&apos;un seul mégot restent détectables.
               </p>
             </div>
             <ul className="equiv" aria-label={`${fr(chiffreCle.valeur)} litres, en équivalences`}>
@@ -99,32 +132,12 @@ export default function LeMegotPage() {
         </div>
       </section>
 
-      <WaveDivider from="bg" to="vert" />
-
-      {/* 3. Le temps */}
-      <section className="megot-section surface-vert" id="temps" aria-labelledby="temps-titre">
-        <div className="wrap">
-          <Reveal direction="rise" className="section-head">
-            <h2 id="temps-titre" className="display">
-              Combien de temps il reste là
-            </h2>
-            <p className="lede">
-              Deux chercheurs ont enterré des filtres dans du compost et dans de la terre, et les ont pesés pendant
-              deux ans. Faites glisser le curseur.
-            </p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <Temps />
-          </Reveal>
-        </div>
-      </section>
-
       <WaveDivider from="vert" to="bg" />
 
       {/* 4. Le trajet */}
       <section className="megot-section" id="trajet" aria-labelledby="trajet-titre">
         <div className="wrap">
-          <Reveal direction="rise" className="section-head">
+          <Reveal direction="rise" className="section-head is-center">
             <h2 id="trajet-titre" className="display">
               Du trottoir à l&apos;estuaire
             </h2>
@@ -139,8 +152,26 @@ export default function LeMegotPage() {
 
       <WaveDivider from="bg" to="navy" />
 
+      {/* 3. Le temps */}
+      <section className="megot-section surface-navy" id="temps" aria-labelledby="temps-titre">
+        <div className="wrap">
+          <Reveal delay={0.1}>
+            <Temps
+              titre={
+                <h2 id="temps-titre" className="display temps-titre">
+                  Combien de temps il reste là
+                </h2>
+              }
+              lede="Deux chercheurs ont enterré des filtres dans du compost et dans de la terre, et les ont pesés pendant deux ans. Faites glisser le curseur."
+            />
+          </Reveal>
+        </div>
+      </section>
+
+      <WaveDivider from="navy" to="bg" />
+
       {/* 5. Chiffres sourcés */}
-      <section className="megot-section surface-navy" id="chiffres" aria-labelledby="chiffres-titre">
+      <section className="megot-section" id="chiffres" aria-labelledby="chiffres-titre">
         <div className="wrap">
           <Reveal direction="rise" className="section-head">
             <h2 id="chiffres-titre" className="display">
@@ -155,12 +186,12 @@ export default function LeMegotPage() {
         </div>
       </section>
 
-      <WaveDivider from="navy" to="bg" />
+      <WaveDivider from="bg" to="vert" />
 
       {/* 6. Et à Saint-Nazaire */}
-      <section className="megot-section" id="saint-nazaire" aria-labelledby="local-titre">
+      <section className="megot-section surface-vert" id="saint-nazaire" aria-labelledby="local-titre">
         <div className="wrap">
-          <Reveal direction="rise" className="section-head">
+          <Reveal direction="rise" className="section-head is-center">
             <h2 id="local-titre" className="display">
               Et à Saint-Nazaire ?
             </h2>
@@ -199,22 +230,27 @@ export default function LeMegotPage() {
         </div>
       </section>
 
-      {/* 7. Sources */}
-      <section className="megot-section" id="sources" aria-labelledby="sources-titre" style={{ paddingTop: 0 }}>
+      <WaveDivider from="vert" to="bg" />
+
+      {/* 7. Sources : bloc condensé, replié par défaut */}
+      <section className="megot-section megot-sources" id="sources" aria-labelledby="sources-titre">
         <div className="wrap">
-          <Reveal direction="rise" className="section-head">
-            <h2 id="sources-titre" className="display">
-              Sources
-            </h2>
-            <p className="lede">
-              Les chiffres de cette page renvoient aux documents ci-dessous. Nous préférons un chiffre juste à un
-              chiffre qui frappe.
-            </p>
-          </Reveal>
+          <h2 id="sources-titre" className="sr-only">
+            Sources
+          </h2>
           <Sources />
         </div>
       </section>
 
+      <WaveDivider from="bg" to="orange" />
+      <Rejoindre />
+      <WaveDivider from="orange" to="bg" />
+      <Faq
+        id="faq"
+        items={faqMegot}
+        titre="FAQ : le mégot en questions"
+        lede="Les réponses courtes, adossées aux sources de la page."
+      />
       <WaveDivider from="bg" to="navy" />
     </PageShell>
   );

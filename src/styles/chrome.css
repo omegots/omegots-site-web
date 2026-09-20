@@ -79,6 +79,11 @@ html:has(.site-header.is-scrolled) {
   position: relative;
 }
 
+.nav-menu-label {
+  position: relative;
+  display: inline-block;
+}
+
 .nav-menu a.is-active {
   color: var(--ink);
 }
@@ -94,12 +99,13 @@ html:has(.site-header.is-scrolled) {
   pointer-events: none;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .nav-ink {
-    left: 4px;
     right: auto;
-    width: 28px;
-    bottom: 8px;
+    width: 36px;
+    bottom: -6px;
+    height: 3px;
+    border-radius: 3px;
   }
 }
 
@@ -449,6 +455,11 @@ section:target .eyebrow::before {
   text-wrap: balance;
 }
 
+/* Mot mis en avant dans un titre de page : l'orange de la charte. */
+.page-head h1 .accent-orange {
+  color: var(--orange);
+}
+
 .page-section {
   padding: 8px 0 clamp(56px, 8vw, 96px);
 }
@@ -652,18 +663,43 @@ section:target .eyebrow::before {
   margin-right: auto;
 }
 
-/* --- Footer : trois colonnes équilibrées, moins haut -------------------- */
+/* --- Footer : trois colonnes de même hauteur ---------------------------- */
 
 .foot .foot-grid {
   padding-top: 44px;
   padding-bottom: 8px;
   gap: 24px 32px;
+  align-items: stretch;
+}
+
+.foot-brand,
+.foot-nav,
+.foot-contact {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100%;
 }
 
 .foot-nav ul {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  flex: 1 1 auto;
+  justify-content: space-between;
+}
+
+.foot-contact > ul {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.foot-brand .foot-mentions,
+.foot-contact .reseaux {
+  margin-top: auto;
 }
 
 .foot .foot-fond {
@@ -733,20 +769,20 @@ section:target .eyebrow::before {
 
 .foot-brand .foot-logo {
   display: block;
-  width: 160px;
+  width: 128px;
   height: auto;
   margin-bottom: 4px;
 }
 
 @media (max-width: 760px) {
   .foot-brand .foot-logo {
-    width: 140px;
+    width: 120px;
     margin-left: auto;
     margin-right: auto;
   }
 }
 
-/* --- Footer : bloc marque équilibré (logo, texte, mentions) ------------ */
+/* --- Footer : bloc marque (logo, texte, mentions en bas) --------------- */
 
 .foot-brand {
   display: flex;
@@ -758,6 +794,7 @@ section:target .eyebrow::before {
 .foot-brand p {
   margin-left: auto;
   margin-right: auto;
+  flex: 1 1 auto;
 }
 
 .foot-brand .foot-logo {
@@ -769,7 +806,8 @@ section:target .eyebrow::before {
 }
 
 .foot-brand .foot-mentions {
-  margin-top: 14px;
+  margin-top: auto;
+  padding-top: 18px;
   font-size: 13px;
   color: rgba(245, 239, 224, 0.7);
   text-decoration: underline;
@@ -783,12 +821,34 @@ section:target .eyebrow::before {
 @media (max-width: 760px) {
   .foot-brand {
     align-items: center;
+    text-align: center;
+  }
+
+  .foot-brand p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .foot-nav ul,
+  .foot-contact > ul {
+    flex: 0 0 auto;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .foot-brand .foot-mentions,
+  .foot-contact .reseaux {
+    margin-top: 14px;
+  }
+
+  .foot-brand .foot-mentions {
+    padding-top: 0;
   }
 }
 
-/* --- Mobile : tous les titres de section et leur texte centrés ---------- */
+/* --- Tablette / mobile : titres de page et de section centrés ------------ */
 
-@media (max-width: 760px) {
+@media (max-width: 860px) {
   .section-head,
   .section-head.is-right,
   .page-head-inner,
@@ -868,7 +928,8 @@ section:target .eyebrow::before {
   display: flex;
   flex-direction: row;
   gap: 10px;
-  margin-top: 18px;
+  margin-top: auto;
+  padding-top: 18px;
 }
 
 .foot .reseaux.is-icones .reseau-texte {
@@ -965,5 +1026,124 @@ section:target .eyebrow::before {
 
   .reseaux.is-cartes .reseau {
     text-align: left;
+  }
+}
+
+/* --- En-tête de page avec visuel et sommaire ----------------------------- */
+
+.page-head-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: clamp(24px, 4vw, 56px);
+}
+
+.page-head.has-visuel .page-head-grid {
+  grid-template-columns: minmax(0, 1.3fr) minmax(240px, 0.7fr);
+}
+
+.page-head.has-visuel .page-head-inner {
+  max-width: none;
+}
+
+.page-head-visuel {
+  min-width: 0;
+}
+
+.page-head-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+/* Sommaire éditorial : gros numéros en Unbounded, titre dessous, sur un filet. */
+.page-sommaire {
+  margin-top: clamp(32px, 5vw, 56px);
+}
+
+.page-sommaire ol {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 20px;
+  list-style: none;
+  margin: 0 auto;
+  padding-top: clamp(20px, 3vw, 28px);
+  border-top: 1px solid var(--rule);
+}
+
+.page-sommaire a {
+  display: block;
+  color: var(--ink);
+  text-decoration: none;
+  font: 600 clamp(14px, 1.2vw, 16px) / 1.3 var(--font-body);
+  text-wrap: balance;
+  border-radius: 8px;
+}
+
+.page-sommaire-n {
+  display: block;
+  font-size: clamp(26px, 2.6vw, 34px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--vert);
+  margin-bottom: 8px;
+  transition: transform 0.25s var(--ease-out);
+}
+
+.page-sommaire a:hover .page-sommaire-n {
+  transform: translateY(-3px);
+}
+
+.page-sommaire a:hover {
+  color: var(--vert-ink);
+}
+
+@media (max-width: 860px) {
+  .page-head.has-visuel .page-head-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Dès qu'on est en une colonne : titre, texte et CTA centrés (toutes pages PageShell). */
+  .page-head-inner {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .page-head-inner .lede {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Le visuel prend toute la largeur disponible (demande du 20/09). */
+  .page-head-visuel {
+    width: 100%;
+    max-width: none;
+    justify-self: stretch;
+  }
+
+  .page-head-actions {
+    justify-content: center;
+  }
+
+  .page-sommaire ol {
+    grid-auto-flow: row;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .page-sommaire ol {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Sommaire sur deux colonnes : un dernier chapitre seul prend toute la ligne, centré. */
+@media (max-width: 520px) {
+  .page-sommaire li:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
 }

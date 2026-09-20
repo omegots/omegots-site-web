@@ -23,19 +23,20 @@ const links = [
   { href: "/association", label: "L'association" },
 ];
 
+const EMAIL = "association.o.megots@gmail.com";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const listVariants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.06, delayChildren: 0.08 } },
+  show: { transition: { staggerChildren: 0.055, delayChildren: 0.06 } },
   exit: { transition: { staggerChildren: 0.03, staggerDirection: -1 } },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: -10 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.32, ease } },
-  exit: { opacity: 0, y: -6, transition: { duration: 0.14 } },
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.34, ease } },
+  exit: { opacity: 0, y: 6, transition: { duration: 0.14 } },
 };
 
 export function Header() {
@@ -45,7 +46,6 @@ export function Header() {
   const mobile = useMediaQuery("(max-width: 900px)");
   const pathname = usePathname();
 
-  /* Le tablier : ligne vert d'eau qui se remplit avec le défilement. */
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, {
     stiffness: 120,
@@ -69,17 +69,36 @@ export function Header() {
     };
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  /* Fermer le menu si on repasse en desktop. */
+  useEffect(() => {
+    if (!mobile && open) setOpen(false);
+  }, [mobile, open]);
+
   const inkTransition = reduce
     ? { duration: 0 }
     : { type: "spring" as const, stiffness: 200, damping: 26, mass: 0.6 };
 
-  /* Sur mobile la liste n'existe que menu ouvert : les liens tombent en cascade. */
   const showList = !mobile || open;
 
   return (
-    <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
+    <header className={`site-header${scrolled ? " is-scrolled" : ""}${open ? " is-nav-open" : ""}`}>
       <div className="wrap nav">
-        <Link href="/#top" prefetch={false} className="nav-brand" aria-label="Accueil O'Mégots">
+        <Link
+          href="/#top"
+          prefetch={false}
+          className="nav-brand"
+          aria-label="Accueil O'Mégots"
+          onClick={() => setOpen(false)}
+        >
           <Logo />
         </Link>
 
@@ -95,23 +114,30 @@ export function Header() {
           <span />
           <span />
         </button>
+      </div>
 
-        <nav id="nav-menu" className={`nav-menu${open ? " is-open" : ""}`}>
+      <nav id="nav-menu" className={`nav-menu${open ? " is-open" : ""}`}>
+        <div className="nav-menu-panel">
           <LayoutGroup id="nav">
             <AnimatePresence initial={false}>
               {showList && (
                 <motion.ul
                   key="list"
+                  className="nav-menu-list"
                   variants={reduce || !mobile ? undefined : listVariants}
                   initial="hidden"
                   animate="show"
                   exit="exit"
                 >
-                  {links.map((l) => {
+                  {links.map((l, i) => {
                     const isActive =
-                      pathname === l.href || (l.href !== "/" && pathname.startsWith(`${l.href}/`));
+                      pathname === l.href ||
+                      (l.href !== "/" && pathname.startsWith(`${l.href}/`));
                     return (
-                      <motion.li key={l.href} variants={reduce || !mobile ? undefined : itemVariants}>
+                      <motion.li
+                        key={l.href}
+                        variants={reduce || !mobile ? undefined : itemVariants}
+                      >
                         <Link
                           href={l.href}
                           prefetch={false}
@@ -119,21 +145,34 @@ export function Header() {
                           aria-current={isActive ? "page" : undefined}
                           onClick={() => setOpen(false)}
                         >
-                          {l.label}
-                          {isActive && (
-                            <motion.span
-                              className="nav-ink"
-                              layoutId="nav-ink"
-                              transition={inkTransition}
-                              aria-hidden="true"
-                            />
-                          )}
+                          <span className="nav-menu-index" aria-hidden="true">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                          <span className="nav-menu-label">
+                            {l.label}
+                            {isActive && (
+                              <motion.span
+                                className="nav-ink"
+                                layoutId="nav-ink"
+                                transition={inkTransition}
+                                aria-hidden="true"
+                              />
+                            )}
+                          </span>
                         </Link>
                       </motion.li>
                     );
                   })}
-                  <motion.li variants={reduce || !mobile ? undefined : itemVariants}>
-                    <Link href="/rejoindre" prefetch={false} className="btn" onClick={() => setOpen(false)}>
+                  <motion.li
+                    className="nav-menu-cta"
+                    variants={reduce || !mobile ? undefined : itemVariants}
+                  >
+                    <Link
+                      href="/rejoindre"
+                      prefetch={false}
+                      className="btn"
+                      onClick={() => setOpen(false)}
+                    >
                       Nous rejoindre
                     </Link>
                   </motion.li>
@@ -141,8 +180,13 @@ export function Header() {
               )}
             </AnimatePresence>
           </LayoutGroup>
-        </nav>
-      </div>
+
+          <div className="nav-menu-foot">
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            <p>Besné, Loire-Atlantique</p>
+          </div>
+        </div>
+      </nav>
 
       <motion.div
         className="header-progress"

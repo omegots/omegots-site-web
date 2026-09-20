@@ -16,7 +16,7 @@ export function HeroCta() {
   if (!hover) {
     return (
       <>
-        <a className="btn btn-lg" href="#rejoindre">
+        <a className="btn btn-lg" href="/rejoindre">
           Venir ramasser
         </a>
         <a className="btn btn-lg ghost" href="#pourquoi">
@@ -29,7 +29,7 @@ export function HeroCta() {
 
   return (
     <>
-      <MagneticButton className="btn btn-lg" href="#rejoindre">
+      <MagneticButton className="btn btn-lg" href="/rejoindre">
         Venir ramasser
       </MagneticButton>
       <MagneticButton className="btn btn-lg ghost" href="#pourquoi">

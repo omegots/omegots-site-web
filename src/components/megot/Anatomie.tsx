@@ -4,10 +4,42 @@ import { useState } from "react";
 import { parties, type Partie } from "@/data/megot";
 import { Ref } from "./Ref";
 
+/*
+ * Le mégot dans le style du logo (mêmes proportions, couleurs et contour bleu),
+ * mais droit, pas écrasé, et aux proportions d'un vrai mégot : un cylindre de
+ * 11 unités de diamètre, filtre de 27 (environ 20 mm), reste de papier et de
+ * tabac de 13 dont 5 de bout cramé. Le filtre fait les deux tiers du mégot. Échelle U = 5 px.
+ */
+const U = 7;
+const CY = 190;
+const H = 11 * U;
+const X0 = 180;
+const CRAME = 5 * U;
+const TABAC = 2.5 * U;
+const TUBE_L = 13 * U;
+const JONCTION = X0 + TUBE_L;
+const FILTRE_L = 27 * U;
+const FILTRE_H = H;
+
+/** Ancrage de chaque trait sur le mégot, repère numéroté et étiquette. */
+const CALLOUTS: {
+  id: Partie["id"];
+  from: [number, number];
+  to: [number, number];
+  label: [number, number];
+  anchor: "start" | "end";
+}[] = [
+  { id: "filtre", from: [JONCTION + FILTRE_L * 0.55, CY - FILTRE_H / 2 - 2], to: [500, 78], label: [478, 83], anchor: "end" },
+  { id: "tabac", from: [X0 + CRAME / 2, CY - H / 2 - 2], to: [150, 78], label: [172, 83], anchor: "start" },
+  { id: "papier", from: [X0 + TUBE_L * 0.55, CY + H / 2 + 2], to: [170, 300], label: [192, 305], anchor: "start" },
+  { id: "fumee", from: [JONCTION + FILTRE_L * 0.5, CY + 10], to: [520, 300], label: [498, 305], anchor: "end" },
+];
+
 /**
- * Anatomie interactive du mégot : un grand dessin dans le style de la charte,
- * quatre parties cliquables (boutons, donc au clavier aussi). La partie choisie
- * s'allume, les autres s'estompent, et le texte de droite change.
+ * Anatomie interactive du mégot : quatre parties cliquables, sur le dessin
+ * (parties, traits, repères) comme dans les onglets. La partie choisie
+ * s'allume, les autres s'estompent, et le texte change. Les onglets restent
+ * la commande accessible au clavier et aux lecteurs d'écran.
  */
 export function Anatomie() {
   const [actif, setActif] = useState<Partie["id"]>("filtre");
@@ -17,67 +49,79 @@ export function Anatomie() {
   return (
     <div className="anat">
       <div className="anat-visuel">
-        {/* Le mégot, à plat : filtre à gauche, papier et tabac, bout brûlé à droite. */}
-        <svg viewBox="0 0 640 200" className="anat-svg" aria-hidden="true" focusable="false">
-          <defs>
-            <pattern id="anat-liege" width="14" height="14" patternUnits="userSpaceOnUse">
-              <rect width="14" height="14" fill="#DD8A2E" />
-              <circle cx="4" cy="4" r="1.6" fill="#B36A1E" />
-              <circle cx="10" cy="10" r="1.6" fill="#B36A1E" />
-            </pattern>
-            <clipPath id="anat-clip-filtre">
-              <rect x="24" y="60" width="200" height="80" rx="16" />
-            </clipPath>
-          </defs>
-
+        <svg viewBox="0 0 640 360" className="anat-svg" aria-hidden="true" focusable="false">
           {/* Ombre au sol */}
-          <ellipse cx="320" cy="176" rx="290" ry="8" fill="rgba(11, 42, 64, 0.35)" />
+          <ellipse cx={(X0 + JONCTION + FILTRE_L) / 2} cy={CY + FILTRE_H / 2 + 14} rx="150" ry="7" fill="rgba(11, 42, 64, 0.35)" />
 
-          {/* Papier : tube crème */}
-          <g className={cls("papier")}>
-            <rect x="200" y="60" width="300" height="80" rx="4" fill="#F5EFE0" stroke="#0B2A40" strokeWidth="4" />
-            <path d="M212,60 v80 M226,60 v80" stroke="#DED5C0" strokeWidth="2" />
+          {/* 3. Papier : le tube */}
+          <g className={cls("papier")} onClick={() => setActif("papier")}>
+            {/* Seule la partie papier, après le bout cramé et le tabac, pour que le halo ne les englobe pas */}
+            <rect x={X0 + CRAME + TABAC} y={CY - H / 2} width={TUBE_L - CRAME - TABAC} height={H} fill="#F5EFE0" />
           </g>
 
-          {/* Filtre : liège rayé */}
-          <g className={cls("filtre")}>
-            <rect x="24" y="60" width="200" height="80" rx="16" fill="url(#anat-liege)" stroke="#0B2A40" strokeWidth="4" />
-            <g clipPath="url(#anat-clip-filtre)">
-              <rect x="168" y="60" width="6" height="80" fill="#B36A1E" />
-              <rect x="184" y="60" width="6" height="80" fill="#B36A1E" />
-            </g>
+          {/* 2. Tabac restant et bout cramé */}
+          <g className={cls("tabac")} onClick={() => setActif("tabac")}>
+            <rect x={X0} y={CY - H / 2} width={CRAME} height={H} fill="#0F3550" />
+            <rect x={X0 + CRAME} y={CY - H / 2} width={TABAC} height={H} fill="#4E6675" />
           </g>
 
-          {/* Ce que le filtre a piégé : pointillés dans le filtre */}
-          <g className={cls("fumee")}>
-            {[52, 84, 116, 148].map((x, i) =>
-              [78, 100, 122].map((y, j) => (
-                <circle key={`${i}-${j}`} cx={x + (j % 2) * 10} cy={y} r="5" fill="#0B2A40" opacity="0.75" />
+          {/* 1. Filtre : orange, un peu plus large que le tube, deux rayures comme sur le logo */}
+          <g className={`${cls("filtre")}${actif === "fumee" ? " is-fond" : ""}`} onClick={() => setActif("filtre")}>
+            <rect x={JONCTION} y={CY - FILTRE_H / 2} width={FILTRE_L} height={FILTRE_H} fill="#DD8A2E" />
+            <rect x={JONCTION + 8} y={CY - FILTRE_H / 2 + 3} width={5} height={FILTRE_H - 6} fill="#B36A1E" />
+            <rect x={JONCTION + FILTRE_L - 13} y={CY - FILTRE_H / 2 + 3} width={5} height={FILTRE_H - 6} fill="#B36A1E" />
+          </g>
+
+          {/* 4. Ce que le filtre a piégé : dépôts dans le filtre */}
+          <g className={cls("fumee")} onClick={() => setActif("fumee")}>
+            {[14, 44, 74, 104, 134, 164].map((dx, i) =>
+              [-16, 2, 18].map((dy, j) => (
+                <circle
+                  key={`${i}-${j}`}
+                  className="anat-depot"
+                  cx={JONCTION + dx + (j % 2) * 4}
+                  cy={CY + dy}
+                  r={actif === "fumee" ? 5.5 : 4}
+                  fill={actif === "fumee" ? "#7fd6c6" : "#0B2A40"}
+                  opacity="0.9"
+                />
               )),
             )}
           </g>
 
-          {/* Tabac restant et bout brûlé */}
-          <g className={cls("tabac")}>
-            <rect x="500" y="60" width="52" height="80" fill="#4E6675" stroke="#0B2A40" strokeWidth="4" />
-            <path d="M552,64 l38,-14 l-6,22 l14,8 l-14,10 l8,22 l-40,-12 Z" fill="#B9B1A4" stroke="#0B2A40" strokeWidth="4" strokeLinejoin="round" />
-            <path d="M552,86 l14,-2 M552,110 l16,4" stroke="#DD8A2E" strokeWidth="4" strokeLinecap="round" />
+          {/* Contours bleus du logo, par-dessus, sans capter les clics */}
+          <g fill="none" stroke="#1A4B6E" strokeWidth="3" strokeLinejoin="round" style={{ pointerEvents: "none" }}>
+            <rect x={X0} y={CY - H / 2} width={TUBE_L} height={H} />
+            <rect x={JONCTION} y={CY - FILTRE_H / 2} width={FILTRE_L} height={FILTRE_H} />
           </g>
 
-          {/* Repères numérotés */}
-          {[
-            { n: "1", x: 124, y: 36, id: "filtre" as const },
-            { n: "4", x: 100, y: 164, id: "fumee" as const },
-            { n: "3", x: 350, y: 36, id: "papier" as const },
-            { n: "2", x: 560, y: 36, id: "tabac" as const },
-          ].map((r) => (
-            <g key={r.id} className={`anat-repere${actif === r.id ? " is-on" : ""}`}>
-              <circle cx={r.x} cy={r.y} r="14" fill="#F5EFE0" stroke="#0B2A40" strokeWidth="3" />
-              <text x={r.x} y={r.y + 5} textAnchor="middle" fontSize="15" fontWeight="800" fill="#0B2A40" fontFamily="var(--font-display)">
-                {r.n}
-              </text>
-            </g>
-          ))}
+          {/* Traits et repères, comme les chiffres de l'accueil */}
+          {CALLOUTS.map((c) => {
+            const i = parties.findIndex((p) => p.id === c.id);
+            const on = actif === c.id;
+            return (
+              <g key={c.id} className={`anat-callout${on ? " is-on" : ""}`} onClick={() => setActif(c.id)}>
+                <path d={`M${c.from[0]},${c.from[1]} L${c.to[0]},${c.to[1]}`} fill="none" stroke="#7fd6c6" strokeWidth="1.6" />
+                <circle cx={c.from[0]} cy={c.from[1]} r="4" fill="#7fd6c6" />
+                <circle className="anat-callout-n" cx={c.to[0]} cy={c.to[1]} r="15" fill="#F5EFE0" stroke="#0B2A40" strokeWidth="3" />
+                <text x={c.to[0]} y={c.to[1] + 5.5} textAnchor="middle" fontSize="16" fontWeight="800" fill="#0B2A40" fontFamily="var(--font-display)">
+                  {i + 1}
+                </text>
+                <text
+                  className="anat-callout-label"
+                  x={c.label[0]}
+                  y={c.label[1]}
+                  textAnchor={c.anchor}
+                  fontSize="15"
+                  fontWeight="600"
+                  fill="#F5EFE0"
+                  fontFamily="var(--font-body)"
+                >
+                  {parties[i].nom}
+                </text>
+              </g>
+            );
+          })}
         </svg>
       </div>
 

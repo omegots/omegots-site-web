@@ -1,7 +1,8 @@
 "use client";
 
-import { useId, useState, useSyncExternalStore } from "react";
+import { useId, useState, useSyncExternalStore, type ReactNode } from "react";
 import { etapesTemps, TEMPS_MAX_ANNEES } from "@/data/megot";
+import { MegotDroit, MEGOT_LONGUEUR } from "./MegotDroit";
 import { Ref } from "./Ref";
 
 /**
@@ -14,7 +15,7 @@ import { Ref } from "./Ref";
 const rien = () => () => {};
 const dateDuJour = () => new Date().toDateString();
 const pasDeDate = () => null;
-export function Temps() {
+export function Temps({ titre, lede }: { titre?: ReactNode; lede?: ReactNode }) {
   const [annees, setAnnees] = useState(0);
   const id = useId();
   const cle = useSyncExternalStore(rien, dateDuJour, pasDeDate);
@@ -30,9 +31,34 @@ export function Temps() {
 
   return (
     <div className="temps">
-      <div className="temps-visuel" aria-hidden="true">
+      <div className="temps-texte">
+        {titre}
+        {lede && <p className="lede">{lede}</p>}
+
+        <div className="temps-etape" key={etape.annees}>
+          <h3 className="display">{etape.titre}</h3>
+          <p>
+            {etape.texte}
+            <Ref ids={etape.sourceIds} />
+          </p>
+        </div>
+
+        <p className="temps-date">
+          {dateJet && anneeFin ? (
+            <>
+              Un mégot jeté aujourd&apos;hui, le {dateJet}, sera encore là en <b>{anneeFin}</b> dans un sol ordinaire.
+            </>
+          ) : (
+            <>Un mégot jeté aujourd&apos;hui sera encore là dans quatorze ans dans un sol ordinaire.</>
+          )}
+          <Ref ids={[3]} />
+        </p>
+      </div>
+
+      <div className="temps-visuel">
+        <div aria-hidden="true">
         <svg viewBox="0 0 320 120" className="temps-svg">
-          <ellipse cx="160" cy="104" rx="130" ry="6" fill="rgba(11, 42, 64, 0.18)" />
+          <ellipse cx="160" cy="104" rx="130" ry="6" fill="rgba(0, 0, 0, 0.28)" />
           {/* Fibres libérées */}
           <g className="temps-fibres" style={{ opacity: fibres }}>
             {[
@@ -42,21 +68,12 @@ export function Temps() {
               <rect key={i} x={x} y={y} width="16" height="3" rx="1.5" fill="#B36A1E" transform={`rotate(${r} ${x + 8} ${y + 1.5})`} />
             ))}
           </g>
-          {/* Le filtre, de plus en plus pâle */}
-          <g style={{ opacity: filtreOpacite }}>
-            <rect x="90" y="52" width="140" height="44" rx="12" fill="#DD8A2E" stroke="#0B2A40" strokeWidth="3" />
-            <rect x="196" y="52" width="5" height="44" fill="#B36A1E" />
-            <rect x="212" y="52" width="5" height="44" fill="#B36A1E" />
-          </g>
-          {/* Le papier et le tabac : disparus après six mois */}
-          <g style={{ opacity: annees < 0.5 ? 1 : Math.max(0, 1 - (annees - 0.5) * 4) }}>
-            <rect x="230" y="52" width="40" height="44" fill="#F5EFE0" stroke="#0B2A40" strokeWidth="3" />
-            <rect x="270" y="52" width="14" height="44" fill="#4E6675" stroke="#0B2A40" strokeWidth="3" />
+          {/* Le mégot du site (MegotDroit) : le papier et le tabac partent en six mois, le filtre pâlit sur des années */}
+          <g transform={`translate(${160 - (MEGOT_LONGUEUR * 2.9) / 2},${52})`}>
+            <MegotDroit u={2.9} contour={2} papierOpacite={annees < 0.5 ? 1 : Math.max(0, 1 - (annees - 0.5) * 4)} filtreOpacite={filtreOpacite} />
           </g>
         </svg>
-      </div>
-
-      <div className="temps-panneau">
+        </div>
         <label htmlFor={id} className="temps-label">
           <span>Curseur : années après le jet</span>
           <b className="display" aria-live="polite">
@@ -81,25 +98,6 @@ export function Temps() {
             </li>
           ))}
         </ol>
-
-        <div className="temps-etape" key={etape.annees}>
-          <h3 className="display">{etape.titre}</h3>
-          <p>
-            {etape.texte}
-            <Ref ids={etape.sourceIds} />
-          </p>
-        </div>
-
-        <p className="temps-date">
-          {dateJet && anneeFin ? (
-            <>
-              Un mégot jeté aujourd&apos;hui, le {dateJet}, sera encore là en <b>{anneeFin}</b> dans un sol ordinaire.
-            </>
-          ) : (
-            <>Un mégot jeté aujourd&apos;hui sera encore là dans quatorze ans dans un sol ordinaire.</>
-          )}
-          <Ref ids={[3]} />
-        </p>
       </div>
     </div>
   );

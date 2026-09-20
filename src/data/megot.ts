@@ -224,3 +224,43 @@ export const chiffresSources = [
 
 /** Densité moyenne nationale de mégots au sol, en mégots par mètre de voirie (1,3 tous les 10 m). */
 export const MEGOTS_PAR_METRE = 0.13;
+
+/** FAQ de la page « Le mégot » : réponses courtes, chacune adossée à une source de la page. */
+export const faqMegot: { question: string; reponse: string; lien?: { href: string; label: string } }[] = [
+  {
+    question: "Le filtre d'une cigarette est-il biodégradable ?",
+    reponse:
+      "Non. Il est fait d'acétate de cellulose, un plastique. Enterré, il met de 7 ans et demi (compost) à 14 ans (sol) pour se dégrader, et jusqu'à 30 ans dans des conditions moins favorables. Avant cela, il se délite en microfibres.",
+    lien: { href: "#temps", label: "Voir la ligne du temps" },
+  },
+  {
+    question: "Un mégot pollue-t-il vraiment 500 litres d'eau ?",
+    reponse:
+      "C'est l'ordre de grandeur repris par le ministère de la Transition écologique à la création de la filière mégots en 2021, pas une mesure de laboratoire. Ce qui est mesuré, c'est qu'un seul mégot fumé dans un litre d'eau tue la moitié des poissons exposés en quatre jours.",
+    lien: { href: "#eau", label: "Voir l'essai du bocal" },
+  },
+  {
+    question: "Que contient un mégot jeté ?",
+    reponse:
+      "De la nicotine, des métaux comme l'arsenic, le plomb et le cadmium, des hydrocarbures aromatiques et des phénols, retenus par le filtre pendant qu'on fume. La fumée d'une cigarette compte plus de 7 000 substances, dont des dizaines de cancérogènes reconnus.",
+    lien: { href: "#anatomie", label: "Voir l'anatomie du mégot" },
+  },
+  {
+    question: "Combien de mégots sont jetés par terre en France ?",
+    reponse:
+      "Plus de 23 milliards par an d'après le ministère, soit en moyenne 1,3 mégot tous les dix mètres de rue selon le comptage national d'Alcome et de l'ADEME, et 4,5 dans les grandes villes. L'État a fixé un objectif de 40 % de mégots en moins au sol d'ici 2027.",
+    lien: { href: "#chiffres", label: "Voir les chiffres sourcés" },
+  },
+  {
+    question: "Pourquoi retrouve-t-on autant de mégots sur les plages ?",
+    reponse:
+      "Parce que la pluie les emporte du trottoir au caniveau, puis dans le réseau d'eaux pluviales, qui rejoint souvent directement le cours d'eau, puis l'estuaire et la mer. Sur les plages françaises, le mégot est le déchet le plus ramassé, présent dans toutes les collectes de Surfrider.",
+    lien: { href: "#trajet", label: "Suivre le trajet d'un mégot" },
+  },
+  {
+    question: "Que faire de son mégot quand il n'y a pas de cendrier ?",
+    reponse:
+      "Le garder : un cendrier de poche tient dans n'importe quelle poche et se vide dans une poubelle. L'éco-organisme de la filière en distribue des millions aux communes. Et si vous voulez aller plus loin, venez en ramasser avec nous.",
+    lien: { href: "/rejoindre", label: "Venir ramasser" },
+  },
+];

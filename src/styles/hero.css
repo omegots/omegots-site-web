@@ -203,8 +203,8 @@
   }
 }
 
-/* Mobile : hero centré. */
-@media (max-width: 760px) {
+/* Tablette / mobile : hero centré dès qu'on est en une colonne (860 px). */
+@media (max-width: 860px) {
   .hero .hero-copy {
     text-align: center;
     margin: 0 auto;

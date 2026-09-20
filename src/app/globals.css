@@ -313,6 +313,10 @@ a:focus-visible {
   align-items: center;
 }
 
+.nav-menu-index {
+  display: none;
+}
+
 .nav-menu a:not(.btn) {
   color: inherit;
   text-decoration: none;
@@ -328,12 +332,58 @@ a:focus-visible {
   font-size: 14px;
 }
 
+.nav-menu-panel {
+  display: contents;
+}
+
+.nav-menu-foot {
+  display: none;
+}
+
+/* Desktop : le menu est hors .wrap, on le recale dans la barre d'en-tête. */
+@media (min-width: 901px) {
+  .nav-menu {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    background: none;
+    border: none;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
+
+  .nav-menu-panel {
+    display: flex;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+    box-sizing: border-box;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 0;
+    pointer-events: none;
+  }
+
+  .nav-menu-list,
+  .nav-menu ul {
+    pointer-events: auto;
+  }
+}
+
 .nav-toggle {
   display: none;
   width: 44px;
   height: 44px;
   border: 1px solid var(--rule);
-  border-radius: 10px;
+  border-radius: 12px;
   background: var(--card);
   padding: 0;
   cursor: pointer;
@@ -341,6 +391,19 @@ a:focus-visible {
   justify-content: center;
   align-items: center;
   gap: 5px;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.nav-toggle:hover {
+  border-color: color-mix(in srgb, var(--navy) 28%, var(--rule));
+}
+
+.nav-toggle:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--vert) 55%, transparent);
+  outline-offset: 2px;
 }
 
 .nav-toggle span {
@@ -350,8 +413,13 @@ a:focus-visible {
   background: var(--ink);
   border-radius: 2px;
   transition:
-    transform 0.25s ease,
-    opacity 0.25s ease;
+    transform 0.28s var(--ease-out),
+    opacity 0.2s ease;
+}
+
+.nav-toggle.is-open {
+  background: var(--cream);
+  border-color: var(--navy);
 }
 
 .nav-toggle.is-open span:nth-child(1) {
@@ -364,6 +432,19 @@ a:focus-visible {
 
 .nav-toggle.is-open span:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
+}
+
+.site-header.is-nav-open {
+  background: var(--bg);
+  border-bottom-color: var(--rule);
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+html:has(.site-header.is-nav-open) {
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 /* --- Hero -------------------------------------------------------------- */
@@ -379,14 +460,14 @@ a:focus-visible {
   position: relative;
   z-index: 3;
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.85fr);
+  grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
   gap: clamp(28px, 5vw, 72px);
   align-items: center;
   padding-bottom: 360px;
 }
 
 .hero-copy {
-  max-width: 660px;
+  max-width: 720px;
 }
 
 .hero h1 {
@@ -1506,45 +1587,175 @@ a:focus-visible {
     display: inline-flex;
   }
 
+  /* Barre (logo + burger) au-dessus du panneau fixed, pour rester cliquable. */
+  .site-header .nav {
+    position: relative;
+    z-index: 60;
+  }
+
   .nav-menu {
     position: fixed;
     top: var(--header-h);
+    left: 0;
     right: 0;
     bottom: 0;
-    left: 0;
-    background: var(--bg);
-    padding: 28px 24px 40px;
-    transform: translateX(100%);
+    /* Sort du .wrap (padding) pour coller au viewport, sans 100vw (scrollbar). */
+    width: auto;
+    max-width: none;
+    height: calc(100dvh - var(--header-h));
+    max-height: calc(100dvh - var(--header-h));
+    margin: 0;
+    background:
+      radial-gradient(120% 60% at 100% 0%, color-mix(in srgb, var(--vert) 12%, transparent), transparent 55%),
+      radial-gradient(90% 50% at 0% 100%, color-mix(in srgb, var(--orange) 10%, transparent), transparent 50%),
+      var(--bg);
+    padding: 0;
+    transform: translateY(-8px);
+    opacity: 0;
     transition:
-      transform 0.28s cubic-bezier(0.25, 0.8, 0.25, 1),
+      transform 0.32s var(--ease-out),
+      opacity 0.28s ease,
       visibility 0.28s;
     border-top: 1px solid var(--rule);
     visibility: hidden;
     pointer-events: none;
     z-index: 50;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  /* Évite que le blur du header captive le fixed et décale la largeur. */
+  .site-header {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--bg);
   }
 
   .nav-menu.is-open {
     transform: none;
+    opacity: 1;
     visibility: visible;
     pointer-events: auto;
   }
 
+  .nav-menu-panel {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 100%;
+    padding: 10px clamp(16px, 4vw, 20px) calc(16px + env(safe-area-inset-bottom, 0px));
+    margin: 0;
+  }
+
+  .nav-menu-list,
   .nav-menu ul {
     flex-direction: column;
     align-items: stretch;
-    gap: 6px;
+    gap: 0;
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    width: 100%;
+  }
+
+  .nav-menu li {
+    min-width: 0;
+    max-width: 100%;
   }
 
   .nav-menu li a:not(.btn) {
-    display: block;
-    padding: 14px 4px;
-    font-size: 18px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 10px 2px 12px;
+    font: 800 clamp(20px, 5.6vw, 28px) / 1.15 var(--font-display);
+    letter-spacing: -0.03em;
+    color: var(--ink2);
+    border-bottom: 1px solid color-mix(in srgb, var(--rule) 70%, transparent);
+    transition: color 0.2s ease;
+  }
+
+  .nav-menu li:nth-last-child(2) a:not(.btn) {
+    border-bottom: none;
+  }
+
+  .nav-menu li a:not(.btn):hover,
+  .nav-menu li a:not(.btn):focus-visible {
     color: var(--ink);
   }
 
+  .nav-menu li a.is-active {
+    color: var(--ink);
+  }
+
+  .nav-menu-index {
+    display: inline-block;
+    flex-shrink: 0;
+    font: 700 11px/1 var(--font-display);
+    letter-spacing: 0.08em;
+    color: var(--vert-ink);
+    opacity: 0.75;
+    min-width: 1.5em;
+  }
+
+  .nav-menu-label {
+    position: relative;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .nav-menu-cta {
+    margin-top: auto;
+    padding-top: 20px;
+    min-width: 0;
+    max-width: 100%;
+  }
+
   .nav-menu .btn {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-top: 0;
+    padding: 15px 20px;
+    font-size: 15px;
+  }
+
+  .nav-menu-foot {
+    display: grid;
+    gap: 4px;
     margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    flex-shrink: 0;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .nav-menu-foot a {
+    color: var(--ink);
+    text-decoration: none;
+    font: 600 13.5px/1.4 var(--font-body);
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .nav-menu-foot a:hover,
+  .nav-menu-foot a:focus-visible {
+    color: var(--vert-ink);
+  }
+
+  .nav-menu-foot p {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--ink2);
   }
 }
 
@@ -1671,14 +1882,19 @@ a:focus-visible {
 
 /* Glissé court à chaque navigation (template.tsx remonte ce conteneur à chaque
    route). En CSS, donc visible dès le HTML, sans attendre l'hydratation, et
-   sans opacité : un fondu retarderait la mesure du LCP jusqu'à sa fin. */
+   sans opacité : un fondu retarderait la mesure du LCP jusqu'à sa fin.
+   Important : fill-mode « both » + seul « from » laissait un matrix(1,0,0,1,0,0)
+   après l'anim, ce qui crée un containing block et captive le menu mobile fixed. */
 .page-enter {
-  animation: page-enter 0.3s var(--ease-out) both;
+  animation: page-enter 0.3s var(--ease-out) backwards;
 }
 
 @keyframes page-enter {
   from {
     transform: translateY(8px);
+  }
+  to {
+    transform: none;
   }
 }
 
