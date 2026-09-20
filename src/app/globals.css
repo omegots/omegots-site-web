@@ -426,9 +426,15 @@ a:focus-visible {
   transform-origin: center bottom;
 }
 
-.hero-photo img {
+/* Cadre réservé dès le 1er paint : évite le CLS quand l'image arrive. */
+.hero-photo-frame {
+  position: relative;
   width: 100%;
   aspect-ratio: 6 / 5;
+  background: color-mix(in srgb, var(--navy) 6%, var(--card));
+}
+
+.hero-photo-frame img {
   object-fit: cover;
 }
 
@@ -1444,8 +1450,8 @@ a:focus-visible {
     margin: 0 auto;
   }
 
-  /* Sur une colonne, la photo passe en bandeau 16/9 pour laisser le pont visible. */
-  .hero-photo img {
+  /* Bandeau mobile : ratio fixé sur le cadre (pas sur l'img) → pas de CLS. */
+  .hero-photo-frame {
     aspect-ratio: 16 / 9;
   }
 
@@ -1473,7 +1479,8 @@ a:focus-visible {
   .megothon-photo {
     height: auto;
     min-height: 0;
-    aspect-ratio: 4 / 3;
+    /* Carré = taille affichée mobile (~376), réserve la place avant le lazy-load. */
+    aspect-ratio: 1 / 1;
   }
 
   .megothon-photo img {

@@ -44,16 +44,18 @@ export function Hero() {
         </div>
 
         <figure className="hero-photo hero-photo-in">
-          <Image
-            src="/photos/megothon-bouteilles.jpg"
-            alt="Six bouteilles remplies de mégots ramassés dans le centre-ville de Saint-Nazaire, posées sur un muret."
-            width={1200}
-            height={1026}
-            priority
-            fetchPriority="high"
-            quality={60}
-            sizes="(max-width: 480px) 100vw, (max-width: 860px) 92vw, 520px"
-          />
+          <div className="hero-photo-frame">
+            <Image
+              src="/photos/megothon-bouteilles.jpg"
+              alt="Six bouteilles remplies de mégots ramassés dans le centre-ville de Saint-Nazaire, posées sur un muret."
+              fill
+              priority
+              fetchPriority="high"
+              quality={60}
+              sizes="(max-width: 480px) 360px, (max-width: 860px) 420px, 520px"
+              style={{ objectFit: "cover" }}
+            />
+          </div>
           <figcaption className="hero-photo-cap">
             <span className="hero-photo-num display">{litres} L</span>
             <CaptionCycle />

@@ -13,8 +13,8 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 31536000,
     qualities: [60, 65, 75],
-    // Tailles serrées pour le mobile (évite de servir du 1080+ pour ~400 px).
-    deviceSizes: [640, 750, 828, 1080, 1200],
+    // Sans 750 : à ~360–420 CSS px (DPR 1.75) le navigateur prend 640, pas 750.
+    deviceSizes: [640, 828, 1080, 1200],
     imageSizes: [64, 96, 128, 256, 384],
   },
 };

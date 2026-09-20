@@ -152,9 +152,8 @@
     max-width: none;
   }
 
-  .hero-photo img {
+  .hero-photo-frame {
     aspect-ratio: 16 / 9;
-    max-height: 220px;
   }
 
   .hero-photo-cap {

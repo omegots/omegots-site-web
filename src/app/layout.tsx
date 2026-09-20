@@ -15,6 +15,7 @@ const poppins = Poppins({
   weight: ["400", "500", "600"],
   variable: "--font-poppins",
   display: "swap",
+  adjustFontFallback: true,
 });
 
 const unbounded = Unbounded({
@@ -24,6 +25,7 @@ const unbounded = Unbounded({
   weight: ["800"],
   variable: "--font-unbounded",
   display: "swap",
+  adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {

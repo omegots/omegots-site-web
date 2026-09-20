@@ -197,7 +197,7 @@ export function Megothon() {
               alt="Mosaïque du Mégothon : les bénévoles devant la mairie de Saint-Nazaire, les bouteilles remplies de mégots, et le ramassage au sol."
               fill
               quality={60}
-              sizes="(max-width: 480px) 100vw, (max-width: 860px) 92vw, 560px"
+              sizes="(max-width: 480px) 360px, (max-width: 860px) 420px, 560px"
               style={{ objectFit: "cover" }}
             />
           </Reveal>
