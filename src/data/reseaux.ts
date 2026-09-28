@@ -13,7 +13,7 @@ export const reseaux: Reseau[] = [
     id: "instagram",
     nom: "Instagram",
     texte: "Les photos des sorties et les chiffres, au fil des ramassages.",
-    href: "",
+    href: "https://www.instagram.com/asso.omegots/",
   },
   {
     id: "facebook",

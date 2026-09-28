@@ -78,7 +78,7 @@ export function Footer() {
             valorisation des mégots à Saint-Nazaire et ses alentours.
           </p>
           <Link href="/mentions-legales" prefetch={false} className="foot-mentions">
-            Mentions légales
+            Mentions légales et confidentialité
           </Link>
         </div>
 
@@ -96,6 +96,9 @@ export function Footer() {
         <div className="foot-contact">
           <p className="foot-label">Contact</p>
           <ul>
+            <li>
+              <Link href="/contact" prefetch={false}>Nous contacter</Link>
+            </li>
             <li>
               <Link href="/rejoindre" prefetch={false}>Nous rejoindre</Link>
             </li>

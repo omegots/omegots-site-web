@@ -43,7 +43,7 @@ export const faq: FaqItem[] = [
   {
     question: "Pourquoi un seul mégot, ça compte ?",
     reponse:
-      "C'est le déchet le plus répandu au monde. Jeté au sol, un mégot peut polluer jusqu'à 500 litres d'eau, met une douzaine d'années à se dégrader et libère des milliers de substances toxiques. Nous ne jugeons pas les fumeurs : le mégot est un déchet, pas une faute.",
+      "C'est le déchet le plus répandu au monde. Jeté au sol, un mégot peut polluer jusqu'à 500 litres d'eau, met jusqu'à 14 ans à se dégrader dans le sol et relâche dans l'eau une partie des milliers de substances piégées par son filtre. Nous ne jugeons pas les fumeurs : le mégot est un déchet, pas une faute.",
     lien: { href: "#pourquoi", label: "Les chiffres" },
   },
   {
@@ -51,7 +51,7 @@ export const faq: FaqItem[] = [
     reponse:
       "Signalez-nous un lieu où les mégots s'accumulent, proposez un partenariat si vous êtes une association ou une entreprise, faites passer le mot autour de vous, ou soutenez l'association par un don. Un e-mail suffit.",
     lien: {
-      href: "mailto:association.o.megots@gmail.com?subject=Aider%20O%27M%C3%A9gots",
+      href: "/contact",
       label: "Nous écrire",
     },
   },

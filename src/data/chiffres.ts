@@ -1,6 +1,8 @@
 /**
- * Chiffres de sensibilisation, repris du site actuel de l'association.
- * À faire confirmer avec leurs sources avant mise en ligne.
+ * Chiffres de sensibilisation de l'accueil. Les trois chiffres clés sont
+ * alignés sur les sources de la page « Le mégot » (data/megot.ts) : 14 ans
+ * (Joly et Coulis, 2018), plus de 7 000 substances (Novotny et al., 2009),
+ * 1er déchet des plages (Surfrider, Ocean Conservancy).
  */
 
 /** Une unité dans laquelle on peut exprimer les 500 litres. */
@@ -50,12 +52,12 @@ export function libelleEquivalence(u: UniteEquivalence) {
 
 export const chiffres = [
   {
-    valeur: "12 ans",
-    label: "pour qu'un mégot se dégrade dans la nature",
+    valeur: "14 ans",
+    label: "pour qu'un filtre se dégrade dans un sol ordinaire",
   },
   {
-    valeur: "4 500",
-    label: "substances toxiques libérées pendant sa décomposition",
+    valeur: "7 000",
+    label: "substances dans la fumée, que le filtre retient en partie",
   },
   {
     valeur: "N° 1",

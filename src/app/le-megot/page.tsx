@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/data/seo";
 import Link from "next/link";
 import { Faq } from "@/components/Faq";
 import { PageShell } from "@/components/PageShell";
@@ -19,12 +19,12 @@ import { faqMegot, MEGOTS_PAR_METRE } from "@/data/megot";
 import { LITRES_EAU_PAR_MEGOT, ramassages, totals } from "@/data/ramassages";
 import "@/styles/megot.css";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/le-megot" },
+export const metadata = pageMetadata({
+  path: "/le-megot",
   title: "Le mégot, un petit déchet, un gros pollueur · O'Mégots",
   description:
-    "De quoi est fait un mégot, ce qu'il libère dans l'eau, combien d'années il reste au sol, comment il arrive jusqu'à l'estuaire de la Loire. Des faits sourcés, expliqués simplement.",
-};
+    "De quoi est fait un mégot, ce qu'il libère dans l'eau, combien d'années il reste au sol, comment il rejoint l'estuaire de la Loire. Des faits sourcés.",
+});
 
 export default function LeMegotPage() {
   const { megots } = totals();
@@ -238,7 +238,7 @@ export default function LeMegotPage() {
           <h2 id="sources-titre" className="sr-only">
             Sources
           </h2>
-          <Sources />
+          <Sources majLe="2026-09-29" />
         </div>
       </section>
 

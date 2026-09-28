@@ -8,7 +8,14 @@ import { sources as sourcesMegot, type Source } from "@/data/megot";
  * sources »), une ligne par référence. Un appel de source en exposant
  * (#source-N) ouvre le bloc avant de faire défiler jusqu'à la ligne visée.
  */
-export function Sources({ liste = sourcesMegot }: { liste?: readonly Source[] }) {
+export function Sources({
+  liste = sourcesMegot,
+  majLe,
+}: {
+  liste?: readonly Source[];
+  /** Date de dernière mise à jour du contenu de la page, au format ISO (AAAA-MM-JJ). */
+  majLe?: string;
+}) {
   const sources = liste;
   const ref = useRef<HTMLDetailsElement>(null);
 
@@ -25,6 +32,7 @@ export function Sources({ liste = sourcesMegot }: { liste?: readonly Source[] })
   }, []);
 
   return (
+    <>
     <details className="sources" ref={ref}>
       <summary className="sources-resume">
         <span className="sources-resume-n display" aria-hidden="true">
@@ -55,5 +63,15 @@ export function Sources({ liste = sourcesMegot }: { liste?: readonly Source[] })
         ))}
       </ol>
     </details>
+    {majLe && (
+      <p className="sources-maj">
+        Page mise à jour le{" "}
+        <time dateTime={majLe}>
+          {new Date(`${majLe}T12:00:00`).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}
+        </time>
+        .
+      </p>
+    )}
+    </>
   );
 }

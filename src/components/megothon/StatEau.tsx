@@ -20,7 +20,7 @@ const ORDRE: Mode[] = ["litres", "baignoires", "bouteilles"];
 const ease = [0.22, 1, 0.36, 1] as const;
 
 type StatEauProps = {
-  /** Total d'eau douce préservée, en litres (totals().eau). */
+  /** Eau douce que les mégots ramassés pouvaient polluer, en litres (totals().eau, ordre de grandeur de 500 L par mégot). */
   eau: number;
   /** Valeur lissée du compteur, pilotée par la timeline du Mégothon. */
   spring: MotionValue<number>;
@@ -51,20 +51,20 @@ export function StatEau({ eau, spring }: StatEauProps) {
     { legende: string; phrase: string; bouton: string; label: string }
   > = {
     litres: {
-      legende: "d'eau douce préservés",
-      phrase: `${fr(eau)} litres d'eau douce préservés, à ${fr(LITRES_EAU_PAR_MEGOT)} litres par mégot`,
+      legende: "d'eau douce qu'ils pouvaient polluer",
+      phrase: `${fr(eau)} litres d'eau douce que ces mégots pouvaient polluer, à ${fr(LITRES_EAU_PAR_MEGOT)} litres par mégot`,
       bouton: "en litres ?",
       label: "Afficher l'équivalent en litres d'eau douce",
     },
     baignoires: {
-      legende: `baignoires de ${fr(LITRES_PAR_BAIGNOIRE)} L préservées`,
-      phrase: `${fr(baignoires)} baignoires de ${fr(LITRES_PAR_BAIGNOIRE)} litres d'eau douce préservées`,
+      legende: `baignoires de ${fr(LITRES_PAR_BAIGNOIRE)} L qu'ils pouvaient polluer`,
+      phrase: `${fr(baignoires)} baignoires de ${fr(LITRES_PAR_BAIGNOIRE)} litres d'eau douce que ces mégots pouvaient polluer`,
       bouton: "en baignoires ?",
       label: `Afficher l'équivalent en baignoires de ${fr(LITRES_PAR_BAIGNOIRE)} litres`,
     },
     bouteilles: {
-      legende: `bouteilles de ${fr(LITRES_PAR_BOUTEILLE * 100)} cl préservées`,
-      phrase: `${fr(bouteilles)} bouteilles de ${fr(LITRES_PAR_BOUTEILLE * 100)} cl d'eau douce préservées`,
+      legende: `bouteilles de ${fr(LITRES_PAR_BOUTEILLE * 100)} cl qu'ils pouvaient polluer`,
+      phrase: `${fr(bouteilles)} bouteilles de ${fr(LITRES_PAR_BOUTEILLE * 100)} cl d'eau douce que ces mégots pouvaient polluer`,
       bouton: "en bouteilles ?",
       label: `Afficher l'équivalent en bouteilles de ${fr(LITRES_PAR_BOUTEILLE * 100)} cl`,
     },

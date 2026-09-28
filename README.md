@@ -106,3 +106,21 @@ mobile 88 à 92 en performance (le reste à 100). Ce qui a été fait, et pourqu
   natifs, une réponse ouverte à la fois, balisage `FAQPage` (schema.org) dans `page.tsx`. Les
   réponses ne reprennent que des faits déjà publiés par l'association.
 - `fr()` (format des nombres) vit dans `src/data/format.ts`, importable côté serveur.
+
+## Audit SEO, GEO et contenus (29/09/2026)
+
+- **Métadonnées par page** : `pageMetadata()` (`src/data/seo.ts`) pose title, description (155 caractères
+  au plus), canonique, Open Graph et carte Twitter propres à chaque page. Sans lui, Next reprend l'openGraph
+  du layout et toutes les pages se partagent sous le même titre. Le layout n'impose plus de canonique « / ».
+- **schema.org** (`src/data/jsonld.ts`) : fiche `NGO` (avec Instagram en `sameAs`) et `WebSite` sur toutes
+  les pages via le layout, `Event` pour chaque sortie sur `/ramassages` (champ `iso` dans `ramassages.ts`).
+- **Titres de page visibles dès le HTML** : `PageShell` utilise `.hero-in` (CSS) au lieu de `Reveal`, comme
+  le hero de l'accueil (le titre partait en `opacity:0` jusqu'à l'hydratation).
+- **Sitemap** : les mentions légales (noindex) n'y figurent plus.
+- **Chiffres alignés sur les sources** de `/le-megot` : 14 ans (et non 12), plus de 7 000 substances (et non
+  4 500). Le « 500 L par mégot » reste un ordre de grandeur : « jusqu'à … litres d'eau épargnés », jamais
+  « sauvés ».
+- Le bandeau orange (`Rejoindre`) prend un `href` : `#prochaine` sur les pages qui ont le bandeau
+  « Prochaine sortie », `/rejoindre#prochaine` ailleurs.
+- Mentions légales complétées d'une partie confidentialité (finalités, bases légales, durées, Netlify,
+  Pay Asso, droits, CNIL) : durées et hébergeur à faire valider par l'association.

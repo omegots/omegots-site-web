@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/data/seo";
 import Link from "next/link";
 import { Faq } from "@/components/Faq";
 import { FormPrevenir } from "@/components/FormPrevenir";
@@ -16,20 +16,20 @@ import "@/styles/megot.css";
 import "@/styles/ramassages.css";
 import "@/styles/rejoindre.css";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/rejoindre" },
-  title: "Nous rejoindre · O'Mégots",
+export const metadata = pageMetadata({
+  path: "/rejoindre",
+  title: "Rejoindre O'Mégots : ramasser des mégots à Saint-Nazaire",
   description:
-    "Venir ramasser gratuitement, adhérer pour 1 euro, faire un don, proposer un partenariat ou signaler un lieu : toutes les façons de rejoindre O'Mégots à Saint-Nazaire.",
-};
+    "Venir ramasser gratuitement, adhérer pour 1 €, faire un don ou proposer un partenariat : toutes les façons d'agir avec O'Mégots à Saint-Nazaire.",
+});
 
 export default function RejoindrePage() {
   const reseauxActifs = reseaux.some((r) => r.href);
 
   return (
     <PageShell
-      title="L'association se construit maintenant. C'est le bon moment."
-      lede="Venir ramasser est gratuit et sans inscription. Adhérer coûte 1 euro symbolique. Et il y a mille autres façons d'aider, même sans venir."
+      title={<>Rejoindre O&apos;Mégots&nbsp;: c&apos;est le bon moment.</>}
+      lede="L'association se construit maintenant, à Saint-Nazaire. Venir ramasser est gratuit et sans inscription, adhérer coûte 1 euro symbolique, et il y a mille autres façons d'aider, même sans venir."
       actions={
         <>
           <a className="btn btn-lg" href="#prochaine">
@@ -90,7 +90,7 @@ export default function RejoindrePage() {
             <h2 id="etapes-titre" className="display">
               Trois étapes simples
             </h2>
-            <p className="lede">Comment ça marche, de l&apos;adhésion à la première sortie.</p>
+            <p className="lede">Comment ça marche, du premier e-mail à l&apos;adhésion, facultative.</p>
           </Reveal>
           <Reveal className="etapes" delay={0.1}>
             {etapes.map((e, i) => (
@@ -236,7 +236,7 @@ export default function RejoindrePage() {
       </section>
 
       <WaveDivider from="bg" to="orange" />
-      <Rejoindre />
+      <Rejoindre href="#prochaine" />
       <WaveDivider from="orange" to="bg" />
       <Faq
         id="faq"

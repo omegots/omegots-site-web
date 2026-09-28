@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/data/seo";
 import { PageShell } from "@/components/PageShell";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/mentions-legales" },
-  title: "Mentions légales · O'Mégots",
+export const metadata = pageMetadata({
+  path: "/mentions-legales",
+  title: "Mentions légales et confidentialité · O'Mégots",
   description:
-    "Informations légales relatives au site omegots.fr et à l'association O'Mégots : éditeur, directeur de la publication, hébergement, données personnelles.",
+    "Éditeur, directeur de la publication, hébergement, données personnelles et cookies du site omegots.fr de l'association O'Mégots.",
   robots: { index: false, follow: true },
-};
+});
 
 const EMAIL = "association.o.megots@gmail.com";
 const TEL = "07 80 39 48 78";
@@ -16,7 +16,7 @@ const TEL_HREF = "tel:+33780394878";
 export default function MentionsLegalesPage() {
   return (
     <PageShell
-      title="Mentions légales."
+      title="Mentions légales et confidentialité."
       lede="Informations légales relatives au site omegots.fr et à l'association O'Mégots."
     >
       <section className="page-section">
@@ -41,7 +41,8 @@ export default function MentionsLegalesPage() {
           <h2>Directeur de la publication</h2>
           <p>
             Le directeur de la publication est Romain Perrais, président de
-            l&apos;association. Pour tout contact, écrivez à{" "}
+            l&apos;association. Pour tout contact,{" "}
+            <a href="/contact">écrivez-nous via le formulaire</a> ou à{" "}
             <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
           </p>
 
@@ -74,31 +75,64 @@ export default function MentionsLegalesPage() {
             leurs propriétaires restent la propriété exclusive de ces derniers.
           </p>
 
-          <h2>Données personnelles</h2>
+          <h2 id="confidentialite">Données personnelles et confidentialité</h2>
+          <p>
+            Le responsable du traitement est l&apos;association O&apos;Mégots,
+            représentée par son président. Le site ne collecte que les données
+            que vous saisissez vous-même dans ses formulaires.
+          </p>
+          <ul>
+            <li>
+              <b>«&nbsp;Être prévenu de la prochaine sortie&nbsp;»</b> : votre adresse
+              e-mail, pour vous annoncer les prochains ramassages. Base légale :
+              votre consentement, que vous pouvez retirer à tout moment en nous
+              écrivant. Conservation : jusqu&apos;à votre désinscription, et au
+              plus trois ans après notre dernier échange.
+            </li>
+            <li>
+              <b>Formulaire de contact</b> : prénom, nom, e-mail, objet et
+              message, pour répondre à votre demande. Base légale : l&apos;intérêt
+              légitime de l&apos;association à répondre aux personnes qui la
+              sollicitent. Conservation : le temps de traiter la demande, et au
+              plus trois ans après notre dernier échange.
+            </li>
+            <li>
+              <b>Adhésion et dons</b> : ils se font sur la plateforme Crédit
+              Mutuel Pay Asso, qui collecte et traite vos coordonnées et votre
+              paiement pour le compte de l&apos;association, selon sa propre
+              politique de confidentialité. L&apos;association ne voit jamais
+              vos coordonnées bancaires.
+            </li>
+          </ul>
+          <p>
+            Ces données sont réservées aux membres du bureau de
+            l&apos;association. Elles ne sont ni cédées, ni vendues, ni
+            utilisées à des fins publicitaires. Les envois des formulaires sont
+            reçus et stockés par l&apos;hébergeur du site, Netlify, établi aux
+            États-Unis : ce transfert hors de l&apos;Union européenne est
+            encadré par les garanties prévues par le RGPD (clauses
+            contractuelles types de la Commission européenne).
+          </p>
           <p>
             Conformément au règlement général sur la protection des données
             (RGPD) et à la loi Informatique et Libertés, vous disposez
-            d&apos;un droit d&apos;accès, de rectification, d&apos;opposition
-            et de suppression des données vous concernant.
-          </p>
-          <p>
-            Les données collectées via les formulaires du site (adresse e-mail,
-            et le cas échéant nom et message) sont utilisées uniquement pour
-            vous prévenir des prochaines sorties et répondre à vos demandes.
-            Elles ne sont ni cédées, ni vendues à des tiers.
-          </p>
-          <p>
-            Pour exercer vos droits ou pour toute question relative à vos
-            données personnelles, contactez-nous à{" "}
-            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
+            d&apos;un droit d&apos;accès, de rectification, d&apos;effacement,
+            de limitation, d&apos;opposition et de portabilité des données vous
+            concernant. Pour les exercer, écrivez à{" "}
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a> : nous répondons dans un
+            délai d&apos;un mois. Si vous estimez, après nous avoir contactés,
+            que vos droits ne sont pas respectés, vous pouvez adresser une
+            réclamation à la CNIL (<a href="https://www.cnil.fr">www.cnil.fr</a>).
           </p>
 
           <h2>Cookies</h2>
           <p>
-            Ce site n&apos;utilise pas de cookies de traçage ou de publicité.
-            Des cookies techniques strictement nécessaires au bon fonctionnement
-            du site peuvent être déposés par l&apos;hébergeur Netlify. Ces
-            cookies ne collectent pas de données personnelles.
+            Ce site ne dépose aucun cookie de mesure d&apos;audience, de
+            traçage ou de publicité, et n&apos;enregistre rien dans votre
+            navigateur. Aucun bandeau de consentement n&apos;est donc
+            nécessaire. Des cookies techniques strictement nécessaires au
+            fonctionnement du site peuvent être déposés par l&apos;hébergeur ;
+            ils ne servent pas à vous suivre.
           </p>
 
           <h2>Limitation de responsabilité</h2>

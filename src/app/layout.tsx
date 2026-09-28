@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins, Unbounded } from "next/font/google";
+import { jsonLd, ngo, website } from "@/data/jsonld";
+import { OG_IMAGE } from "@/data/seo";
 import { NOINDEX, SITE_URL } from "@/data/site";
 import "./globals.css";
 import "../styles/hero.css";
@@ -29,18 +31,18 @@ const unbounded = Unbounded({
 });
 
 export const metadata: Metadata = {
-  title: "O'Mégots · Ramassage et valorisation des mégots à Saint-Nazaire",
+  title: "O'Mégots · Ramassage citoyen de mégots à Saint-Nazaire",
   description:
     "O'Mégots, association citoyenne de Saint-Nazaire : on ramasse les mégots, on les mesure, on publie les chiffres. Rejoignez un ramassage.",
   metadataBase: new URL(SITE_URL),
-  alternates: { canonical: "/" },
   // Démo (SITE_NOINDEX=1) : aucune indexation, le vrai site reste omegots.fr.
   robots: NOINDEX ? { index: false, follow: false } : undefined,
   openGraph: {
     title: "O'Mégots · Saint-Nazaire",
     description:
       "Un territoire sans mégots, c'est possible. À Saint-Nazaire, on les ramasse, on les compte, et on publie les chiffres.",
-    images: ["/reseaux/og-partage-1200x630.png"],
+    images: [OG_IMAGE],
+    siteName: "O'Mégots",
     type: "website",
     locale: "fr_FR",
   },
@@ -65,7 +67,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className={`${poppins.variable} ${unbounded.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd([ngo, website]) }} />
+      </body>
     </html>
   );
 }

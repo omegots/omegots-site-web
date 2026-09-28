@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/data/seo";
 import Link from "next/link";
 import { Faq } from "@/components/Faq";
 import { FormPrevenir } from "@/components/FormPrevenir";
@@ -14,17 +14,18 @@ import { HeroRamassages } from "@/components/ramassages/HeroRamassages";
 import { RemplirLitre } from "@/components/ramassages/RemplirLitre";
 import { Zones } from "@/components/ramassages/Zones";
 import { fr } from "@/data/format";
+import { evenements, jsonLd } from "@/data/jsonld";
 import { megotsParLitre, ramassages, totals } from "@/data/ramassages";
 import { faqRamassages, sourcesRamassages } from "@/data/ramassages-page";
 import "@/styles/megot.css";
 import "@/styles/ramassages.css";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/ramassages" },
-  title: "Nos ramassages de mégots à Saint-Nazaire · O'Mégots",
+export const metadata = pageMetadata({
+  path: "/ramassages",
+  title: "Ramassages de mégots à Saint-Nazaire · O'Mégots",
   description:
-    "Les sorties de ramassage de mégots d'O'Mégots à Saint-Nazaire et ses alentours : prochaine date, bilan chiffré de chaque sortie, photos, zones d'action et déroulé d'une sortie.",
-};
+    "Ramassages de mégots gratuits à Saint-Nazaire et alentours : prochaine sortie, bilan chiffré de chaque sortie, lieux et déroulé. Ouvert à tous.",
+});
 
 const MAILTO_LIEU = "mailto:association.o.megots@gmail.com?subject=Signaler%20un%20lieu";
 
@@ -34,8 +35,8 @@ export default function RamassagesPage() {
 
   return (
     <PageShell
-      title="Les sorties, les chiffres, la prochaine date."
-      lede="Des ramassages gratuits, ouverts à toutes et tous, dans les rues, les parcs et sur les plages de Saint-Nazaire et ses alentours. Chaque sortie est mesurée et publiée ici, litre par litre."
+      title="Nos ramassages de mégots à Saint-Nazaire."
+      lede="Les sorties, les chiffres, la prochaine date. Des ramassages gratuits, ouverts à toutes et tous, dans les rues, les parcs et sur les plages de Saint-Nazaire et ses alentours, mesurés et publiés ici, litre par litre."
       actions={
         <>
           <a className="btn btn-lg" href="#prochaine">
@@ -193,7 +194,7 @@ export default function RamassagesPage() {
             <p>
               <b id="jeu-titre">Mini-jeu : ramassez avant la marée.</b>
               La marée monte en quatorze secondes : touchez les mégots avant la vague. Chaque mégot sauvé, c&apos;est
-              500 litres d&apos;eau préservés.
+              jusqu&apos;à 500 litres d&apos;eau épargnés.
             </p>
             <Link className="btn" href="/jeu">
               Jouer
@@ -208,12 +209,12 @@ export default function RamassagesPage() {
           <h2 id="sources-titre" className="sr-only">
             Sources
           </h2>
-          <Sources liste={sourcesRamassages} />
+          <Sources liste={sourcesRamassages} majLe="2026-09-29" />
         </div>
       </section>
 
       <WaveDivider from="bg" to="orange" />
-      <Rejoindre />
+      <Rejoindre href="#prochaine" />
       <WaveDivider from="orange" to="bg" />
       <Faq
         id="faq"
@@ -222,6 +223,7 @@ export default function RamassagesPage() {
         lede="Les réponses courtes avant votre première sortie."
       />
       <WaveDivider from="bg" to="navy" />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(evenements) }} />
     </PageShell>
   );
 }

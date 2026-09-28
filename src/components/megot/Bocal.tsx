@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { essais } from "@/data/megot";
 import { MegotDroit, MEGOT_LONGUEUR } from "./MegotDroit";
 import { Ref } from "./Ref";
 
@@ -164,14 +163,6 @@ export function Bocal({ titre }: { titre?: ReactNode }) {
             La moitié du banc est morte. C&apos;est la dose létale médiane mesurée : un mégot fumé par litre
             d&apos;eau, en 96 heures, pour les deux espèces testées.
             <Ref ids={[2]} />
-          </p>
-        )}
-
-        {fini && (
-          <p className="aqua-note">
-            Sans le tabac, il faut {essais[1].megotsParLitre.toLocaleString("fr-FR")} filtres fumés par litre pour
-            le même résultat ; et {essais[2].megotsParLitre.toLocaleString("fr-FR")} filtres neufs, jamais allumés.
-            Le plastique du filtre n&apos;est pas neutre non plus.
           </p>
         )}
 

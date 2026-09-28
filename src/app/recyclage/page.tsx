@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/data/seo";
 import Link from "next/link";
 import { DevenirUsages } from "@/components/devenir/DevenirUsages";
 import { Faq } from "@/components/Faq";
@@ -18,12 +18,12 @@ import { faqRecyclage, MEGOTS_PAR_BANC, sourcesRecyclage } from "@/data/recyclag
 import "@/styles/megot.css";
 import "@/styles/recyclage.css";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/recyclage" },
+export const metadata = pageMetadata({
+  path: "/recyclage",
   title: "Que deviennent les mégots ramassés ? Le recyclage · O'Mégots",
   description:
-    "Collecte, tri, dépollution, matière, objet : comment un mégot ramassé devient un banc ou un isolant, qui le fait en France, ce que dit la loi, et les limites du recyclage. Des faits sourcés.",
-};
+    "Collecte, tri, dépollution : comment un mégot devient un banc ou un isolant, qui le recycle en France, ce que dit la loi et ses limites. Sources à l'appui.",
+});
 
 const MAILTO_PARTENARIAT = "mailto:association.o.megots@gmail.com?subject=Proposer%20un%20partenariat";
 
@@ -273,7 +273,7 @@ export default function RecyclagePage() {
           <h2 id="sources-titre" className="sr-only">
             Sources
           </h2>
-          <Sources liste={sourcesRecyclage} />
+          <Sources liste={sourcesRecyclage} majLe="2026-09-29" />
         </div>
       </section>
 

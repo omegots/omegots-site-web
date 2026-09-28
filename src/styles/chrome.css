@@ -1057,6 +1057,22 @@ section:target .eyebrow::before {
   margin-top: 28px;
 }
 
+/* Sans illustration : titre, lede et CTA centrés (Contact, Mentions…). */
+.page-head.is-center .page-head-inner {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.page-head.is-center .page-head-inner .lede {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.page-head.is-center .page-head-actions {
+  justify-content: center;
+}
+
 /* Sommaire éditorial : gros numéros en Unbounded, titre dessous, sur un filet. */
 .page-sommaire {
   margin-top: clamp(32px, 5vw, 56px);

@@ -253,6 +253,34 @@
   border-radius: 4px;
 }
 
+/* --- Renvoi vers /contact ---------------------------------------------- */
+
+.contact-renvoi {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  padding: 24px 28px;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  box-shadow: var(--shadow);
+}
+
+.contact-renvoi p {
+  color: var(--ink2);
+  max-width: 60ch;
+}
+
+.contact-renvoi b {
+  display: block;
+  font: 800 20px/1.2 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
 /* --- Contact ----------------------------------------------------------- */
 
 .contact {

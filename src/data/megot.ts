@@ -127,33 +127,6 @@ export const parties: Partie[] = [
   },
 ];
 
-/** Concentrations létales mesurées par Slaughter et al. (2011), en mégots par litre, 96 h, deux espèces de poissons. */
-export const essais = [
-  {
-    id: "fume",
-    nom: "Mégot fumé, filtre et tabac",
-    megotsParLitre: 1,
-    texte:
-      "Un seul mégot fumé dans un litre d'eau : au bout de quatre jours, la moitié des poissons de l'essai sont morts. C'est le résultat pour les deux espèces testées, l'une d'eau douce, l'autre de mer.",
-  },
-  {
-    id: "filtre",
-    nom: "Filtre fumé, sans tabac",
-    megotsParLitre: 4.3,
-    texte:
-      "Le filtre seul, une fois fumé, reste toxique : il en faut un peu plus de quatre par litre pour le même effet. Ce qu'il a piégé en brûlant suffit.",
-  },
-  {
-    id: "neuf",
-    nom: "Filtre neuf, jamais fumé",
-    megotsParLitre: 13.5,
-    texte:
-      "Même un filtre jamais allumé finit par tuer : treize par litre. Le plastique et ses additifs ne sont pas neutres.",
-  },
-] as const;
-
-export type Essai = (typeof essais)[number];
-
 /** Étapes de la dégradation du filtre, en années après le jet (Joly et Coulis, 2018). */
 export const etapesTemps = [
   {

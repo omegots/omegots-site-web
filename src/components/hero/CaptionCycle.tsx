@@ -3,7 +3,7 @@ import { fr } from "@/data/format";
 
 /**
  * Légende de la photo du hero : le « 6 L » à gauche, une seule phrase fixe à
- * droite (les litres d'eau sauvés de la pollution), puis la date de la sortie.
+ * droite (jusqu'à combien de litres d'eau épargnés), puis la date de la sortie.
  * Plus de défilement : le client garde uniquement cette phrase.
  */
 export function CaptionCycle() {
@@ -13,7 +13,7 @@ export function CaptionCycle() {
   return (
     <span className="hero-cap-text">
       <span className="hero-cap-line">
-        soit {fr(eau)} litres d&apos;eau sauvés de la pollution
+        soit jusqu&apos;à {fr(eau)} litres d&apos;eau épargnés
       </span>
       <span className="hero-cap-date">Mégothon du {date}.</span>
     </span>

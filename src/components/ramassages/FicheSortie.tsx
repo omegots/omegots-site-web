@@ -55,7 +55,7 @@ export function FicheSortie({ sortie, premiere }: { sortie: Ramassage; premiere:
           </ul>
           <ul className="fiche-equiv">
             <li>
-              <b>{fr(eau)} L</b> d&apos;eau douce préservés, à {fr(LITRES_EAU_PAR_MEGOT)} litres par mégot
+              jusqu&apos;à <b>{fr(eau)} L</b> d&apos;eau douce épargnés, à {fr(LITRES_EAU_PAR_MEGOT)} litres par mégot (ordre de grandeur)
               <Ref ids={[2]} liste={sourcesRamassages} />
             </li>
             <li>

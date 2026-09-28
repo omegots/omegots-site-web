@@ -1,6 +1,5 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/data/seo";
 import Link from "next/link";
-import { FormContact } from "@/components/association/FormContact";
 import { HeroAssociation } from "@/components/association/HeroAssociation";
 import { Valeurs } from "@/components/association/Valeurs";
 import { Faq } from "@/components/Faq";
@@ -14,12 +13,12 @@ import { actions, faqAssociation, identite } from "@/data/association";
 import "@/styles/megot.css";
 import "@/styles/association.css";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/association" },
+export const metadata = pageMetadata({
+  path: "/association",
   title: "L'association O'Mégots · Saint-Nazaire",
   description:
-    "O'Mégots, association citoyenne loi 1901 née à Saint-Nazaire en 2026 : notre mission, ce qui nous guide, la fiche d'identité, la presse et le formulaire de contact.",
-};
+    "O'Mégots, association citoyenne loi 1901 née à Saint-Nazaire en 2026 : notre mission, ce qui nous guide, la fiche d'identité et la presse.",
+});
 
 export default function AssociationPage() {
   return (
@@ -32,9 +31,9 @@ export default function AssociationPage() {
       lede="Déterminée à agir pour les espaces naturels, urbains et littoraux. Un premier Mégothon en mai 2026, et une conviction : notre territoire mérite d'être propre."
       actions={
         <>
-          <a className="btn btn-lg" href="#contact">
+          <Link className="btn btn-lg" href="/contact">
             Nous écrire
-          </a>
+          </Link>
           <Link className="btn btn-lg ghost" href="/rejoindre">
             Venir ramasser
           </Link>
@@ -47,7 +46,7 @@ export default function AssociationPage() {
         { href: "#temoignages", label: "Paroles de bénévoles" },
         { href: "#presse", label: "Ils parlent de nous" },
         { href: "#identite", label: "Fiche d'identité" },
-        { href: "#contact", label: "Contact" },
+        { href: "/contact", label: "Contact" },
       ]}
     >
       <WaveDivider from="bg" to="navy" />
@@ -155,37 +154,17 @@ export default function AssociationPage() {
 
       <WaveDivider from="navy" to="bg" />
 
-      {/* 6. Contact */}
+      {/* 6. Contact : renvoi vers la page dédiée */}
       <section className="megot-section" id="contact" aria-labelledby="contact-titre">
         <div className="wrap">
-          <Reveal direction="rise" className="section-head is-center">
-            <h2 id="contact-titre" className="display">
+          <Reveal className="contact-renvoi" delay={0.05}>
+            <p>
+              <b id="contact-titre">Une question, une idée ?</b>
+              Écrivez-nous, adhérez pour 1 € ou faites un don. On répond en {identite.delai}.
+            </p>
+            <Link className="btn" href="/contact">
               Nous contacter
-            </h2>
-            <p className="lede">Une question, une idée, envie de rejoindre l&apos;aventure ? On vous répond rapidement.</p>
-          </Reveal>
-          <Reveal className="contact" delay={0.1}>
-            <div className="contact-infos">
-              <ul>
-                <li>
-                  <b>Localisation</b>
-                  {identite.territoire}
-                </li>
-                <li>
-                  <b>E-mail</b>
-                  <a href={`mailto:${identite.email}`}>{identite.email}</a>
-                </li>
-                <li>
-                  <b>Statut</b>
-                  {identite.forme}
-                </li>
-                <li>
-                  <b>Délai de réponse</b>
-                  Nous nous engageons à vous répondre en {identite.delai}.
-                </li>
-              </ul>
-            </div>
-            <FormContact />
+            </Link>
           </Reveal>
         </div>
       </section>

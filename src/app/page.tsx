@@ -6,8 +6,15 @@ import { Hero } from "@/components/Hero";
 import { SvgSprites } from "@/components/SvgSprites";
 import { WaveDivider } from "@/components/WaveDivider";
 import { faq } from "@/data/faq";
-import { articlesPresse } from "@/data/presse";
-import { SITE_URL } from "@/data/site";
+import { pageMetadata } from "@/data/seo";
+
+export const metadata = pageMetadata({
+  path: "/",
+  title: "O'Mégots · Ramassage citoyen de mégots à Saint-Nazaire",
+  description:
+    "O'Mégots, association citoyenne de Saint-Nazaire : on ramasse les mégots, on les mesure, on publie les chiffres. Rejoignez un ramassage.",
+  ogTitle: "Un territoire sans mégots, c'est possible · O'Mégots Saint-Nazaire",
+});
 
 /** Sections sous le hero : chunks JS séparés, hors du chemin critique mobile. */
 const Chiffres = dynamic(() =>
@@ -35,29 +42,6 @@ const Rejoindre = dynamic(() =>
   import("@/components/Rejoindre").then((m) => ({ default: m.Rejoindre })),
 );
 
-/** Fiche de l'association (schema.org NGO) : uniquement des faits publiés (mentions légales, presse). */
-const ngoJsonLd = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "NGO",
-  name: "O'Mégots",
-  url: SITE_URL,
-  logo: `${SITE_URL}/favicon/favicon-512.png`,
-  email: "association.o.megots@gmail.com",
-  description:
-    "Association citoyenne loi 1901 : ramassage et comptage des mégots à Saint-Nazaire et ses alentours, chiffres publiés, sensibilisation sans jugement.",
-  address: { "@type": "PostalAddress", addressLocality: "Besné", postalCode: "44160", addressCountry: "FR" },
-  areaServed: { "@type": "City", name: "Saint-Nazaire" },
-  identifier: [
-    { "@type": "PropertyValue", propertyID: "RNA", value: "W443012511" },
-    { "@type": "PropertyValue", propertyID: "SIRET", value: "10448840800014" },
-  ],
-  subjectOf: articlesPresse.map((a) => ({
-    "@type": "NewsArticle",
-    headline: a.title,
-    url: a.href,
-    publisher: { "@type": "Organization", name: a.media },
-  })),
-}).replace(/</g, "\u003c");
 
 export default function HomePage() {
   return (
@@ -82,7 +66,7 @@ export default function HomePage() {
           <WaveDivider from="bg" to="navy" />
           <Devenir />
           <WaveDivider from="navy" to="orange" />
-          <Rejoindre />
+          <Rejoindre href="#prochaine" />
           <WaveDivider from="orange" to="bg" />
           <Faq
             items={faq}
@@ -93,7 +77,6 @@ export default function HomePage() {
         </main>
         <Footer />
       </div>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ngoJsonLd }} />
     </>
   );
 }

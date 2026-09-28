@@ -1,5 +1,7 @@
 export type Ramassage = {
   date: string;
+  /** Date au format ISO 8601 (AAAA-MM-JJ), pour le balisage schema.org Event. */
+  iso: string;
   libelle: string;
   lieu: string;
   duree: string;
@@ -16,6 +18,7 @@ export const LITRES_EAU_PAR_MEGOT = 500;
 export const ramassages: Ramassage[] = [
   {
     date: "23 mai 2026",
+    iso: "2026-05-23",
     libelle: "Mégothon",
     lieu: "de la mairie au Paquebot",
     duree: "2 h",

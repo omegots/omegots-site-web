@@ -53,7 +53,7 @@ const CALLOUTS = [
     anchor: "start" as const,
   },
   {
-    // filtre : le plastique, 12 ans
+    // filtre : le plastique, 14 ans
     fait: 0,
     from: [JONCTION + 34, CY + 4] as const,
     to: [JONCTION + 34, 114] as const,

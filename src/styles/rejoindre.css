@@ -271,6 +271,13 @@
   margin-top: 12px;
 }
 
+.adherer-texte a {
+  color: var(--cream);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .adherer-gratuit {
   display: inline-block;
   padding: 8px 14px;

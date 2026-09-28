@@ -8,7 +8,12 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 const SECOND_LINE_DELAY = 1;
 
-export function Rejoindre() {
+type RejoindreProps = {
+  /** Cible de « Venir ramasser » : l'ancre locale si la page a son bandeau « Prochaine sortie ». */
+  href?: string;
+};
+
+export function Rejoindre({ href = "/rejoindre#prochaine" }: RejoindreProps) {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.5 });
@@ -47,13 +52,10 @@ export function Rejoindre() {
             </motion.span>
           </h2>
           <div className="rejoindre-actions">
-            <MagneticButton className="btn btn-lg btn-navy" href="#prochaine">
-              Viens ramasser
+            <MagneticButton className="btn btn-lg btn-navy" href={href}>
+              Venir ramasser
             </MagneticButton>
-            <MagneticButton
-              className="btn btn-lg btn-cream"
-              href="mailto:association.o.megots@gmail.com?subject=Rejoindre%20O%27M%C3%A9gots"
-            >
+            <MagneticButton className="btn btn-lg btn-cream" href="/contact">
               Nous écrire
             </MagneticButton>
           </div>

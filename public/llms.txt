@@ -4,6 +4,7 @@
 
 Site : https://omegots.fr
 Contact : association.o.megots@gmail.com
+Instagram : https://www.instagram.com/asso.omegots/
 Siège : Besné (44160), Loire-Atlantique
 Statut : association loi 1901, RNA W443012511, SIRET 104 488 408 00014
 Directeur de la publication : Romain Perrais (président)
@@ -21,6 +22,14 @@ Directeur de la publication : Romain Perrais (président)
 - 7 bénévoles, 2 heures de ramassage, 6 litres de mégots, soit environ 4 800 mégots.
 - Chiffre de sensibilisation utilisé par l'association : un mégot peut polluer jusqu'à 500 litres d'eau.
 
+## Chiffres sourcés (détail et références sur https://omegots.fr/le-megot)
+
+- Le filtre d'une cigarette est en acétate de cellulose, un plastique : 7,5 ans (compost) à 14 ans (sol) pour se dégrader, jusqu'à 30 ans dans la rue (Joly et Coulis, Waste Management, 2018).
+- Plus de 7 000 substances dans la fumée d'une cigarette ; le filtre en retient une partie et la relâche dans l'eau (Novotny et al., 2009).
+- Plus de 23 milliards de mégots jetés au sol chaque année en France ; objectif de l'État : 40 % de moins d'ici 2027 (ministère de la Transition écologique, 2021).
+- En moyenne 1,3 mégot tous les dix mètres de rue en France, 4,5 dans les grandes villes (Alcome et ADEME, 2024).
+- « Jusqu'à 500 litres d'eau polluée par mégot » est un ordre de grandeur, pas une mesure de laboratoire.
+
 ## Presse
 
 - Saint-Nazaire News : « Mégothon de Saint-Nazaire : 6 litres de mégots récoltés en 2h, de la mairie au Paquebot » https://www.saintnazairenews.fr/news/megothon-de-saint-nazaire-6-litres-de-megots-recoltes-en-2h-de-la-mairie-au-paquebot
@@ -34,5 +43,6 @@ Directeur de la publication : Romain Perrais (président)
 - [Nos ramassages](https://omegots.fr/ramassages) : sorties, bilans chiffrés, prochaine date.
 - [Le recyclage](https://omegots.fr/recyclage) : que deviennent les mégots ramassés.
 - [Nous rejoindre](https://omegots.fr/rejoindre) : venir ramasser, adhérer, proposer un partenariat.
-- [L'association](https://omegots.fr/association) : mission, principes, presse, contact.
-- [Mentions légales](https://omegots.fr/mentions-legales)
+- [Contact](https://omegots.fr/contact) : formulaire, adhésion, don.
+- [L'association](https://omegots.fr/association) : mission, principes, presse, fiche d'identité.
+- [Mentions légales et confidentialité](https://omegots.fr/mentions-legales)

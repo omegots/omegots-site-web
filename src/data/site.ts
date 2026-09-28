@@ -8,14 +8,14 @@ export const SITE_URL = "https://omegots.fr";
 
 export const NOINDEX = process.env.SITE_NOINDEX === "1";
 
-/** Pages publiques, avec la fréquence de mise à jour attendue et leur poids relatif. */
+/** Pages publiques indexables (les mentions légales, en noindex, n'y figurent pas), avec la fréquence de mise à jour attendue et leur poids relatif. */
 export const PAGES: { path: string; changeFrequency: "weekly" | "monthly" | "yearly"; priority: number }[] = [
   { path: "/", changeFrequency: "weekly", priority: 1 },
   { path: "/ramassages", changeFrequency: "weekly", priority: 0.9 },
   { path: "/rejoindre", changeFrequency: "monthly", priority: 0.9 },
+  { path: "/contact", changeFrequency: "monthly", priority: 0.85 },
   { path: "/le-megot", changeFrequency: "monthly", priority: 0.8 },
   { path: "/recyclage", changeFrequency: "monthly", priority: 0.7 },
   { path: "/association", changeFrequency: "monthly", priority: 0.7 },
   { path: "/jeu", changeFrequency: "yearly", priority: 0.3 },
-  { path: "/mentions-legales", changeFrequency: "yearly", priority: 0.1 },
 ];

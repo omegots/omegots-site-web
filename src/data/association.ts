@@ -79,19 +79,19 @@ export const faqAssociation: FaqItem[] = [
     question: "Comment devenir membre ?",
     reponse:
       "Participer aux ramassages est gratuit et ne demande pas d'adhésion. L'adhésion, symbolique, à 1 euro, permet de devenir membre officiel et de voter en assemblée générale. Elle aide à couvrir l'assurance, le matériel de collecte et la communication.",
-    lien: { href: "/rejoindre", label: "Nous rejoindre" },
+    lien: { href: "/contact#adherer", label: "Adhérer" },
   },
   {
     question: "Vous êtes journaliste, comment vous contacter ?",
     reponse:
-      "Par e-mail à association.o.megots@gmail.com, objet « Presse / média », ou avec le formulaire de cette page. Nous répondons en moins de trois jours ouvrés.",
-    lien: { href: "#contact", label: "Nous écrire" },
+      "Par e-mail à association.o.megots@gmail.com, objet « Presse / média », ou avec le formulaire de la page Contact. Nous répondons en moins de trois jours ouvrés.",
+    lien: { href: "/contact", label: "Nous écrire" },
   },
   {
     question: "Une entreprise, une école ou une mairie peut-elle travailler avec vous ?",
     reponse:
       "Oui, nous sommes ouverts à toute collaboration : matériel, communication, financement, ou un ramassage organisé ensemble. Écrivez-nous avec l'objet « Partenariat ».",
-    lien: { href: "/recyclage#saint-nazaire", label: "Proposer un partenariat" },
+    lien: { href: "/contact", label: "Proposer un partenariat" },
   },
   {
     question: "Jugez-vous les fumeurs ?",

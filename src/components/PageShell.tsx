@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
-import { Reveal } from "./Reveal";
 import { SvgSprites } from "./SvgSprites";
 
 type Chapitre = { href: string; label: string };
@@ -20,19 +19,23 @@ type PageShellProps = {
 
 /** Gabarit des pages intérieures : en-tête, titre de page, sections, pied de page. */
 export function PageShell({ title, lede, actions, visuel, sommaire, children }: PageShellProps) {
+  const headClass = ["page-head", visuel ? "has-visuel" : "is-center"].filter(Boolean).join(" ");
+
   return (
     <>
       <SvgSprites />
       <div id="top">
         <Header />
         <main>
-          <section className={`page-head${visuel ? " has-visuel" : ""}`}>
+          <section className={headClass}>
             <div className="wrap page-head-grid">
-              <Reveal direction="rise" className="page-head-inner">
+              {/* Entrée en CSS (.hero-in, hero.css), sans fondu ni JavaScript : le titre
+                  est visible dès le HTML et compte tout de suite pour le LCP. */}
+              <div className="page-head-inner hero-in">
                 <h1 className="display">{title}</h1>
                 {lede && <p className="lede">{lede}</p>}
                 {actions && <div className="page-head-actions">{actions}</div>}
-              </Reveal>
+              </div>
               {visuel && <div className="page-head-visuel">{visuel}</div>}
             </div>
             {sommaire && sommaire.length > 0 && (
