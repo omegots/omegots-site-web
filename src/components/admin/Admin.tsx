@@ -545,7 +545,12 @@ export function Admin() {
                       onChange={(e) => majProchaine("iso", e.target.value)}
                     />
                   </Champ>
-                  <Champ id="p-heure" label="Heure du rendez-vous" erreur={erreurDe("prochaine.heure")}>
+                  <Champ
+                    id="p-heure"
+                    label="Heure (facultatif)"
+                    aide="Vide : le site affiche « horaire à venir »."
+                    erreur={erreurDe("prochaine.heure")}
+                  >
                     <input
                       id="p-heure"
                       type="time"
@@ -583,10 +588,10 @@ export function Admin() {
                     onChange={(e) => majProchaine("note", e.target.value)}
                   />
                 </Champ>
-                {prochaine.iso && prochaine.heure && (
+                {prochaine.iso && (
                   <p className="adm-apercu">
-                    Sur le site : <b>{prochaine.libelle || "Prochain ramassage"} : {dateLongue(prochaine.iso)}.</b> Rendez-vous
-                    à {heureTexte(prochaine.heure)}
+                    Sur le site : <b>{prochaine.libelle || "Prochain ramassage"} : {dateLongue(prochaine.iso)}.</b>{" "}
+                    {prochaine.heure ? `Rendez-vous à ${heureTexte(prochaine.heure)}` : "Horaire à venir"}
                     {prochaine.lieu ? `, ${prochaine.lieu}` : ""}.
                   </p>
                 )}

@@ -206,7 +206,6 @@ export function validerContenu(donnees: unknown, aujourdhui?: string): ResultatV
     } else if (aujourdhui && prochaine.iso < aujourdhui) {
       erreurs.push({ champ: "prochaine.iso", message: "Cette date est déjà passée." });
     }
-    if (!prochaine.heure) erreurs.push({ champ: "prochaine.heure", message: "Indiquez l'heure du rendez-vous." });
     if (!prochaine.lieu) erreurs.push({ champ: "prochaine.lieu", message: "Indiquez le lieu du rendez-vous." });
   }
   // La date en toutes lettres se déduit toujours de la date choisie.

@@ -37,7 +37,7 @@ export function ProchaineSortie({
   const titre = annoncee ? `${p.libelle || "Prochain ramassage"} : ${p.date}.` : "Le prochain ramassage arrive.";
   const texte = annoncee
     ? [
-        `Rendez-vous à ${p.heure}, ${p.lieu}`,
+        p.heure ? `Rendez-vous à ${p.heure}, ${p.lieu}` : `Horaire à venir, ${p.lieu}`,
         p.duree ? `, pour ${p.duree} de ramassage. ` : ". ",
         p.note ? `${p.note} ` : "",
         "Laissez votre adresse pour recevoir un rappel. Rien d'autre, promis.",
@@ -59,7 +59,7 @@ export function ProchaineSortie({
         {details && (
           <p className="prochaine-quand">
             <span>
-              <b>Date</b> : {annoncee ? `${p.date}, ${p.heure}` : "à fixer"}
+              <b>Date</b> : {annoncee ? `${p.date}, ${p.heure || "horaire à venir"}` : "à fixer"}
             </span>
             <span>
               <b>Lieu</b> : {annoncee ? p.lieu : "Saint-Nazaire et alentours"}

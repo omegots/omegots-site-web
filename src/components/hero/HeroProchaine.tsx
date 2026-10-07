@@ -20,7 +20,7 @@ export function HeroProchaine() {
       </span>
       <span className="hero-notif-date display">{annoncee ? jourEtDate(p.iso) : "Bientôt !"}</span>
       <span className="hero-notif-info">
-        {annoncee ? `${p.heure} · ${p.lieu}` : "Date à fixer, soyez prévenu"}
+        {annoncee ? `${p.heure || "Horaire à venir"} · ${p.lieu}` : "Date à fixer, soyez prévenu"}
         <span aria-hidden="true"> →</span>
       </span>
     </a>

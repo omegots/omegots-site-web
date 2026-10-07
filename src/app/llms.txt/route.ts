@@ -10,7 +10,7 @@ export function GET() {
   const p = prochaineSortie();
   const prochaine =
     p.statut === "annoncee"
-      ? `${p.libelle || "Ramassage"} le ${p.date} à ${p.heure}, ${p.lieu}. Gratuit, ouvert à toutes et tous.`
+      ? `${p.libelle || "Ramassage"} le ${p.date}${p.heure ? ` à ${p.heure}` : " (horaire à venir)"}, ${p.lieu}. Gratuit, ouvert à toutes et tous.`
       : "Date à fixer. Alerte e-mail sur https://omegots.fr/ramassages#prochaine.";
 
   const texte = `# O'Mégots
