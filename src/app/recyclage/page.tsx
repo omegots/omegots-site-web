@@ -13,7 +13,7 @@ import { Filiere } from "@/components/recyclage/Filiere";
 import { HeroRecyclage } from "@/components/recyclage/HeroRecyclage";
 import { Limites } from "@/components/recyclage/Limites";
 import { fr } from "@/data/format";
-import { ramassages, totals } from "@/data/ramassages";
+import { megotsParLitre, totals } from "@/data/ramassages";
 import { faqRecyclage, MEGOTS_PAR_BANC, sourcesRecyclage } from "@/data/recyclage";
 import "@/styles/megot.css";
 import "@/styles/recyclage.css";
@@ -28,9 +28,9 @@ export const metadata = pageMetadata({
 const MAILTO_PARTENARIAT = "mailto:association.o.megots@gmail.com?subject=Proposer%20un%20partenariat";
 
 export default function RecyclagePage() {
-  const { megots } = totals();
-  const premiere = ramassages[0];
-  const partBanc = megots / MEGOTS_PAR_BANC;
+  // « Aujourd'hui » : le cumul de toutes les sorties.
+  const t = totals();
+  const partBanc = t.megots / MEGOTS_PAR_BANC;
 
   return (
     <PageShell
@@ -75,8 +75,11 @@ export default function RecyclagePage() {
           <Reveal className="rec-auj" delay={0.1}>
             <ul className="cs-grid">
               <li className="cs-tuile">
-                <b className="display">{fr(megots)}</b>
-                <p>mégots ramassés et comptés lors du Mégothon du {premiere.date}, à 800 par litre.</p>
+                <b className="display">{fr(t.megots)}</b>
+                <p>
+                  mégots ramassés et comptés {t.sorties > 1 ? `en ${t.sorties} sorties` : "lors de notre première sortie"}, à{" "}
+                  {fr(megotsParLitre())} par litre.
+                </p>
               </li>
               <li className="cs-tuile">
                 <b className="display">{partBanc.toLocaleString("fr-FR", { maximumFractionDigits: 1 })}</b>
@@ -127,8 +130,8 @@ export default function RecyclagePage() {
               Ce que ça devient
             </h2>
             <p className="lede">
-              Quatre débouchés, du plus au moins vertueux. Les trois premiers gardent la matière ; le dernier la
-              brûle.
+              Quatre débouchés : trois gardent la matière, le quatrième en tire de
+              l&apos;énergie.
             </p>
           </Reveal>
           <div className="rec-usages devenir">
@@ -139,16 +142,16 @@ export default function RecyclagePage() {
 
       <WaveDivider from="vert" to="navy" />
 
-      {/* 4. Compteur de bancs */}
+      {/* 4. Mégots par banc */}
       <section className="megot-section surface-navy" id="bancs" aria-labelledby="bancs-titre">
         <div className="wrap">
           <Reveal direction="rise" className="section-head is-center">
             <h2 id="bancs-titre" className="display">
-              Combien de sorties pour un banc ?
+              Combien de mégots pour un banc ?
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <Bancs megotsParSortie={megots} />
+            <Bancs />
           </Reveal>
         </div>
       </section>

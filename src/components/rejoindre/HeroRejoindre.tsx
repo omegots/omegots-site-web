@@ -17,8 +17,11 @@ export function HeroRejoindre() {
             <text x={xs[i]} y="181" textAnchor="middle" fontSize="28" fontWeight="800" fill="#1A4B6E" fontFamily="var(--font-display)">
               {i + 1}
             </text>
-            <text x={xs[i]} y="236" textAnchor="middle" fontSize="15" fontWeight="600" fill="#1A4B6E" fontFamily="var(--font-body)">
-              {e.titre}
+            <text x={xs[i]} y="232" textAnchor="middle" fontSize="15" fontWeight="600" fill="#1A4B6E" fontFamily="var(--font-body)">
+              <tspan x={xs[i]}>{e.hero[0]}</tspan>
+              <tspan x={xs[i]} dy="19">
+                {e.hero[1]}
+              </tspan>
             </text>
           </g>
         ))}

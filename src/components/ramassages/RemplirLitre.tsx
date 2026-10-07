@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { fr } from "@/data/format";
-import { LITRES_EAU_PAR_MEGOT, megotsParLitre } from "@/data/ramassages";
+import { LITRES_EAU_PAR_MEGOT, megotsParLitre, totals } from "@/data/ramassages";
 import { sourcesRamassages } from "@/data/ramassages-page";
 import { Ref } from "../megot/Ref";
 
@@ -70,7 +70,7 @@ export function RemplirLitre() {
         {!fini ? (
           <p className="litre-texte">
             Un litre de contenant gradué, c&apos;est environ {fr(plein)} mégots : c&apos;est le rapport constaté sur
-            nos six litres du Mégothon. Remplissez-le.
+            les {fr(totals().litres)} litres déjà ramassés. Remplissez-le.
           </p>
         ) : (
           <p className="litre-texte">

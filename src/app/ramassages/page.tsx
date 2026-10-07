@@ -1,7 +1,8 @@
 import { pageMetadata } from "@/data/seo";
 import Link from "next/link";
 import { Faq } from "@/components/Faq";
-import { FormPrevenir } from "@/components/FormPrevenir";
+import { ProchaineSortie } from "@/components/ProchaineSortie";
+import { Bilan } from "@/components/bilan/Bilan";
 import { PageShell } from "@/components/PageShell";
 import { Rejoindre } from "@/components/Rejoindre";
 import { Reveal } from "@/components/Reveal";
@@ -13,9 +14,8 @@ import { FicheSortie } from "@/components/ramassages/FicheSortie";
 import { HeroRamassages } from "@/components/ramassages/HeroRamassages";
 import { RemplirLitre } from "@/components/ramassages/RemplirLitre";
 import { Zones } from "@/components/ramassages/Zones";
-import { fr } from "@/data/format";
-import { evenements, jsonLd } from "@/data/jsonld";
-import { megotsParLitre, ramassages, totals } from "@/data/ramassages";
+import { evenementProchain, jsonLd } from "@/data/jsonld";
+import { depuisMois, megotsParLitre, ramassages, totals } from "@/data/ramassages";
 import { faqRamassages, sourcesRamassages } from "@/data/ramassages-page";
 import "@/styles/megot.css";
 import "@/styles/ramassages.css";
@@ -62,29 +62,7 @@ export default function RamassagesPage() {
       {/* 1. Prochaine sortie */}
       <section className="megot-section" id="prochaine" aria-labelledby="prochaine-titre">
         <div className="wrap">
-          <Reveal className="prochaine" delay={0.05}>
-            <div>
-              <p className="megothon-next-tag">Prochaine sortie</p>
-              <h2 id="prochaine-titre" className="megothon-next-title display">
-                Le prochain ramassage arrive.
-              </h2>
-              <p className="megothon-next-text">
-                Date à fixer. Laissez votre adresse, on vous écrit dès que la date est fixée. Rien d&apos;autre, promis.
-              </p>
-              <p className="prochaine-quand">
-                <span>
-                  <b>Date</b> : à fixer
-                </span>
-                <span>
-                  <b>Lieu</b> : Saint-Nazaire et alentours
-                </span>
-                <span>
-                  <b>Prix</b> : gratuit, sans inscription
-                </span>
-              </p>
-            </div>
-            <FormPrevenir />
-          </Reveal>
+          <ProchaineSortie className="prochaine" titreId="prochaine-titre" details />
         </div>
       </section>
 
@@ -102,27 +80,18 @@ export default function RamassagesPage() {
             </p>
           </Reveal>
           <Reveal delay={0.05}>
-            <ul className="totaux">
-              <li>
-                <b className="display">{t.sorties}</b>
-                <span>{t.sorties > 1 ? "sorties" : "sortie"} depuis mai 2026</span>
-              </li>
-              <li>
-                <b className="display">{t.litres} L</b>
-                <span>de mégots ramassés au total</span>
-              </li>
-              <li>
-                <b className="display">{fr(t.megots)}</b>
-                <span>mégots environ, à {fr(megotsParLitre())} par litre</span>
-              </li>
-              <li>
-                <b className="display">{t.benevoles}</b>
-                <span>bénévoles venus ramasser</span>
-              </li>
-            </ul>
+            <Bilan
+              litres={t.litres}
+              megots={t.megots}
+              eau={t.eau}
+              benevoles={t.benevoles}
+              sorties={t.sorties}
+              depuis={depuisMois()}
+              parLitre={megotsParLitre()}
+            />
           </Reveal>
           {sorties.map((s, i) => (
-            <FicheSortie key={s.date} sortie={s} premiere={i === 0} />
+            <FicheSortie key={s.date} sortie={s} inverse={i % 2 === 1} />
           ))}
         </div>
       </section>
@@ -223,7 +192,9 @@ export default function RamassagesPage() {
         lede="Les réponses courtes avant votre première sortie."
       />
       <WaveDivider from="bg" to="navy" />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(evenements) }} />
+      {evenementProchain && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(evenementProchain) }} />
+      )}
     </PageShell>
   );
 }

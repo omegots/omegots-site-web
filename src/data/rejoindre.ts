@@ -11,16 +11,28 @@ export const PAYASSO_DON = "https://www.payasso.fr/association-o-megots/nous-sou
 export const etapes = [
   {
     titre: "Laissez votre e-mail",
+    /** Libellé du hero, en deux lignes pour ne pas déborder sur l'étape voisine. */
+    hero: ["Laissez", "votre e-mail"],
     texte: "On vous écrit dès qu'une date est fixée, avec le lieu de rendez-vous et l'heure. Pas d'inscription, pas de cotisation.",
   },
   {
     titre: "Venez ramasser",
+    hero: ["Venez", "ramasser"],
     texte: "On a juste besoin de votre bonne humeur. Deux heures un samedi matin suffisent à remplir un contenant.",
   },
   {
     titre: "Adhérez, si vous le souhaitez",
+    hero: ["Adhérez,", "si vous le souhaitez"],
     texte: "Pour devenir membre officiel et voter en assemblée générale : 1 € symbolique via l'espace sécurisé Pay Asso. Facultatif.",
   },
+] as const;
+
+/** Ce que finance un don (textes de l'ancien site : matériel, assurance, actions). */
+export const donFinance = [
+  "Les pinces, les gants et les sacs de chaque sortie",
+  "Les contenants gradués qui servent à compter",
+  "L'assurance qui couvre chaque bénévole",
+  "Les affiches et la sensibilisation dans la ville",
 ] as const;
 
 /** Ce que l'adhésion implique, texte de l'ancien site. */

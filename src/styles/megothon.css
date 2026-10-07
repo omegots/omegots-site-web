@@ -294,3 +294,582 @@
     max-width: 34px;
   }
 }
+
+/* Le total, en orange dans le titre de la section. */
+.accent-orange {
+  color: var(--orange);
+}
+
+/* --- Bilan chiffré : quatre cartes orange (components/bilan/Bilan.tsx) ---------
+   Accueil et page Ramassages. Un grand chiffre bleu nuit, une ligne de contexte,
+   un petit visuel qui se construit à l'arrivée. Survol : la carte se soulève et
+   un reflet la traverse. */
+
+.bilan {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.bilan-carte {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 248px;
+  padding: 20px 20px 18px;
+  border-radius: 20px;
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgba(255, 255, 255, 0.28) 0%, transparent 55%),
+    linear-gradient(160deg, #f4ab5a 0%, #dd8a2e 52%, #c46d17 100%);
+  color: #1c1008;
+  box-shadow:
+    0 18px 36px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out);
+}
+
+/* Reflet qui traverse la carte au survol. */
+.bilan-carte::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.38) 50%, transparent 65%);
+  transform: translateX(-110%);
+  transition: transform 0.9s var(--ease-out);
+  pointer-events: none;
+}
+
+.bilan-carte:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 26px 48px rgba(0, 0, 0, 0.3),
+    0 0 0 3px rgba(245, 239, 224, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.bilan-carte:hover::after {
+  transform: translateX(110%);
+}
+
+.bilan-tete {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.bilan-ico {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--cream) var(--ico, none) center / 24px no-repeat;
+  box-shadow: 3px 3px 0 var(--navy-deep);
+  transition: transform 0.45s var(--ease-out);
+}
+
+.bilan-carte:hover .bilan-ico {
+  transform: rotate(-14deg) scale(1.1);
+}
+
+.bilan-label {
+  font: 800 11.5px/1.2 var(--font-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(28, 16, 8, 0.75);
+}
+
+.bilan-chiffre {
+  display: block;
+  font-size: clamp(34px, 3.4vw, 48px);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  color: var(--navy-deep);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.bilan-chiffre span {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+
+/* « millions », « L » : plus petits que le chiffre. */
+.bilan-chiffre small {
+  font-size: 0.5em;
+  letter-spacing: -0.01em;
+}
+
+.bilan-detail {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: rgba(28, 16, 8, 0.82);
+}
+
+.bilan-bascule {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--navy-deep);
+  font: 600 13.5px/1.4 var(--font-body);
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.bilan-bascule:hover {
+  color: var(--cream);
+}
+
+.bilan-bascule:focus-visible {
+  outline: 2px solid var(--navy-deep);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* --- Petits visuels, en bas de chaque carte ----------------------------------- */
+
+.bilan-viz {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 5px;
+  margin-top: auto;
+  padding-top: 16px;
+  min-height: 46px;
+}
+
+.bilan-viz i {
+  display: block;
+}
+
+.bilan-plus {
+  align-self: center;
+  font: 800 12px/1 var(--font-display);
+  color: var(--navy-deep);
+}
+
+/* Une silhouette par bénévole. */
+.bilan-personnes svg {
+  display: block;
+  width: 18px;
+  height: 22px;
+  fill: var(--navy-deep);
+  opacity: 0.85;
+}
+
+.bilan-personnes i:nth-child(3n + 2) svg {
+  fill: var(--cream);
+  opacity: 1;
+}
+
+/* Un fanion par sortie, puis la prochaine en pointillés. */
+.bilan-fanions i {
+  position: relative;
+  width: 18px;
+  height: 28px;
+}
+
+.bilan-fanions i::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  bottom: 0;
+  width: 2.5px;
+  height: 28px;
+  border-radius: 2px;
+  background: var(--navy-deep);
+}
+
+.bilan-fanions i::after {
+  content: "";
+  position: absolute;
+  left: 4.5px;
+  top: 1px;
+  width: 13px;
+  height: 10px;
+  background: var(--cream);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.bilan-fanions i.is-prochaine::before {
+  background: none;
+  border-left: 2.5px dashed rgba(11, 42, 64, 0.55);
+  width: 0;
+}
+
+.bilan-fanions i.is-prochaine::after {
+  background: rgba(245, 239, 224, 0.45);
+  animation: bilan-attente 1.6s ease-in-out infinite;
+}
+
+@keyframes bilan-attente {
+  50% {
+    transform: scale(1.25);
+    background: var(--cream);
+  }
+}
+
+/* Un contenant par litre, le dernier rempli en partie s'il le faut. */
+.bilan-contenants i {
+  position: relative;
+  width: 16px;
+  height: 26px;
+  border: 2px solid var(--navy-deep);
+  border-top-width: 4px;
+  border-radius: 3px 3px 5px 5px;
+  overflow: hidden;
+  background: rgba(245, 239, 224, 0.35);
+}
+
+.bilan-contenants i::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(var(--niveau, 1) * 100%);
+  background: #8a5a2b;
+  background-image: radial-gradient(circle at 30% 40%, #f5efe0 1px, transparent 1.6px);
+  background-size: 5px 5px;
+}
+
+/* La vague, qui ondule doucement au pied de la carte « eau ». */
+.bilan-vague {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  height: 70px;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.bilan-vague svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  fill: var(--vert);
+  animation: bilan-houle 6s linear infinite;
+}
+
+/* Une seconde vague, plus claire, qui part dans l'autre sens. */
+.bilan-vague svg + svg {
+  height: 80%;
+  fill: var(--mint);
+  opacity: 0.55;
+  animation-duration: 9s;
+  animation-direction: reverse;
+}
+
+@keyframes bilan-houle {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.bilan-carte.is-eau {
+  padding-bottom: 54px;
+}
+
+/* --- Icônes des pastilles (traits bleu nuit) ---------------------------------- */
+
+.bilan-carte.is-benevoles {
+  --ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B2A40' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='9' cy='8' r='3.2'/%3E%3Cpath d='M3 19.5c0-3.3 2.7-5.6 6-5.6s6 2.3 6 5.6'/%3E%3Ccircle cx='17' cy='9' r='2.5'/%3E%3Cpath d='M16 13.8c2.9.2 5 2.2 5 5.2'/%3E%3C/svg%3E");
+}
+
+.bilan-carte.is-sorties {
+  --ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B2A40' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 21V3.5'/%3E%3Cpath d='M5 4h12l-2.5 4.5L17 13H5' fill='%23DD8A2E'/%3E%3C/svg%3E");
+}
+
+.bilan-carte.is-megots {
+  --ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='%230B2A40' stroke-width='1.8' stroke-linejoin='round'%3E%3Cg transform='rotate(-35 12 12)'%3E%3Crect x='2.5' y='9.3' width='12' height='5.4' rx='1' fill='%23F5EFE0'/%3E%3Crect x='14.5' y='9.3' width='7' height='5.4' rx='1' fill='%23DD8A2E'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.bilan-carte.is-eau {
+  --ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232A8C7E' stroke='%230B2A40' stroke-width='2' stroke-linejoin='round'%3E%3Cpath d='M12 2.8c3.6 4.6 6.2 7.8 6.2 11.3a6.2 6.2 0 0 1-12.4 0c0-3.5 2.6-6.7 6.2-11.3z'/%3E%3C/svg%3E");
+}
+
+/* --- Entrée : cartes en cascade, puis les petits visuels un par un -------------- */
+
+.bilan.is-pret .bilan-carte {
+  opacity: 0;
+  transform: translateY(28px) scale(0.96);
+}
+
+.bilan.is-pret .bilan-viz i {
+  opacity: 0;
+}
+
+.bilan.is-vu .bilan-carte {
+  animation: bilan-carte-in 0.8s var(--ease-out) both;
+  animation-delay: calc(var(--k, 0) * 110ms);
+}
+
+.bilan.is-vu .bilan-viz i {
+  animation: bilan-picto-in 0.45s var(--ease-out) both;
+  animation-delay: calc(500ms + var(--k, 0) * 70ms);
+}
+
+@keyframes bilan-carte-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes bilan-picto-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .bilan {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .bilan {
+    gap: 10px;
+  }
+
+  .bilan-carte {
+    min-height: 0;
+    padding: 16px 14px 14px;
+    border-radius: 16px;
+  }
+
+  .bilan-carte.is-eau {
+    padding-bottom: 46px;
+  }
+
+  .bilan-ico {
+    width: 36px;
+    height: 36px;
+    background-size: 20px;
+  }
+
+  .bilan-tete {
+    margin-bottom: 12px;
+  }
+
+  .bilan-label {
+    font-size: 10px;
+  }
+
+  .bilan-chiffre {
+    font-size: clamp(24px, 7vw, 30px);
+  }
+
+  .bilan-detail {
+    font-size: 12.5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bilan.is-vu .bilan-carte,
+  .bilan.is-vu .bilan-viz i,
+  .bilan-vague svg,
+  .bilan-fanions i.is-prochaine::after {
+    animation: none;
+  }
+
+  .bilan-carte:hover {
+    transform: none;
+  }
+
+  .bilan-carte::after {
+    display: none;
+  }
+}
+
+/* --- Les dernières sorties de l'accueil : fiches en grille ---------------------- */
+
+.bilan-sorties {
+  margin-top: clamp(40px, 5vw, 64px);
+}
+
+.bilan-sorties-tete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-bottom: 18px;
+}
+
+.bilan-sorties-titre {
+  font: 800 clamp(20px, 2.2vw, 26px) / 1.2 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--cream);
+}
+
+.bilan-sorties-lien {
+  color: var(--mint);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.bilan-sorties-lien:hover {
+  color: var(--cream);
+}
+
+.bilan-sorties ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.bilan-sortie {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--cream);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  transition: transform 0.35s var(--ease-out);
+}
+
+.bilan-sortie:hover {
+  transform: translateY(-4px);
+}
+
+.bilan-sortie-photo {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: color-mix(in srgb, var(--vert) 16%, var(--cream));
+  display: grid;
+  place-items: center;
+}
+
+.bilan-sortie-photo img {
+  object-fit: cover;
+}
+
+.bilan-sortie-photo svg {
+  width: 84px;
+  height: 56px;
+  overflow: visible;
+}
+
+.bilan-sortie-corps {
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px 16px;
+}
+
+.bilan-sortie-date {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--vert-ink);
+}
+
+.bilan-sortie-nom {
+  font: 800 17px/1.25 var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+.bilan-sortie-chiffres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.bilan-sortie-chiffres span {
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(26, 75, 110, 0.08);
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.bilan-sortie-chiffres span:first-child {
+  background: var(--orange);
+  color: #1c1008;
+}
+
+/* Moins de trois sorties : la case suivante appelle à la prochaine. */
+.bilan-sortie.is-prochaine {
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 200px;
+  padding: 22px 20px;
+  background: transparent;
+  border: 2px dashed rgba(245, 239, 224, 0.4);
+  box-shadow: none;
+  color: var(--cream);
+  text-decoration: none;
+}
+
+.bilan-sortie.is-prochaine:hover {
+  border-color: var(--orange);
+}
+
+.bilan-sortie.is-prochaine b {
+  font: 800 19px/1.25 var(--font-display);
+}
+
+.bilan-sortie.is-prochaine span {
+  color: var(--mint);
+  font-weight: 600;
+}
+
+@media (max-width: 860px) {
+  .bilan-sorties ul {
+    grid-template-columns: 1fr;
+  }
+
+  .bilan-sortie {
+    flex-direction: row;
+  }
+
+  .bilan-sortie-photo {
+    flex: none;
+    width: 120px;
+    aspect-ratio: auto;
+  }
+
+  .bilan-sortie.is-prochaine {
+    flex-direction: column;
+    min-height: 0;
+  }
+}

@@ -8,7 +8,7 @@ export function Presse() {
     <section className="presse" id="presse">
       <div className="wrap presse-grid">
         <Reveal direction="rise" className="section-head presse-head is-right">
-          <h2 className="display">La presse locale suit nos premières actions.</h2>
+          <h2 className="display">La presse locale suit nos actions.</h2>
         </Reveal>
 
         <Stagger className="presse-list" stagger={0.1}>

@@ -1,5 +1,7 @@
 import type { FaqItem } from "@/data/faq";
 import type { Source } from "@/data/megot";
+import { fr } from "@/data/format";
+import { megotsParLitre, ramassages } from "@/data/ramassages";
 
 /**
  * Contenus de la page « Nos ramassages » : sources, zones d'action (reprises de
@@ -76,11 +78,13 @@ export const deroule = [
   },
   {
     titre: "On ramasse",
-    texte: "Rues, abords des commerces, parcs, plages : on parcourt la zone choisie et on ramasse tout ce qui est mégot. Le Mégothon a duré deux heures.",
+    texte: `Rues, abords des commerces, parcs, plages : on parcourt la zone choisie et on ramasse tout ce qui est mégot.${
+      ramassages[0].duree ? ` Le ${ramassages[0].libelle} a duré ${ramassages[0].duree}.` : ""
+    }`,
   },
   {
     titre: "On mesure",
-    texte: "Tout est versé dans un contenant gradué. Un litre plein, c'est environ 800 mégots. Pas d'estimation à l'œil : on compte.",
+    texte: `Tout est versé dans un contenant gradué. Un litre plein, c'est environ ${fr(megotsParLitre())} mégots. Pas d'estimation à l'œil : on compte.`,
   },
   {
     titre: "On publie",
@@ -98,18 +102,17 @@ export const faqRamassages: FaqItem[] = [
   {
     question: "Combien de temps dure une sortie ?",
     reponse:
-      "Le Mégothon du 23 mai 2026 a duré deux heures, de la mairie au Paquebot. Chaque sortie est annoncée avec son heure de début et sa durée ; on vient pour tout ou partie.",
-    lien: { href: "#sorties", label: "Voir le bilan du Mégothon" },
+      "En moyenne deux heures. Chaque sortie est annoncée avec son heure de début et sa durée ; on vient pour tout ou partie.",
   },
   {
     question: "Peut-on venir avec des enfants ?",
     reponse:
-      "Oui, les sorties sont ouvertes à tous les âges, sous la responsabilité d'un adulte. Les détails pratiques de chaque sortie (matériel, gants, parcours) sont précisés dans l'e-mail d'annonce.",
+      "Oui, les sorties sont ouvertes à tous les âges. Les moins de 16 ans doivent venir accompagnés d'un adulte. Les détails pratiques de chaque sortie (matériel, gants, parcours) sont à consulter sur nos réseaux sociaux.",
   },
   {
     question: "Que deviennent les mégots ramassés ?",
     reponse:
-      "Ils sont comptés dans un contenant gradué, environ 800 par litre, puis les chiffres sont publiés. Rejoindre une filière de recyclage est l'étape suivante que l'association prépare.",
+      `Ils sont comptés dans un contenant gradué, environ ${fr(megotsParLitre())} par litre, puis les chiffres sont publiés. Rejoindre une filière de recyclage est l'étape suivante que l'association prépare.`,
     lien: { href: "/recyclage", label: "Voir la page recyclage" },
   },
   {

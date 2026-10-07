@@ -1,9 +1,10 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
-import { totals } from "@/data/ramassages";
+import { megothon } from "@/data/ramassages";
 import { ApostropheMegot } from "./hero/ApostropheMegot";
 import { CaptionCycle } from "./hero/CaptionCycle";
 import { HeroCta } from "./hero/HeroCta";
+import { HeroProchaine } from "./hero/HeroProchaine";
 import { MegotFieldLazy } from "./hero/MegotFieldLazy";
 
 /** Délai d'entrée d'un bloc du hero, en secondes (animation CSS `hero-in`, hero.css). */
@@ -16,7 +17,7 @@ const entree = (delay: number): CSSProperties => ({ ["--d" as string]: `${delay}
  * fin de son animation d'opacité.
  */
 export function Hero() {
-  const { litres } = totals();
+  const { litres } = megothon();
 
   return (
     <section className="hero" aria-labelledby="hero-title">
@@ -43,24 +44,27 @@ export function Hero() {
           </div>
         </div>
 
-        <figure className="hero-photo hero-photo-in">
-          <div className="hero-photo-frame">
-            <Image
-              src="/photos/megothon-bouteilles.jpg"
-              alt="Six bouteilles remplies de mégots ramassés dans le centre-ville de Saint-Nazaire, posées sur un muret."
-              fill
-              priority
-              fetchPriority="high"
-              quality={60}
-              sizes="(max-width: 480px) 360px, (max-width: 860px) 420px, 520px"
-              style={{ objectFit: "cover" }}
-            />
-          </div>
-          <figcaption className="hero-photo-cap">
-            <span className="hero-photo-num display">{litres} L</span>
-            <CaptionCycle />
-          </figcaption>
-        </figure>
+        <div className="hero-visuel">
+          <HeroProchaine />
+          <figure className="hero-photo hero-photo-in">
+            <div className="hero-photo-frame">
+              <Image
+                src="/photos/megothon-bouteilles.jpg"
+                alt="Six bouteilles remplies de mégots ramassés dans le centre-ville de Saint-Nazaire, posées sur un muret."
+                fill
+                priority
+                fetchPriority="high"
+                quality={60}
+                sizes="(max-width: 480px) 360px, (max-width: 860px) 420px, 520px"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+            <figcaption className="hero-photo-cap">
+              <span className="hero-photo-num display">{litres} L</span>
+              <CaptionCycle />
+            </figcaption>
+          </figure>
+        </div>
       </div>
 
       {/* Décor (pont, eau) masqué aux lecteurs d'écran ; les mégots à ramasser restent des boutons accessibles. */}

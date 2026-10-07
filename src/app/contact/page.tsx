@@ -1,13 +1,14 @@
 import { pageMetadata } from "@/data/seo";
 import Link from "next/link";
 import { FormContact } from "@/components/association/FormContact";
+import { FaireUnDon } from "@/components/rejoindre/FaireUnDon";
 import { Faq } from "@/components/Faq";
 import { PageShell } from "@/components/PageShell";
 import { Rejoindre } from "@/components/Rejoindre";
 import { Reveal } from "@/components/Reveal";
 import { WaveDivider } from "@/components/WaveDivider";
 import { identite } from "@/data/association";
-import { implique, PAYASSO_ADHESION, PAYASSO_DON } from "@/data/rejoindre";
+import { implique, PAYASSO_ADHESION } from "@/data/rejoindre";
 import type { FaqItem } from "@/data/faq";
 import "@/styles/megot.css";
 import "@/styles/association.css";
@@ -61,11 +62,6 @@ export default function ContactPage() {
           </a>
         </>
       }
-      sommaire={[
-        { href: "#ecrire", label: "Nous écrire" },
-        { href: "#adherer", label: "Adhérer" },
-        { href: "#don", label: "Faire un don" },
-      ]}
     >
       {/* 1. Formulaire */}
       <section className="megot-section" id="ecrire" aria-labelledby="ecrire-titre">
@@ -158,21 +154,7 @@ export default function ContactPage() {
       {/* 3. Faire un don */}
       <section className="megot-section" id="don" aria-labelledby="don-titre">
         <div className="wrap">
-          <Reveal direction="rise" className="section-head is-center">
-            <h2 id="don-titre" className="display">
-              Faire un don
-            </h2>
-          </Reveal>
-          <Reveal className="don" delay={0.1}>
-            <p>
-              Vous souhaitez soutenir O&apos;Mégots financièrement ? Chaque don nous aide à financer notre matériel,
-              notre assurance et nos actions sur le terrain. Montant libre.
-            </p>
-            <a className="btn btn-lg" href={PAYASSO_DON} target="_blank" rel="noopener noreferrer">
-              Faire un don
-            </a>
-            <span className="don-securite">Paiement sécurisé par Crédit Mutuel Pay Asso.</span>
-          </Reveal>
+          <FaireUnDon />
         </div>
       </section>
 

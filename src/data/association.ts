@@ -78,7 +78,7 @@ export const faqAssociation: FaqItem[] = [
   {
     question: "Comment devenir membre ?",
     reponse:
-      "Participer aux ramassages est gratuit et ne demande pas d'adhésion. L'adhésion, symbolique, à 1 euro, permet de devenir membre officiel et de voter en assemblée générale. Elle aide à couvrir l'assurance, le matériel de collecte et la communication.",
+      "L'adhésion, symbolique, à 1 euro, permet de devenir membre officiel et de voter en assemblée générale. Elle aide à couvrir l'assurance, le matériel de collecte et la communication.",
     lien: { href: "/contact#adherer", label: "Adhérer" },
   },
   {

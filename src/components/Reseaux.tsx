@@ -11,6 +11,14 @@ function Icone({ id }: { id: Reseau["id"] }) {
       </svg>
     );
   }
+  if (id === "email") {
+    return (
+      <svg {...common} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round">
+        <rect x="2.5" y="5" width="19" height="14" rx="3" />
+        <path d="M3.5 6.5l8.5 6.5 8.5-6.5" strokeLinecap="round" />
+      </svg>
+    );
+  }
   if (id === "facebook") {
     return (
       <svg {...common} fill="currentColor">
@@ -36,12 +44,17 @@ type Props = {
 };
 
 /**
- * Liens vers les réseaux. Une entrée sans URL dans reseaux.ts n'est pas affichée
- * (aucune adresse inventée) ; sans aucune URL, le composant ne rend rien.
+ * Liens vers les réseaux. Sans URL, rien n'est inventé : les cartes de la page
+ * Nous rejoindre restent masquées, les icônes du footer s'affichent quand même.
  */
 export function Reseaux({ variant }: Props) {
   const cartes = variant === "cartes";
-  const actifs = reseaux.filter((r) => r.href);
+  // L'e-mail n'a sa carte que sur la page Nous rejoindre : le footer l'affiche déjà en toutes lettres.
+  const actifs = reseaux.filter((r) => {
+    if (r.id === "email") return cartes && Boolean(r.href);
+    if (cartes) return Boolean(r.href);
+    return true;
+  });
   if (actifs.length === 0) return null;
   return (
     <ul className={`reseaux is-${variant}`}>
@@ -63,15 +76,18 @@ export function Reseaux({ variant }: Props) {
               <a
                 className="reseau"
                 href={r.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                {...(r.id === "email" ? {} : { target: "_blank", rel: "noopener noreferrer" })}
                 aria-label={cartes ? undefined : r.nom}
                 title={cartes ? undefined : r.nom}
               >
                 {inner}
               </a>
             ) : (
-              <span className="reseau is-off" title="Lien à venir">
+              <span
+                className="reseau is-off"
+                title="Lien à venir"
+                {...(cartes ? {} : { "aria-label": `${r.nom}, lien à venir` })}
+              >
                 {inner}
               </span>
             )}

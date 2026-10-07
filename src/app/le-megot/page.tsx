@@ -16,7 +16,7 @@ import { Trajet } from "@/components/megot/Trajet";
 import { chiffreCle, formatNombre, libelleEquivalence, quantite } from "@/data/chiffres";
 import { fr } from "@/data/format";
 import { faqMegot, MEGOTS_PAR_METRE } from "@/data/megot";
-import { LITRES_EAU_PAR_MEGOT, ramassages, totals } from "@/data/ramassages";
+import { megothon, ramassages } from "@/data/ramassages";
 import "@/styles/megot.css";
 
 export const metadata = pageMetadata({
@@ -27,7 +27,7 @@ export const metadata = pageMetadata({
 });
 
 export default function LeMegotPage() {
-  const { megots } = totals();
+  const { megots } = megothon();
   const premiere = ramassages[0];
   // À la densité moyenne nationale au sol (1,3 mégot tous les 10 m), les mégots
   // du Mégothon représentent autant de mètres de rue.
@@ -104,14 +104,13 @@ export default function LeMegotPage() {
         <div className="wrap">
           <Reveal direction="rise" className="section-head">
             <h2 id="cinq-titre" className="display">
-              Et les 500 litres, alors ?
+              Un mégot pollue jusqu&apos;à 500 litres d&apos;eau
             </h2>
           </Reveal>
           <Reveal className="cinq-cents" delay={0.05}>
             <div>
               <p>
-                « Un mégot pollue jusqu&apos;à {fr(LITRES_EAU_PAR_MEGOT)} litres d&apos;eau » : c&apos;est le chiffre que
-                nous reprenons sur nos affiches, et c&apos;est celui du ministère de la Transition écologique quand
+                C&apos;est le chiffre que nous reprenons sur nos affiches, et c&apos;est celui du ministère de la Transition écologique quand
                 il a créé la filière mégots en 2021.
                 <Ref ids={[1]} />
               </p>
@@ -209,7 +208,8 @@ export default function LeMegotPage() {
             </div>
             <div>
               <p>
-                Sept bénévoles, deux heures, un parcours de la mairie au Paquebot : {fr(premiere.litres)} litres de
+                {premiere.benevoles} bénévoles{premiere.duree ? `, ${premiere.duree}` : ""}, un parcours {premiere.lieu} :{" "}
+                {fr(premiere.litres)} litres de
                 mégots, comptés et publiés. Ce n&apos;est pas une statistique nationale, c&apos;est ce qu&apos;il y avait
                 vraiment par terre, un samedi matin, dans nos rues.
               </p>

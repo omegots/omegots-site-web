@@ -1,0 +1,549 @@
+/* Interface /admin (préfixe adm-) : pensée pour un téléphone d'abord.
+   Couleurs et polices de la charte (globals.css), boutons larges, textes lisibles. */
+
+.adm {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px 16px 140px;
+  font-family: var(--font-body);
+  color: var(--ink);
+}
+
+.adm-connexion {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding-bottom: 20px;
+}
+
+.adm-connexion .adm-carte {
+  width: 100%;
+  max-width: 420px;
+}
+
+.adm h1 {
+  font: 800 clamp(22px, 5vw, 28px) / 1.15 var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.adm h2 {
+  font: 800 19px/1.2 var(--font-display);
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
+}
+
+.adm-marque {
+  font: 800 13px/1 var(--font-display);
+  color: var(--vert-ink);
+  margin-bottom: 6px;
+}
+
+.adm-intro {
+  margin: 8px 0 18px;
+  color: var(--ink2);
+}
+
+.adm-tete {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.adm-carte {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 20px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 6px 18px rgba(26, 75, 110, 0.06);
+}
+
+.adm-carte-tete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.adm-carte-tete h2 {
+  margin-bottom: 0;
+}
+
+/* --- Champs ------------------------------------------------------------------ */
+
+.adm-champ {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.adm-champ label {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.adm-champ input,
+.adm-champ textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1.5px solid #b9b09c;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font: 400 16px/1.4 var(--font-body);
+}
+
+.adm-champ textarea {
+  resize: vertical;
+}
+
+.adm-champ input:focus-visible,
+.adm-champ textarea:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 1px;
+  border-color: var(--ink);
+}
+
+.adm-champ.is-erreur input,
+.adm-champ.is-erreur textarea {
+  border-color: #b3261e;
+  background: #fff6f5;
+}
+
+.adm-aide {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--ink2);
+}
+
+.adm-erreur {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #b3261e;
+}
+
+.adm-ligne {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 12px;
+}
+
+/* --- Choix « date à fixer / annoncée » ---------------------------------------- */
+
+.adm-choix {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  border: 0;
+  padding: 0;
+  margin: 0 0 14px;
+}
+
+.adm-choix label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 10px 12px;
+  border: 1.5px solid var(--rule);
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.adm-choix label.is-on {
+  border-color: var(--vert);
+  background: rgba(42, 140, 126, 0.08);
+}
+
+.adm-choix input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--vert);
+}
+
+.adm-apercu {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--bg);
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+
+/* --- Boutons ------------------------------------------------------------------ */
+
+.adm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--orange-btn);
+  color: var(--orange-btn-text);
+  font: 600 16px/1.2 var(--font-body);
+  cursor: pointer;
+  width: 100%;
+}
+
+.adm-btn:hover:not(:disabled) {
+  background: var(--orange-btn-hover);
+}
+
+.adm-btn:focus-visible,
+.adm-lien:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.adm-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.adm-btn.is-petit {
+  width: auto;
+  min-height: 44px;
+  padding: 10px 16px;
+  font-size: 15px;
+}
+
+.adm-btn.is-second {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+}
+
+.adm-btn.is-second:hover:not(:disabled) {
+  background: rgba(26, 75, 110, 0.06);
+}
+
+.adm-btn.is-danger {
+  background: #b3261e;
+  color: #fff;
+}
+
+.adm-btn.is-danger:hover:not(:disabled) {
+  background: #8f1e18;
+}
+
+.adm-btn.is-danger-texte {
+  color: #b3261e;
+  border-color: #b3261e;
+}
+
+.adm-btn.is-grand {
+  min-height: 56px;
+  font-size: 17px;
+}
+
+.adm-lien {
+  border: 0;
+  background: none;
+  padding: 6px 0;
+  color: var(--vert-ink);
+  font: 600 15px/1.3 var(--font-body);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  text-align: left;
+  margin: -6px 0 14px;
+}
+
+.adm-tete .adm-lien {
+  margin: 0;
+}
+
+.adm-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+/* --- Liste des sorties ------------------------------------------------------------ */
+
+.adm-liste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.adm-sortie {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: var(--bg);
+}
+
+.adm-sortie.is-erreur {
+  border-color: #b3261e;
+}
+
+.adm-sortie-date {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--vert-ink);
+}
+
+.adm-sortie-nom {
+  font-weight: 600;
+  font-size: 16px;
+  margin: 2px 0;
+}
+
+.adm-sortie-chiffres {
+  font-size: 14.5px;
+  color: var(--ink2);
+  font-variant-numeric: tabular-nums;
+}
+
+.adm-confirmer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.adm-confirmer p {
+  grid-column: 1 / -1;
+  font-weight: 600;
+}
+
+.adm-form {
+  padding: 16px 14px 14px;
+  border: 2px solid var(--vert);
+  border-radius: 12px;
+  background: #fff;
+  margin-bottom: 12px;
+}
+
+/* --- Totaux ------------------------------------------------------------------------- */
+
+.adm-totaux {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.adm-totaux li {
+  display: grid;
+  gap: 2px;
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--bg);
+}
+
+.adm-totaux li.is-change {
+  background: rgba(221, 138, 46, 0.14);
+}
+
+.adm-totaux b {
+  font: 800 22px/1.1 var(--font-display);
+  font-variant-numeric: tabular-nums;
+}
+
+.adm-totaux span {
+  font-size: 13.5px;
+  color: var(--ink2);
+}
+
+.adm-totaux small {
+  font-size: 12.5px;
+  color: var(--ink2);
+}
+
+/* --- Pied fixe : le bouton d'enregistrement reste sous le pouce ------------------- */
+
+.adm-pied {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: grid;
+  gap: 8px;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  background: rgba(245, 239, 224, 0.96);
+  border-top: 1px solid var(--rule);
+}
+
+.adm-bandeau {
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.adm-bandeau.is-ok {
+  background: rgba(42, 140, 126, 0.14);
+  color: var(--vert-ink);
+  margin-bottom: 16px;
+}
+
+.adm-bandeau.is-erreur {
+  background: #fdecea;
+  color: #b3261e;
+}
+
+@media (max-width: 420px) {
+  .adm-ligne {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Photos d'une sortie ------------------------------------------------------- */
+
+.adm-photos {
+  display: grid;
+  gap: 10px;
+  margin: 4px 0 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+}
+
+.adm-photos-titre {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.adm-photos-liste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.adm-photos-liste li {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 10px;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: var(--bg);
+}
+
+.adm-photos-liste li.is-erreur {
+  border-color: #b3261e;
+}
+
+.adm-photos-liste img {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.adm-photo-champs .adm-champ {
+  margin-bottom: 4px;
+}
+
+.adm-lien.is-danger {
+  color: #b3261e;
+  margin: 0;
+}
+
+.adm-btn.is-occupe {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+label.adm-btn {
+  cursor: pointer;
+}
+
+label.adm-btn:focus-within {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+}
+
+@media (max-width: 420px) {
+  .adm-photos-liste li {
+    grid-template-columns: 72px minmax(0, 1fr);
+  }
+
+  .adm-photos-liste img {
+    width: 72px;
+    height: 72px;
+  }
+}
+
+/* --- Onglets ------------------------------------------------------------------- */
+
+.adm-onglets {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin: 0 -16px 16px;
+  padding: 8px 16px;
+  background: rgba(245, 239, 224, 0.96);
+}
+
+.adm-onglets button {
+  position: relative;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1.5px solid var(--rule);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--ink);
+  font: 600 15px/1.2 var(--font-body);
+  cursor: pointer;
+}
+
+.adm-onglets button.is-on {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.adm-onglets button:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 2px;
+}
+
+.adm-onglet-alerte {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #b3261e;
+}
+
+/* --- Paroles ----------------------------------------------------------------------- */
+
+.adm-paroles-intro {
+  margin: -6px 0 14px;
+}
+
+.adm-parole {
+  padding: 14px;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: var(--bg);
+}

@@ -21,7 +21,7 @@ export const faq: FaqItem[] = [
   {
     question: "Faut-il adhérer à l'association ?",
     reponse:
-      "Non, participer aux ramassages est gratuit. L'adhésion est symbolique, 1 euro, et permet de devenir membre et de voter en assemblée générale. L'association se construit maintenant : c'est le bon moment pour en faire partie dès le début.",
+      "L'adhésion est symbolique, 1 euro, et permet de devenir membre et de voter en assemblée générale. L'association se construit maintenant : c'est le bon moment pour en faire partie dès le début.",
   },
   {
     question: "Où ont lieu les ramassages ?",
@@ -37,7 +37,7 @@ export const faq: FaqItem[] = [
   {
     question: "Que deviennent les mégots ramassés ?",
     reponse:
-      "Ils sont comptés et mesurés, puis les chiffres sont publiés. Notre ambition est de collaborer avec des filières de recyclage : les mégots peuvent devenir du mobilier urbain, des cendriers ou des emballages industriels, la valorisation énergétique restant le dernier recours.",
+      "Ils sont comptés et mesurés, puis les chiffres sont publiés. Notre ambition est de collaborer avec des filières de recyclage : les mégots peuvent devenir du mobilier urbain, des cendriers ou des emballages industriels, ou servir à la valorisation énergétique.",
     lien: { href: "#devenir", label: "Voir ce qu'ils peuvent devenir" },
   },
   {
@@ -49,7 +49,7 @@ export const faq: FaqItem[] = [
   {
     question: "Comment aider sans venir ramasser ?",
     reponse:
-      "Signalez-nous un lieu où les mégots s'accumulent, proposez un partenariat si vous êtes une association ou une entreprise, faites passer le mot autour de vous, ou soutenez l'association par un don. Un e-mail suffit.",
+      "Signalez-nous un lieu où les mégots s'accumulent, proposez un partenariat si vous êtes une association ou une entreprise, un e-mail suffit, faites passer le mot autour de vous, ou soutenez l'association par un don.",
     lien: {
       href: "/contact",
       label: "Nous écrire",

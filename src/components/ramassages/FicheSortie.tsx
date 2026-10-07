@@ -5,26 +5,22 @@ import { articlesPresse } from "@/data/presse";
 import { LITRES_EAU_PAR_MEGOT, megotsParLitre, type Ramassage } from "@/data/ramassages";
 import { sourcesRamassages } from "@/data/ramassages-page";
 import { Ref } from "../megot/Ref";
+import { MediaLogo } from "../presse/MediaLogo";
 import { Reveal } from "../Reveal";
-
-const PHOTOS = [
-  { src: "/photos/megothon-groupe.jpg", alt: "Les bénévoles du Mégothon réunis devant la mairie de Saint-Nazaire.", w: 1200, h: 900 },
-  { src: "/photos/megothon-ramassage.jpg", alt: "Un bénévole ramasse des mégots au sol, à la pince.", w: 1200, h: 900 },
-  { src: "/photos/megothon-bouteilles.jpg", alt: "Six bouteilles remplies de mégots ramassés, posées sur un muret.", w: 1200, h: 1026 },
-];
 
 /**
  * La fiche d'une sortie : date, parcours, les quatre chiffres, les équivalents,
  * les photos et l'article de presse s'il existe. Générée depuis ramassages.ts,
  * donc chaque nouvelle sortie ajoute une fiche sans toucher au code.
+ * Les fiches alternent : chiffres à gauche, puis à droite (`inverse`).
  */
-export function FicheSortie({ sortie, premiere }: { sortie: Ramassage; premiere: boolean }) {
+export function FicheSortie({ sortie, inverse }: { sortie: Ramassage; inverse: boolean }) {
   const eau = sortie.megots * LITRES_EAU_PAR_MEGOT;
   const metres = sortie.megots / MEGOTS_PAR_METRE;
   const article = articlesPresse.find((a) => a.title.toLowerCase().includes(sortie.libelle.toLowerCase()));
 
   return (
-    <article className="fiche" aria-labelledby={`fiche-${sortie.date.replace(/\s/g, "-")}`}>
+    <article className={inverse ? "fiche is-inverse" : "fiche"} aria-labelledby={`fiche-${sortie.date.replace(/\s/g, "-")}`}>
       <Reveal direction="rise" className="fiche-tete">
         <p className="fiche-date display">{sortie.date}</p>
         <h3 id={`fiche-${sortie.date.replace(/\s/g, "-")}`} className="display">
@@ -40,12 +36,14 @@ export function FicheSortie({ sortie, premiere }: { sortie: Ramassage; premiere:
               <b className="display">{sortie.benevoles}</b>
               <span>bénévoles</span>
             </li>
+            {sortie.duree && (
+              <li>
+                <b className="display">{sortie.duree}</b>
+                <span>de ramassage</span>
+              </li>
+            )}
             <li>
-              <b className="display">{sortie.duree}</b>
-              <span>de ramassage</span>
-            </li>
-            <li>
-              <b className="display">{sortie.litres} L</b>
+              <b className="display">{fr(sortie.litres)} L</b>
               <span>de mégots, mesurés au contenant gradué</span>
             </li>
             <li>
@@ -66,16 +64,16 @@ export function FicheSortie({ sortie, premiere }: { sortie: Ramassage; premiere:
           </ul>
           {article && (
             <a className="fiche-presse" href={article.href} target="_blank" rel="noopener noreferrer">
-              <span className="fiche-presse-media">{article.media}</span>
+              <MediaLogo media={article.media} />
               <span className="fiche-presse-titre">{article.title}</span>
               <span aria-hidden="true">↗</span>
             </a>
           )}
         </Reveal>
 
-        {premiere && (
+        {sortie.photos && (
           <Reveal className="fiche-photos" delay={0.1}>
-            {PHOTOS.map((p, i) => (
+            {sortie.photos.map((p, i) => (
               <figure key={p.src} className={`fiche-photo is-${i + 1}`}>
                 <Image src={p.src} alt={p.alt} width={p.w} height={p.h} sizes="(max-width: 860px) 100vw, 360px" quality={65} />
               </figure>

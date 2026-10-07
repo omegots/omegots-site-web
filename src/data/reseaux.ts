@@ -1,5 +1,5 @@
 export type Reseau = {
-  id: "instagram" | "facebook" | "whatsapp";
+  id: "instagram" | "facebook" | "whatsapp" | "email";
   nom: string;
   /** Ce qu'on y trouve, affiché sur la page Nous rejoindre. */
   texte: string;
@@ -7,7 +7,7 @@ export type Reseau = {
   href: string;
 };
 
-/** Réseaux de l'association : Instagram, Facebook et la communauté WhatsApp. */
+/** Réseaux de l'association : Instagram, Facebook, la chaîne WhatsApp et l'e-mail (cartes de la page Nous rejoindre). */
 export const reseaux: Reseau[] = [
   {
     id: "instagram",
@@ -23,8 +23,14 @@ export const reseaux: Reseau[] = [
   },
   {
     id: "whatsapp",
-    nom: "Communauté WhatsApp",
+    nom: "Chaîne WhatsApp",
     texte: "Les prochaines dates en direct, pour ne rater aucune sortie.",
     href: "",
+  },
+  {
+    id: "email",
+    nom: "association.o.megots@gmail.com",
+    texte: "Une question, une idée, un lieu à signaler : on vous répond.",
+    href: "mailto:association.o.megots@gmail.com",
   },
 ];

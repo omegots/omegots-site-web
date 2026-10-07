@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { LITRES_EAU_PAR_MEGOT, totals } from "@/data/ramassages";
+import { LITRES_EAU_PAR_MEGOT, megothon } from "@/data/ramassages";
 import { fr } from "../motion/useCountUp";
 
 type Spot = { left: string; top: string; width: number; delay?: string };
@@ -126,7 +126,7 @@ export function MegotField() {
               {cta ? (
                 <>
                   <span>
-                    Il y en avait environ {fr(totals().megots)} rien qu&apos;au
+                    Il y en avait environ {fr(megothon().megots)} rien qu&apos;au
                     centre-ville.
                   </span>
                   <a className="hero-pick-link" href="#prochaine">

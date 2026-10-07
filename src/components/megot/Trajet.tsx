@@ -5,37 +5,37 @@ const etapes = [
   {
     titre: "Le trottoir",
     texte:
-      "Jeté, écrasé du pied. Il ne reste pas là : la première pluie le pousse vers la pente.",
+      "Jeté au sol, il attend la première pluie.",
     x: 148,
     yLine: 132,
   },
   {
     titre: "Le caniveau",
     texte:
-      "L'eau de ruissellement l'emporte avec les feuilles et la poussière, jusqu'à la bouche d'égout la plus proche.",
+      "La pluie l'emporte jusqu'à la bouche d'égout.",
     x: 328,
-    yLine: 168,
+    yLine: 140,
   },
   {
     titre: "L'avaloir et le réseau pluvial",
     texte:
-      "Dans beaucoup de rues, l'eau de pluie ne passe pas par la station d'épuration : le réseau rejoint directement le cours d'eau ou le bassin le plus proche.",
+      "Souvent sans station d'épuration, droit vers le cours d'eau.",
     x: 468,
     yLine: 238,
   },
   {
     titre: "La Loire et l'estuaire",
     texte:
-      "L'estuaire reçoit l'eau des villes. Le mégot y libère ses substances, puis le filtre se délite en fibres.",
-    x: 790,
+      "Il y libère ses substances, puis se délite en fibres.",
+    x: 700,
     yLine: 198,
   },
   {
     titre: "La plage et l'océan",
     texte:
-      "Ce qui ne s'est pas déposé finit sur le sable ou en mer. C'est là que les collectes le retrouvent, en tête de tous les déchets.",
+      "Il finit sur le sable ou en mer, premier déchet des plages.",
     x: 1090,
-    yLine: 218,
+    yLine: 140,
   },
 ] as const;
 
@@ -44,7 +44,84 @@ const etapes = [
  * conduite → Loire → océan. Utilisé par <animateMotion> dans Trajet.
  */
 export const TRAJET_PATH =
-  "M148,148 L278,148 L292,172 L340,182 L357,192 L357,248 C365,256 382,256 400,256 L555,256 C575,256 595,228 615,212 C655,198 720,204 780,210 C850,216 920,208 990,210 C1030,212 1060,216 1095,220";
+  "M148,148 L330,148 C345,148 357,160 357,176 L357,248 C365,256 382,256 400,256 L600,256 C618,256 635,232 650,215 C680,202 720,204 780,210 C850,216 920,208 975,210 C990,210 1002,208 1012,204";
+
+/** Surface de l'eau, de la berge (cachée sous le talus) jusqu'au bord droit. */
+const EAU_SURFACE =
+  "M480,200 C510,198 535,197 560,196 C610,186 670,192 730,198 C810,208 890,196 970,200 C1040,204 1100,208 1200,212";
+const EAU = `${EAU_SURFACE} L1200,320 L480,320 Z`;
+
+/** Sol de la ville, au niveau du trottoir, qui descend en talus dans l'eau. */
+const SOL = "M0,156 H470 C505,158 525,176 540,196 C558,220 590,268 625,320 H0 Z";
+
+/** Le poisson, sous le trajet du mégot. */
+const POISSON = { x: 905, y: 258 };
+
+/** Fraction des 18 s où le mégot passe au-dessus du poisson (mesurée sur TRAJET_PATH). */
+const T_PASSAGE = 0.89;
+
+/** Instant relatif au passage du mégot, en keyTime. */
+function t(delta: number) {
+  return (T_PASSAGE + delta).toFixed(3);
+}
+
+/** Le poisson dessiné autour de l'origine ; animé, il pâlit et ses yeux deviennent des croix. */
+function Poisson({ anime = false }: { anime?: boolean }) {
+  const palit = anime ? (
+    <animate
+      attributeName="fill"
+      values="#F5EFE0;#F5EFE0;#C9C2B4;#C9C2B4"
+      keyTimes={`0;${t(0.015)};${t(0.08)};1`}
+      dur="18s"
+      repeatCount="indefinite"
+    />
+  ) : null;
+  return (
+    <>
+      <ellipse rx="13" ry="5.5" fill="#F5EFE0">
+        {palit}
+      </ellipse>
+      <path d="M-13,0 L-20,-3.5 L-20,3.5 Z" fill="#F5EFE0">
+        {palit}
+      </path>
+      <path
+        d="M-6,-4 C-4,-6 0,-6 2,-4"
+        fill="none"
+        stroke="#1A4B6E"
+        strokeWidth="0.7"
+        opacity="0.35"
+      />
+      <circle cx="7" cy="-1.5" r="1.1" fill="#1A4B6E">
+        {anime && (
+          <animate
+            attributeName="opacity"
+            values="1;1;0;0"
+            keyTimes={`0;${t(0.015)};${t(0.02)};1`}
+            dur="18s"
+            repeatCount="indefinite"
+          />
+        )}
+      </circle>
+      {anime && (
+        <path
+          d="M5.6,-2.9 L8.4,-0.1 M8.4,-2.9 L5.6,-0.1"
+          stroke="#1A4B6E"
+          strokeWidth="0.9"
+          strokeLinecap="round"
+          opacity="0"
+        >
+          <animate
+            attributeName="opacity"
+            values="0;0;1;1"
+            keyTimes={`0;${t(0.015)};${t(0.02)};1`}
+            dur="18s"
+            repeatCount="indefinite"
+          />
+        </path>
+      )}
+    </>
+  );
+}
 
 /**
  * Le trajet d'un mégot, en coupe : ville, réseau pluvial, Loire sous le pont
@@ -62,7 +139,7 @@ export function Trajet() {
           role="img"
         >
           <defs>
-            <linearGradient id="trajet-sol" x1="0" y1="0" x2="0" y2="1">
+            <linearGradient id="trajet-sol" gradientUnits="userSpaceOnUse" x1="0" y1="156" x2="0" y2="320">
               <stop offset="0%" stopColor="#E6DCC8" />
               <stop offset="42%" stopColor="#D6C9B0" />
               <stop offset="100%" stopColor="#C4B49A" />
@@ -101,36 +178,180 @@ export function Trajet() {
               <stop offset="0%" stopColor="#C2CFD6" />
               <stop offset="100%" stopColor="#8A9CAA" />
             </linearGradient>
-            <linearGradient id="trajet-berges" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="#B8A888" />
-              <stop offset="100%" stopColor="#8A9CAA" stopOpacity="0" />
-            </linearGradient>
             <radialGradient id="trajet-lampe" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stopColor="#F5EFE0" stopOpacity="0.65" />
               <stop offset="55%" stopColor="#F5EFE0" stopOpacity="0.18" />
               <stop offset="100%" stopColor="#F5EFE0" stopOpacity="0" />
             </radialGradient>
+            <linearGradient id="trajet-berge-eau" gradientUnits="userSpaceOnUse" x1="530" y1="0" x2="600" y2="0">
+              <stop offset="0%" stopColor="#217A70" stopOpacity="0" />
+              <stop offset="100%" stopColor="#217A70" stopOpacity="0.55" />
+            </linearGradient>
             <filter id="trajet-soft" x="-20%" y="-20%" width="140%" height="140%">
               <feGaussianBlur stdDeviation="1.2" />
             </filter>
+            <clipPath id="trajet-clip-cadre">
+              <rect width="1200" height="320" />
+            </clipPath>
             <clipPath id="trajet-clip-eau">
-              <path d="M560,196 C610,186 670,192 730,198 C810,208 890,196 970,200 C1040,204 1100,208 1200,212 L1200,320 L560,320 Z" />
+              <path d={EAU} />
             </clipPath>
           </defs>
 
-          {/* --- Sol / sous-sol --- */}
+          {/* --- Eau : Loire / estuaire / océan --- */}
           <path
-            d="M0,156 H298 V178 H348 V250 H560 V320 H0 Z"
-            fill="url(#trajet-sol)"
+            d={EAU}
+            fill="url(#trajet-eau)"
           />
+          {/* Bande de surface */}
           <path
-            d="M0,240 H560 V320 H0 Z"
-            fill="url(#trajet-sol-sombre)"
+            d={`${EAU_SURFACE} L1200,230 C1100,226 1040,222 970,218 C890,214 810,226 730,216 C670,210 610,204 560,214 C535,215 510,216 480,218 Z`}
+            fill="url(#trajet-eau-haut)"
+          />
+          {/* Ligne d'horizon d'eau */}
+          <path
+            d={EAU_SURFACE}
+            fill="none"
+            stroke="#F5EFE0"
+            strokeWidth="1.4"
+            opacity="0.35"
+          />
+
+          <g clipPath="url(#trajet-clip-eau)">
+            <path
+              className="trajet-vague"
+              d="M520,226 q36,-9 72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0"
+              fill="none"
+              stroke="#F5EFE0"
+              strokeWidth="1.6"
+              opacity="0.4"
+            />
+            <path
+              className="trajet-vague is-2"
+              d="M520,252 q36,-9 72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0"
+              fill="none"
+              stroke="#F5EFE0"
+              strokeWidth="1.35"
+              opacity="0.26"
+            />
+            <path
+              className="trajet-vague is-3"
+              d="M520,282 q36,-7 72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0"
+              fill="none"
+              stroke="#0F3550"
+              strokeWidth="1.1"
+              opacity="0.14"
+            />
+            {/* Caustiques / reflets */}
+            <g opacity="0.12" fill="#F5EFE0">
+              <ellipse cx="700" cy="240" rx="40" ry="6" />
+              <ellipse cx="880" cy="268" rx="52" ry="5" />
+              <ellipse cx="1040" cy="248" rx="36" ry="5" />
+            </g>
+            {/* Poisson : il nage, le mégot passe au-dessus de lui, il meurt et remonte le ventre en l'air */}
+            <g className="trajet-poisson trajet-poisson--motion">
+              <animate
+                attributeName="opacity"
+                values="0;0.55;0.55;0"
+                keyTimes="0;0.04;0.95;1"
+                dur="18s"
+                repeatCount="indefinite"
+              />
+              <g transform={`translate(${POISSON.x},${POISSON.y})`}>
+                <g>
+                  <animateTransform
+                    attributeName="transform"
+                    type="translate"
+                    values="0 0;-22 4;0 0;0 0;3 -1;-3 1;0 0;6 -46;6 -46"
+                    keyTimes={`0;0.4;${t(-0.03)};${t(0)};${t(0.015)};${t(0.03)};${t(0.045)};0.98;1`}
+                    dur="18s"
+                    repeatCount="indefinite"
+                  />
+                  <g>
+                    <animateTransform
+                      attributeName="transform"
+                      type="scale"
+                      values="1 1;1 1;1 -1;1 -1"
+                      keyTimes={`0;${t(0.045)};${t(0.075)};1`}
+                      dur="18s"
+                      repeatCount="indefinite"
+                    />
+                    <Poisson anime />
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g
+              className="trajet-poisson trajet-poisson--static"
+              transform={`translate(${POISSON.x},${POISSON.y})`}
+              opacity="0.5"
+            >
+              <Poisson />
+            </g>
+          </g>
+
+          {/* --- Pont de Saint-Nazaire : géométrie du logo (voir Hero.tsx), à l'échelle 2.
+               Dessiné avant le sol et la plage : le tablier file derrière le talus et sort du cadre. --- */}
+          <g clipPath="url(#trajet-clip-cadre)">
+            <g className="trajet-pont" transform="translate(820,156) scale(2)" fill="#1A4B6E" stroke="#1A4B6E">
+              {/* Reflet */}
+              <g opacity="0.12" transform="translate(0,33) scale(1,-0.32)" filter="url(#trajet-soft)" stroke="none">
+                <rect x="-21.3" y="-38" width="4.6" height="78" rx="2.3" />
+                <rect x="16.7" y="-38" width="4.6" height="78" rx="2.3" />
+              </g>
+              <path
+                d="M-19,-35 L-50.5,9 M-19,-32 L-40,7.1 M-19,-29 L-30,5 M-19,-35 L-12,1.1 M-19,-31.5 L-6.5,0.4 M-19,-28 L-1.5,0.1 M19,-35 L50.5,9 M19,-32 L40,7.1 M19,-29 L30,5 M19,-35 L12,1.1 M19,-31.5 L6.5,0.4 M19,-28 L1.5,0.1"
+                fill="none"
+                strokeWidth="0.9"
+                strokeLinecap="round"
+              />
+              <path
+                d="M-100,12.5 C-80,12 -68,11 -58,10 C-32,7 -15,0 0,0 C15,0 32,7 58,10 C68,11 80,12 100,12.5"
+                fill="none"
+                strokeWidth="2.8"
+                strokeLinecap="round"
+              />
+              {/* Le tablier se prolonge au-delà des deux rives, comme sur l'accueil */}
+              <path
+                d="M-100,12.5 C-160,12.5 -260,9 -900,3 M100,12.5 C160,12.5 260,9 900,3"
+                fill="none"
+                strokeWidth="2.8"
+              />
+              <rect x="-21.3" y="-38" width="4.6" height="78" rx="2.3" stroke="none" />
+              <rect x="16.7" y="-38" width="4.6" height="78" rx="2.3" stroke="none" />
+            </g>
+          </g>
+          {/* Pied des pylônes sous la surface : voilé d'eau, avec un remous */}
+          <g clipPath="url(#trajet-clip-eau)" fill="#217A70" opacity="0.65">
+            <rect x="775" y="190" width="14" height="50" />
+            <rect x="851" y="190" width="14" height="50" />
+          </g>
+          <g fill="none" stroke="#F5EFE0" strokeWidth="1.2" opacity="0.5">
+            <ellipse cx="782" cy="207" rx="9" ry="1.8" />
+            <ellipse cx="858" cy="208" rx="9" ry="1.8" />
+          </g>
+
+          {/* --- Sol / sous-sol --- */}
+          <path d={SOL} fill="url(#trajet-sol)" />
+          <path d="M0,240 H571 L625,320 H0 Z" fill="url(#trajet-sol-sombre)" />
+          {/* Partie immergée du talus, voilée d'eau : la berge se fond dans l'estuaire */}
+          <g clipPath="url(#trajet-clip-eau)">
+            <path
+              d="M540,196 C558,220 590,268 625,320 L540,320 C528,280 520,240 516,196 Z"
+              fill="url(#trajet-berge-eau)"
+            />
+          </g>
+          <path
+            d="M470,156 C505,158 525,176 540,196"
+            fill="none"
+            stroke="#B5A68C"
+            strokeWidth="1.2"
+            opacity="0.6"
           />
           {/* Strates de terre */}
           <g stroke="#B5A68C" strokeWidth="1" opacity="0.4" fill="none">
-            <path d="M0,210 H300" />
-            <path d="M0,248 H348" />
+            <path d="M0,210 H520" />
+            <path d="M0,248 H560" />
             <path d="M0,286 H520" strokeDasharray="6 8" />
           </g>
           {/* Texture grain discret */}
@@ -153,25 +374,25 @@ export function Trajet() {
             <path d="M144,156 V168" />
             <path d="M216,156 V168" />
           </g>
-          {/* Bordure / nez de trottoir */}
-          <path d="M286,156 L298,156 L298,178 L286,170 Z" fill="#8E8680" />
-          <path d="M286,156 L298,156 L298,166 L286,162 Z" fill="#C2BAB0" />
-          <path d="M286,170 L298,178" fill="none" stroke="#6E6862" strokeWidth="1" opacity="0.5" />
 
-          {/* --- Caniveau --- */}
-          <path d="M298,178 H368 V190 H298 Z" fill="#A39B90" />
-          <path d="M298,178 H368" fill="none" stroke="#726C64" strokeWidth="1.4" />
-          <path d="M298,190 H368" fill="none" stroke="#8A8278" strokeWidth="1" opacity="0.5" />
-          {/* Filet d'eau dans le caniveau */}
+          {/* --- Caniveau : au niveau du trottoir, fond creusé qui mène l'eau à la grille --- */}
+          <path d="M298,156 C306,156 310,160 318,160 H328 V168 H298 Z" fill="#A39B90" />
           <path
-            d="M304,184 C318,182 336,182 352,184"
+            d="M298,156 C306,156 310,160 318,160 H328"
+            fill="none"
+            stroke="#726C64"
+            strokeWidth="1.4"
+          />
+          <path d="M298,156 V168" fill="none" stroke="#8A8278" strokeWidth="1" opacity="0.5" />
+          {/* Filet d'eau qui file vers la grille */}
+          <path
+            d="M306,158 C312,159.5 318,159.5 328,159.5"
             fill="none"
             stroke="#2A8C7E"
             strokeWidth="2.2"
             strokeLinecap="round"
-            opacity="0.4"
+            opacity="0.5"
           />
-          <ellipse cx="330" cy="184" rx="26" ry="2.2" fill="#6ED4C2" opacity="0.28" />
 
           {/* --- Maison --- */}
           <g className="trajet-ville">
@@ -219,40 +440,33 @@ export function Trajet() {
             <ellipse cx="172" cy="156" rx="8" ry="2" fill="#0F3550" opacity="0.1" />
           </g>
 
-          {/* --- Avaloir --- */}
+          {/* --- Bouche d'égout : grille en fonte au ras du sol, regard en dessous --- */}
           <g className="trajet-avaloir">
-            <rect x="334" y="178" width="46" height="18" rx="2.5" fill="#2C3E4A" />
-            <rect x="337" y="180.5" width="40" height="13" rx="1.5" fill="#4A6070" />
-            {[0, 1, 2, 3, 4, 5].map((i) => (
-              <rect
-                key={i}
-                x={340 + i * 6.2}
-                y="181.5"
-                width="3.2"
-                height="11"
-                rx="0.7"
-                fill="#0F3550"
-                opacity="0.55"
-              />
-            ))}
-            <rect
-              x="334"
-              y="178"
-              width="46"
-              height="18"
-              rx="2.5"
-              fill="none"
-              stroke="#0F3550"
-              strokeWidth="1.6"
-            />
-            {/* Ombre intérieure */}
-            <rect x="337" y="180.5" width="40" height="3" rx="1" fill="#0F3550" opacity="0.25" />
+            {/* Regard : cadre béton et puits sombre où plonge la conduite */}
+            <rect x="326" y="156" width="40" height="32" fill="#8E8680" />
+            <rect x="331" y="159" width="30" height="29" fill="#1F2E38" />
+            <rect x="331" y="159" width="30" height="5" fill="#0F1C24" opacity="0.6" />
+            {/* Gouttes qui tombent dans le regard */}
+            <g fill="#6ED4C2" opacity="0.7">
+              <ellipse cx="337" cy="170" rx="1" ry="1.9" />
+              <ellipse cx="354" cy="167" rx="1" ry="1.8" />
+              <ellipse cx="346" cy="178" rx="0.9" ry="1.6" />
+            </g>
+            {/* Grille */}
+            <rect x="327" y="154.6" width="38" height="5" rx="1.2" fill="#2C3E4A" stroke="#0F3550" strokeWidth="1.2" />
+            <g fill="#0F1C24">
+              <rect x="331" y="156.4" width="3.2" height="2.6" rx="0.6" />
+              <rect x="337" y="156.4" width="3.2" height="2.6" rx="0.6" />
+              <rect x="343" y="156.4" width="3.2" height="2.6" rx="0.6" />
+              <rect x="349" y="156.4" width="3.2" height="2.6" rx="0.6" />
+              <rect x="355" y="156.4" width="3.2" height="2.6" rx="0.6" />
+            </g>
           </g>
 
           {/* --- Conduite pluviale --- */}
           <g className="trajet-conduite">
             <path
-              d="M346,196 V244 C346,252 352,256 360,256 H560"
+              d="M346,186 V244 C346,252 352,256 360,256 H600"
               fill="none"
               stroke="#2E4050"
               strokeWidth="26"
@@ -260,7 +474,7 @@ export function Trajet() {
               strokeLinejoin="round"
             />
             <path
-              d="M346,196 V244 C346,252 352,256 360,256 H560"
+              d="M346,186 V244 C346,252 352,256 360,256 H600"
               fill="none"
               stroke="url(#trajet-pipe)"
               strokeWidth="22"
@@ -268,7 +482,7 @@ export function Trajet() {
               strokeLinejoin="round"
             />
             <path
-              d="M346,196 V244 C346,252 352,256 360,256 H560"
+              d="M346,186 V244 C346,252 352,256 360,256 H600"
               fill="none"
               stroke="url(#trajet-pipe-in)"
               strokeWidth="13"
@@ -277,7 +491,7 @@ export function Trajet() {
             />
             {/* Filet d'eau bas de conduite */}
             <path
-              d="M346,196 V244 C346,252 352,256 360,256 H552"
+              d="M346,186 V244 C346,252 352,256 360,256 H592"
               fill="none"
               stroke="#2A8C7E"
               strokeWidth="3.5"
@@ -287,17 +501,17 @@ export function Trajet() {
             />
             {/* Joints de tuyau */}
             <g fill="none" stroke="#2E4050" strokeWidth="2.2" opacity="0.7">
-              <ellipse cx="346" cy="218" rx="12" ry="5" />
+              <ellipse cx="346" cy="214" rx="12" ry="5" />
               <ellipse cx="430" cy="256" rx="5" ry="12" />
               <ellipse cx="500" cy="256" rx="5" ry="12" />
             </g>
             {/* Embouchure */}
-            <ellipse cx="560" cy="256" rx="12" ry="15" fill="#2E4050" />
-            <ellipse cx="560" cy="256" rx="7" ry="10" fill="#4E6675" />
-            <ellipse cx="559" cy="256" rx="4" ry="6.5" fill="#1F6E63" opacity="0.8" />
+            <ellipse cx="600" cy="256" rx="12" ry="15" fill="#2E4050" />
+            <ellipse cx="600" cy="256" rx="7" ry="10" fill="#4E6675" />
+            <ellipse cx="599" cy="256" rx="4" ry="6.5" fill="#1F6E63" opacity="0.8" />
             {/* Jet vers l'estuaire */}
             <path
-              d="M570,250 C588,246 602,236 614,222"
+              d="M610,250 C628,246 642,236 654,222"
               fill="none"
               stroke="#8EE0D2"
               strokeWidth="2.8"
@@ -305,7 +519,7 @@ export function Trajet() {
               opacity="0.7"
             />
             <path
-              d="M570,260 C590,256 606,246 618,232"
+              d="M610,260 C630,256 646,246 658,232"
               fill="none"
               stroke="#2A8C7E"
               strokeWidth="2"
@@ -314,151 +528,14 @@ export function Trajet() {
             />
           </g>
 
-          {/* --- Berge / transition sol → eau --- */}
+          {/* --- Plage : colline de sable qui cache la fin du tablier --- */}
           <path
-            d="M540,198 C548,210 552,230 556,256 L556,320 L540,320 Z"
-            fill="url(#trajet-berges)"
-            opacity="0.55"
-          />
-
-          {/* --- Eau : Loire / estuaire / océan --- */}
-          <path
-            d="M560,196 C610,186 670,192 730,198 C810,208 890,196 970,200 C1040,204 1100,208 1200,212 L1200,320 L560,320 Z"
-            fill="url(#trajet-eau)"
-          />
-          {/* Bande de surface */}
-          <path
-            d="M560,196 C610,186 670,192 730,198 C810,208 890,196 970,200 C1040,204 1100,208 1200,212 L1200,230 C1100,226 1040,222 970,218 C890,214 810,226 730,216 C670,210 610,204 560,214 Z"
-            fill="url(#trajet-eau-haut)"
-          />
-          {/* Ligne d'horizon d'eau */}
-          <path
-            d="M560,196 C610,186 670,192 730,198 C810,208 890,196 970,200 C1040,204 1100,208 1200,212"
-            fill="none"
-            stroke="#F5EFE0"
-            strokeWidth="1.4"
-            opacity="0.35"
-          />
-
-          <g clipPath="url(#trajet-clip-eau)">
-            <path
-              className="trajet-vague"
-              d="M520,226 q36,-9 72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0"
-              fill="none"
-              stroke="#F5EFE0"
-              strokeWidth="1.6"
-              opacity="0.4"
-            />
-            <path
-              className="trajet-vague is-2"
-              d="M520,252 q36,-9 72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0"
-              fill="none"
-              stroke="#F5EFE0"
-              strokeWidth="1.35"
-              opacity="0.26"
-            />
-            <path
-              className="trajet-vague is-3"
-              d="M520,282 q36,-7 72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0 t72,0"
-              fill="none"
-              stroke="#0F3550"
-              strokeWidth="1.1"
-              opacity="0.14"
-            />
-            {/* Caustiques / reflets */}
-            <g opacity="0.12" fill="#F5EFE0">
-              <ellipse cx="700" cy="240" rx="40" ry="6" />
-              <ellipse cx="880" cy="268" rx="52" ry="5" />
-              <ellipse cx="1040" cy="248" rx="36" ry="5" />
-            </g>
-            {/* Poisson */}
-            <g className="trajet-poisson" opacity="0.5">
-              <ellipse cx="990" cy="272" rx="13" ry="5.5" fill="#F5EFE0" />
-              <path d="M977,272 L970,268.5 L970,275.5 Z" fill="#F5EFE0" />
-              <circle cx="997" cy="270.5" r="1.1" fill="#1A4B6E" />
-              <path
-                d="M984,268 C986,266 990,266 992,268"
-                fill="none"
-                stroke="#1A4B6E"
-                strokeWidth="0.7"
-                opacity="0.35"
-              />
-            </g>
-          </g>
-
-          {/* --- Pont de Saint-Nazaire --- */}
-          <g className="trajet-pont" transform="translate(820,198)">
-            {/* Reflet */}
-            <g opacity="0.12" transform="scale(1,0.32) translate(0,70)" filter="url(#trajet-soft)">
-              <rect x="-54" y="-90" width="9" height="120" rx="2" fill="#0F3550" />
-              <rect x="45" y="-90" width="9" height="120" rx="2" fill="#0F3550" />
-              <path
-                d="M-128,22 C-76,16 -34,4 0,4 C34,4 76,16 128,22"
-                fill="none"
-                stroke="#0F3550"
-                strokeWidth="5"
-              />
-            </g>
-            {/* Tablier */}
-            <path
-              d="M-128,22 C-76,16 -34,4 0,4 C34,4 76,16 128,22"
-              fill="none"
-              stroke="#0F3550"
-              strokeWidth="3.4"
-              strokeLinecap="round"
-            />
-            <path
-              d="M-128,25.5 C-76,19.5 -34,7.5 0,7.5 C34,7.5 76,19.5 128,25.5"
-              fill="none"
-              stroke="#1A4B6E"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              opacity="0.5"
-            />
-            {/* Haubans */}
-            <g
-              fill="none"
-              stroke="#0F3550"
-              strokeWidth="1.2"
-              strokeLinecap="round"
-              opacity="0.9"
-            >
-              <path d="M-49.5,-88 L-118,20" />
-              <path d="M-49.5,-82 L-98,18" />
-              <path d="M-49.5,-76 L-78,14" />
-              <path d="M-49.5,-70 L-60,10" />
-              <path d="M-49.5,-88 L-28,6" />
-              <path d="M-49.5,-80 L-14,5" />
-              <path d="M-49.5,-72 L-2,4.2" />
-              <path d="M49.5,-88 L118,20" />
-              <path d="M49.5,-82 L98,18" />
-              <path d="M49.5,-76 L78,14" />
-              <path d="M49.5,-70 L60,10" />
-              <path d="M49.5,-88 L28,6" />
-              <path d="M49.5,-80 L14,5" />
-              <path d="M49.5,-72 L2,4.2" />
-            </g>
-            {/* Pylônes (silhouette en Y inversé, type haubané) */}
-            <path
-              d="M-54,-94 L-49.5,-94 L-46,28 L-53,28 Z"
-              fill="#0F3550"
-            />
-            <path
-              d="M45,-94 L49.5,-94 L53,28 L46,28 Z"
-              fill="#0F3550"
-            />
-            <rect x="-58" y="-98" width="17" height="8" rx="2" fill="#1A4B6E" />
-            <rect x="41" y="-98" width="17" height="8" rx="2" fill="#1A4B6E" />
-          </g>
-
-          {/* --- Plage --- */}
-          <path
-            d="M1010,320 C1055,255 1120,224 1200,212 V320 Z"
+            d="M950,320 C975,250 1000,196 1040,176 C1090,152 1150,148 1200,148 V320 Z"
             fill="url(#trajet-sable)"
           />
-          {/* Ligne d'écume */}
+          {/* Ligne d'écume au pied de la colline */}
           <path
-            d="M1036,298 C1080,252 1140,224 1200,216"
+            d="M958,316 C978,262 994,228 1010,206"
             fill="none"
             stroke="#F5EFE0"
             strokeWidth="3.5"
@@ -466,7 +543,7 @@ export function Trajet() {
             opacity="0.55"
           />
           <path
-            d="M1048,304 C1090,262 1148,230 1200,222"
+            d="M970,318 C990,266 1006,232 1020,212"
             fill="none"
             stroke="#2A8C7E"
             strokeWidth="1.2"
@@ -475,17 +552,17 @@ export function Trajet() {
           />
           {/* Vaguelettes sur le sable */}
           <g stroke="#B9A888" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" fill="none">
-            <path d="M1105,250 q7,-4 14,0" />
-            <path d="M1132,264 q8,-4 16,0" />
-            <path d="M1160,280 q7,-3.5 14,0" />
-            <path d="M1182,296 q6,-3 12,0" />
+            <path d="M1062,196 q7,-4 14,0" />
+            <path d="M1092,214 q8,-4 16,0" />
+            <path d="M1124,236 q7,-3.5 14,0" />
+            <path d="M1156,262 q6,-3 12,0" />
           </g>
           {/* Herbes de dune */}
           <g stroke="#1A4B6E" strokeWidth="1.3" strokeLinecap="round" opacity="0.45" fill="none">
-            <path d="M1178,248 q-2,-10 1,-18" />
-            <path d="M1182,250 q1,-12 4,-16" />
-            <path d="M1188,246 q-1,-11 2,-17" />
-            <path d="M1194,252 q2,-10 5,-14" />
+            <path d="M1150,150 q-2,-10 1,-18" />
+            <path d="M1154,152 q1,-12 4,-16" />
+            <path d="M1160,149 q-1,-11 2,-17" />
+            <path d="M1166,152 q2,-10 5,-14" />
           </g>
 
           {/* Oiseaux au loin */}

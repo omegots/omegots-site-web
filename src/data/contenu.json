@@ -1,0 +1,66 @@
+{
+  "prochaineSortie": {
+    "statut": "a-fixer",
+    "iso": "",
+    "date": "",
+    "libelle": "",
+    "lieu": "Saint-Nazaire et alentours",
+    "heure": "",
+    "duree": "",
+    "note": ""
+  },
+  "ramassages": [
+    {
+      "date": "23 mai 2026",
+      "iso": "2026-05-23",
+      "libelle": "Mégothon",
+      "lieu": "de la mairie au Paquebot",
+      "duree": "2 h",
+      "litres": 6,
+      "megots": 4800,
+      "benevoles": 7,
+      "note": "Première action de l'association, dans le centre-ville.",
+      "photos": [
+        {
+          "src": "/photos/megothon-groupe.jpg",
+          "alt": "Les bénévoles du Mégothon réunis devant la mairie de Saint-Nazaire.",
+          "w": 1200,
+          "h": 900
+        },
+        {
+          "src": "/photos/megothon-ramassage.jpg",
+          "alt": "Un bénévole ramasse des mégots au sol, à la pince.",
+          "w": 1200,
+          "h": 900
+        },
+        {
+          "src": "/photos/megothon-bouteilles.jpg",
+          "alt": "Six bouteilles remplies de mégots ramassés, posées sur un muret.",
+          "w": 1200,
+          "h": 1026
+        }
+      ]
+    },
+    {
+      "date": "Date à préciser",
+      "libelle": "Deuxième sortie",
+      "lieu": "lieu à préciser",
+      "litres": 1.25,
+      "megots": 1000,
+      "benevoles": 5,
+      "note": "Détails à venir."
+    }
+  ],
+  "temoignages": [
+    {
+      "quote": "C'est urgent pour la qualité de l'eau. Le mégot, c'est un petit déchet mais un gros pollueur.",
+      "nom": "Pamela D. R.",
+      "role": ""
+    },
+    {
+      "quote": "Je vous ai vus via un article dans le journal et je suis sensible à ce genre d'actions.",
+      "nom": "Françoise R.",
+      "role": ""
+    }
+  ]
+}

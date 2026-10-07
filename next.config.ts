@@ -4,6 +4,12 @@ const nextConfig: NextConfig = {
   // Sortie autonome pour l'image Docker (Dokploy) : server.js + le strict nécessaire.
   output: "standalone",
 
+  env: {
+    // Date du build (heure de Paris), pour masquer une « prochaine sortie » déjà
+    // passée sans que le serveur et le navigateur ne divergent (src/data/ramassages.ts).
+    DATE_BUILD: new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Paris" }).format(new Date()),
+  },
+
   experimental: {
     // Charge seulement les modules Motion réellement importés (bundle client plus léger).
     optimizePackageImports: ["motion", "motion/react"],

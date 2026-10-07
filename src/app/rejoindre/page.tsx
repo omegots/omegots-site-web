@@ -1,16 +1,16 @@
 import { pageMetadata } from "@/data/seo";
 import Link from "next/link";
 import { Faq } from "@/components/Faq";
-import { FormPrevenir } from "@/components/FormPrevenir";
 import { PageShell } from "@/components/PageShell";
+import { ProchaineSortie } from "@/components/ProchaineSortie";
 import { Rejoindre } from "@/components/Rejoindre";
 import { Reseaux } from "@/components/Reseaux";
 import { Reveal } from "@/components/Reveal";
 import { WaveDivider } from "@/components/WaveDivider";
+import { FaireUnDon } from "@/components/rejoindre/FaireUnDon";
 import { HeroRejoindre } from "@/components/rejoindre/HeroRejoindre";
-import { Impact } from "@/components/rejoindre/Impact";
 import { Partager } from "@/components/rejoindre/Partager";
-import { aides, etapes, faqRejoindre, implique, PAYASSO_ADHESION, PAYASSO_DON } from "@/data/rejoindre";
+import { aides, etapes, faqRejoindre, implique, PAYASSO_ADHESION } from "@/data/rejoindre";
 import { reseaux } from "@/data/reseaux";
 import "@/styles/megot.css";
 import "@/styles/ramassages.css";
@@ -65,19 +65,7 @@ export default function RejoindrePage() {
               Gratuit, sans adhésion, à tout âge. On vous prévient par e-mail, vous venez, on ramasse, on compte.
             </p>
           </Reveal>
-          <Reveal className="prochaine" id="prochaine" delay={0.05}>
-            <div>
-              <p className="megothon-next-tag">Prochaine sortie</p>
-              <p className="megothon-next-title display">Le prochain ramassage arrive.</p>
-              <p className="megothon-next-text">
-                Date à fixer. Laissez votre adresse, on vous écrit dès que la date est fixée. Rien d&apos;autre, promis.
-              </p>
-            </div>
-            <FormPrevenir />
-          </Reveal>
-          <Reveal delay={0.1}>
-            <Impact />
-          </Reveal>
+          <ProchaineSortie className="prochaine" id="prochaine" />
         </div>
       </section>
 
@@ -156,21 +144,7 @@ export default function RejoindrePage() {
       {/* 4. Faire un don */}
       <section className="megot-section" id="don" aria-labelledby="don-titre">
         <div className="wrap">
-          <Reveal direction="rise" className="section-head is-center">
-            <h2 id="don-titre" className="display">
-              Faire un don
-            </h2>
-          </Reveal>
-          <Reveal className="don" delay={0.1}>
-            <p>
-              Vous souhaitez soutenir O&apos;Mégots financièrement ? Chaque don nous aide à financer notre matériel,
-              notre assurance et nos actions sur le terrain. Montant libre.
-            </p>
-            <a className="btn btn-lg" href={PAYASSO_DON} target="_blank" rel="noopener noreferrer">
-              Faire un don
-            </a>
-            <span className="don-securite">Paiement sécurisé par Crédit Mutuel Pay Asso.</span>
-          </Reveal>
+          <FaireUnDon />
         </div>
       </section>
 

@@ -608,20 +608,6 @@
   }
 }
 
-.trajet-poisson {
-  animation: trajet-poisson 18s ease-in-out infinite;
-}
-
-@keyframes trajet-poisson {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(-28px, 6px);
-  }
-}
-
 .trajet-oiseaux {
   animation: trajet-oiseaux 22s ease-in-out infinite;
 }
@@ -636,22 +622,25 @@
   }
 }
 
-/* Le mégot suit TRAJET_PATH (Trajet.tsx) via <animateMotion>, pas offset-path. */
-.trajet-megot--static {
+/* Le mégot suit TRAJET_PATH (Trajet.tsx) via <animateMotion>, pas offset-path.
+   Le poisson est animé en SMIL sur la même horloge, pour mourir au passage du mégot. */
+.trajet-megot--static,
+.trajet-poisson--static {
   display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .trajet-megot--motion {
+  .trajet-megot--motion,
+  .trajet-poisson--motion {
     display: none;
   }
 
-  .trajet-megot--static {
+  .trajet-megot--static,
+  .trajet-poisson--static {
     display: inline;
   }
 
   .trajet-vague,
-  .trajet-poisson,
   .trajet-oiseaux {
     animation: none;
   }

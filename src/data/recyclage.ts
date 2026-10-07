@@ -156,8 +156,8 @@ export const faqRecyclage: FaqItem[] = [
   {
     question: "Combien de mégots pour fabriquer un banc ?",
     reponse:
-      "Environ 7 500. Deux bancs livrés à la mairie du 9e arrondissement de Paris ont demandé 15 000 mégots, soit 4,5 kg d'acétate de cellulose dépollué. Notre Mégothon du 23 mai 2026 en a ramassé 4 800 : un peu plus d'un demi-banc.",
-    lien: { href: "#bancs", label: "Compter les bancs" },
+      "Environ 7 500. Deux bancs livrés à la mairie du 9e arrondissement de Paris ont demandé 15 000 mégots, soit 4,5 kg d'acétate de cellulose dépollué.",
+    lien: { href: "#bancs", label: "Mégots par banc" },
   },
   {
     question: "Pourquoi y a-t-il un pictogramme sur les paquets de cigarettes ?",

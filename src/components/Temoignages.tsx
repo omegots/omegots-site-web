@@ -8,8 +8,9 @@ export function Temoignages() {
         <Reveal direction="rise" className="section-head is-center">
           <h2 className="display">Paroles de bénévoles.</h2>
           <p className="lede">
-            Ce qu&apos;en disent celles et ceux qui ont ramassé avec nous le 23
-            mai. Et bientôt vous ?
+            Ce qu&apos;en disent celles et ceux qui ont ramassé avec nous.
+            <br />
+            Et bientôt vous ?
           </p>
         </Reveal>
         <Stagger className="temoignages-grid" stagger={0.12}>

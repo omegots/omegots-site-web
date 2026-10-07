@@ -913,8 +913,8 @@ section:target .eyebrow::before {
   height: 20px;
 }
 
-.reseau:hover .reseau-icone,
-.reseau:focus-visible .reseau-icone {
+.reseau:not(.is-off):hover .reseau-icone,
+.reseau:not(.is-off):focus-visible .reseau-icone {
   transform: translateY(-2px);
 }
 
@@ -927,9 +927,14 @@ section:target .eyebrow::before {
 .foot .reseaux.is-icones {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  justify-content: flex-start;
+  gap: 8px;
   margin-top: auto;
   padding-top: 18px;
+}
+
+.foot .reseaux.is-icones > li {
+  flex: 0 0 auto;
 }
 
 .foot .reseaux.is-icones .reseau-texte {
@@ -945,8 +950,12 @@ section:target .eyebrow::before {
   color: rgba(245, 239, 224, 0.85);
 }
 
-.foot .reseaux.is-icones .reseau:hover .reseau-icone,
-.foot .reseaux.is-icones .reseau:focus-visible .reseau-icone {
+.foot .reseaux.is-icones .reseau.is-off {
+  opacity: 1;
+}
+
+.foot .reseaux.is-icones .reseau:not(.is-off):hover .reseau-icone,
+.foot .reseaux.is-icones .reseau:not(.is-off):focus-visible .reseau-icone {
   background: var(--mint);
   border-color: var(--mint);
   color: var(--navy-deep);
@@ -1011,6 +1020,7 @@ section:target .eyebrow::before {
 @media (max-width: 760px) {
   .foot .reseaux.is-icones {
     justify-content: center;
+    width: 100%;
   }
 
   .voie-reseaux {

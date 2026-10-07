@@ -1,4 +1,19 @@
-# O'Mégots
+import { fr } from "@/data/format";
+import { LITRES_EAU_PAR_MEGOT, megotsParLitre, prochaineSortie, ramassages, totals } from "@/data/ramassages";
+
+/** llms.txt, généré au build : les chiffres suivent src/data/contenu.json. */
+export const dynamic = "force-static";
+
+export function GET() {
+  const premiere = ramassages[0];
+  const t = totals();
+  const p = prochaineSortie();
+  const prochaine =
+    p.statut === "annoncee"
+      ? `${p.libelle || "Ramassage"} le ${p.date} à ${p.heure}, ${p.lieu}. Gratuit, ouvert à toutes et tous.`
+      : "Date à fixer. Alerte e-mail sur https://omegots.fr/ramassages#prochaine.";
+
+  const texte = `# O'Mégots
 
 > Association citoyenne loi 1901 basée à Besné (Loire-Atlantique, France). Elle organise des ramassages de mégots à Saint-Nazaire et dans ses alentours, compte ce qui est ramassé et publie les chiffres. Participer est gratuit et ouvert à tout âge ; l'adhésion est symbolique (1 euro).
 
@@ -12,15 +27,23 @@ Directeur de la publication : Romain Perrais (président)
 ## Ce que fait l'association
 
 - Ramassages ponctuels de mégots dans les rues, parcs, espaces verts, bords de Loire, sentiers, bords de route et plages de Saint-Nazaire et ses environs, ouverts à toutes et tous.
-- Comptage : chaque sortie est mesurée dans un contenant gradué (environ 800 mégots par litre) et les chiffres sont publiés.
+- Comptage : chaque sortie est mesurée dans un contenant gradué (environ ${fr(megotsParLitre())} mégots par litre) et les chiffres sont publiés.
 - Sensibilisation sans jugement des fumeurs : le mégot est un déchet, pas une faute.
-- Ambition : collaborer avec des filières de recyclage (mobilier urbain, cendriers, emballages industriels ; valorisation énergétique en dernier recours).
+- Ambition : collaborer avec des filières de recyclage (mobilier urbain, cendriers, emballages industriels, valorisation énergétique).
 
-## Première action : le Mégothon du 23 mai 2026
+## Première action : le ${premiere.libelle} du ${premiere.date}
 
-- Centre-ville de Saint-Nazaire, de la mairie au Paquebot.
-- 7 bénévoles, 2 heures de ramassage, 6 litres de mégots, soit environ 4 800 mégots.
-- Chiffre de sensibilisation utilisé par l'association : un mégot peut polluer jusqu'à 500 litres d'eau.
+- Centre-ville de Saint-Nazaire, ${premiere.lieu}.
+- ${premiere.benevoles} bénévoles${premiere.duree ? `, ${premiere.duree} de ramassage` : ""}, ${fr(premiere.litres)} litres de mégots, soit environ ${fr(premiere.megots)} mégots.
+- Chiffre de sensibilisation utilisé par l'association : un mégot peut polluer jusqu'à ${LITRES_EAU_PAR_MEGOT} litres d'eau.
+
+## Toutes les sorties
+
+- ${t.sorties} ${t.sorties > 1 ? "sorties" : "sortie"}, ${t.benevoles} bénévoles, ${fr(t.litres)} litres de mégots, soit environ ${fr(t.megots)} mégots.
+
+## Prochaine sortie
+
+- ${prochaine}
 
 ## Chiffres sourcés (détail et références sur https://omegots.fr/le-megot)
 
@@ -28,7 +51,7 @@ Directeur de la publication : Romain Perrais (président)
 - Plus de 7 000 substances dans la fumée d'une cigarette ; le filtre en retient une partie et la relâche dans l'eau (Novotny et al., 2009).
 - Plus de 23 milliards de mégots jetés au sol chaque année en France ; objectif de l'État : 40 % de moins d'ici 2027 (ministère de la Transition écologique, 2021).
 - En moyenne 1,3 mégot tous les dix mètres de rue en France, 4,5 dans les grandes villes (Alcome et ADEME, 2024).
-- « Jusqu'à 500 litres d'eau polluée par mégot » est un ordre de grandeur, pas une mesure de laboratoire.
+- « Jusqu'à ${LITRES_EAU_PAR_MEGOT} litres d'eau polluée par mégot » est un ordre de grandeur, pas une mesure de laboratoire.
 
 ## Presse
 
@@ -46,3 +69,7 @@ Directeur de la publication : Romain Perrais (président)
 - [Contact](https://omegots.fr/contact) : formulaire, adhésion, don.
 - [L'association](https://omegots.fr/association) : mission, principes, presse, fiche d'identité.
 - [Mentions légales et confidentialité](https://omegots.fr/mentions-legales)
+`;
+
+  return new Response(texte, { headers: { "Content-Type": "text/plain; charset=utf-8" } });
+}

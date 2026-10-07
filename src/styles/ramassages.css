@@ -283,6 +283,11 @@
   color: var(--ink2);
 }
 
+/* Le bilan chiffré (styles/megothon.css) avant les fiches. */
+#sorties .bilan {
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+
 /* --- Fiche d'une sortie ---------------------------------------------------- */
 
 .fiche + .fiche {
@@ -321,6 +326,11 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: clamp(24px, 4vw, 56px);
   align-items: start;
+}
+
+/* Une fiche sur deux : photos à gauche, chiffres à droite. */
+.fiche.is-inverse .fiche-chiffres {
+  order: 2;
 }
 
 .fiche-chiffres ul {
@@ -397,7 +407,25 @@
   background: rgba(245, 239, 224, 0.14);
 }
 
-.fiche-presse-media {
+/* Logo du média sur fond blanc, comme dans la section Presse de l'accueil ; nom en repli. */
+.fiche-presse .presse-logo {
+  display: flex;
+  align-items: center;
+  width: 96px;
+  height: 46px;
+  padding: 5px 8px;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.fiche-presse .presse-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.fiche-presse .presse-media {
   font: 800 11px/1 var(--font-display);
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -677,6 +705,11 @@
 
   .zones {
     grid-template-columns: 1fr;
+  }
+
+  /* Une seule colonne : les chiffres repassent toujours avant les photos. */
+  .fiche.is-inverse .fiche-chiffres {
+    order: 0;
   }
 }
 

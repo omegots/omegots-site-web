@@ -28,7 +28,7 @@ export default function MentionsLegalesPage() {
             <li>Forme juridique : association loi 1901</li>
             <li>Numéro RNA : W443012511</li>
             <li>Numéro de SIRET : 104 488 408 00014</li>
-            <li>Siège social : Besné (44160), Loire-Atlantique</li>
+            <li>Siège social : 12 rue de la Gériais, 44160 Besné</li>
             <li>
               Adresse e-mail : <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
             </li>
