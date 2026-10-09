@@ -270,6 +270,7 @@ function Champ({
 
 export function Admin() {
   const [motDePasse, setMotDePasse] = useState("");
+  const [voirMdp, setVoirMdp] = useState(false);
   const [connecte, setConnecte] = useState(false);
   const [chargement, setChargement] = useState(false);
   const [erreurGlobale, setErreurGlobale] = useState("");
@@ -335,14 +336,21 @@ export function Admin() {
           <Champ id="mdp" label="Mot de passe" erreur={erreurGlobale || undefined}>
             <input
               id="mdp"
-              type="password"
+              type={voirMdp ? "text" : "password"}
               autoComplete="current-password"
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck={false}
               value={motDePasse}
               onChange={(e) => setMotDePasse(e.target.value)}
               required
               aria-invalid={erreurGlobale ? true : undefined}
             />
           </Champ>
+          <label className="adm-voir">
+            <input type="checkbox" checked={voirMdp} onChange={(e) => setVoirMdp(e.target.checked)} />
+            Afficher le mot de passe
+          </label>
           <button className="adm-btn" type="submit" disabled={chargement || !motDePasse}>
             {chargement ? "Connexion…" : "Se connecter"}
           </button>

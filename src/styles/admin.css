@@ -547,3 +547,19 @@ label.adm-btn:focus-within {
   border-radius: 12px;
   background: var(--bg);
 }
+
+/* Case « Afficher le mot de passe » : vérifier ce qu'on a tapé, surtout au téléphone. */
+.adm-voir {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -4px 0 16px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.adm-voir input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--vert);
+}

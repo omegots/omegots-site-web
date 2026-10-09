@@ -29,16 +29,29 @@ export const enProduction = process.env.NODE_ENV === "production";
 
 /* --- Mot de passe ------------------------------------------------------------ */
 
+/**
+ * Nettoie un mot de passe avant comparaison : espaces et retours à la ligne en
+ * bord (copier-coller depuis un mail), guillemets autour de la valeur (collés
+ * dans Netlify avec la valeur), et forme Unicode unique (é composé ou non).
+ */
+function normaliser(mdp: string): string {
+  return mdp
+    .normalize("NFC")
+    .trim()
+    .replace(/^(["'«“])\s*(.*?)\s*(["'»”])$/u, "$2")
+    .trim();
+}
+
 /** Comparaison à temps constant : les deux côtés sont hachés à la même longueur. */
 export function motDePasseValide(saisi: string): boolean {
-  const attendu = process.env.ADMIN_PASSWORD;
+  const attendu = normaliser(process.env.ADMIN_PASSWORD ?? "");
   if (!attendu) {
     throw new ErreurAdmin(
       "L'interface n'est pas encore configurée : le mot de passe n'a pas été défini sur l'hébergement.",
       503,
     );
   }
-  const a = createHash("sha256").update(saisi, "utf8").digest();
+  const a = createHash("sha256").update(normaliser(saisi), "utf8").digest();
   const b = createHash("sha256").update(attendu, "utf8").digest();
   return timingSafeEqual(a, b);
 }
