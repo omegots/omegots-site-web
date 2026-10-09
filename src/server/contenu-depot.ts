@@ -98,10 +98,23 @@ export function effacerEchecs(ip: string) {
 
 export type FichierContenu = { texte: string; sha: string };
 
+/** Retire espaces, guillemets et retours à la ligne collés avec une valeur. */
+function nettoyer(v: string | undefined): string {
+  return (v ?? "").trim().replace(/^["']|["']$/g, "").trim();
+}
+
+/**
+ * Réglages GitHub, tolérants aux variantes courantes : URL complète du dépôt,
+ * « .git » final, barre oblique en trop (« https://github.com/omegots/site.git »
+ * devient « omegots/site »).
+ */
 function configGithub() {
-  const token = process.env.GITHUB_TOKEN;
-  const repo = process.env.GITHUB_REPO;
-  const branch = process.env.GITHUB_BRANCH || "main";
+  const token = nettoyer(process.env.GITHUB_TOKEN);
+  const repo = nettoyer(process.env.GITHUB_REPO)
+    .replace(/^(https?:\/\/)?(www\.)?github\.com\//i, "")
+    .replace(/\.git$/i, "")
+    .replace(/^\/+|\/+$/g, "");
+  const branch = nettoyer(process.env.GITHUB_BRANCH).replace(/^refs\/heads\//, "") || "main";
   if (!token || !repo) {
     throw new ErreurAdmin(
       "L'enregistrement n'est pas encore configuré sur l'hébergement (jeton GitHub ou nom du dépôt manquant).",
@@ -166,6 +179,33 @@ function erreurGithub(res: Response): ErreurAdmin {
   }
 }
 
+/**
+ * GitHub répond « introuvable » aussi bien pour un dépôt inexistant que pour un
+ * dépôt privé auquel le jeton n'a pas accès. On cherche lequel des trois
+ * (dépôt, branche, fichier) coince, pour un message qui dit quoi corriger.
+ */
+async function diagnostic404(token: string, repo: string, branch: string): Promise<ErreurAdmin> {
+  const depot = await appelGithub(`https://api.github.com/repos/${repo}`, token);
+  if (depot.status === 404 || depot.status === 403) {
+    return new ErreurAdmin(
+      `Le jeton GitHub ne voit pas le dépôt « ${repo} ». Soit le nom dans GITHUB_REPO est faux, soit le jeton n'a pas accès à ce dépôt : sur GitHub, vérifiez que le jeton a bien « ${repo} » dans « Only select repositories », avec le bon « Resource owner », et, si le dépôt appartient à une organisation, que le jeton y est approuvé.`,
+      502,
+    );
+  }
+  if (!depot.ok) return erreurGithub(depot);
+  const branche = await appelGithub(`https://api.github.com/repos/${repo}/branches/${encodeURIComponent(branch)}`, token);
+  if (branche.status === 404) {
+    return new ErreurAdmin(
+      `Le dépôt « ${repo} » est bien accessible, mais la branche « ${branch} » n'existe pas. Corrigez GITHUB_BRANCH sur Netlify (en général « main »).`,
+      502,
+    );
+  }
+  return new ErreurAdmin(
+    `Le dépôt et la branche sont accessibles, mais le fichier ${CHEMIN_DEPOT} est introuvable sur « ${branch} ». Vérifiez que c'est bien la branche publiée par Netlify.`,
+    502,
+  );
+}
+
 function urlContenu(repo: string): string {
   return `https://api.github.com/repos/${repo}/contents/${CHEMIN_DEPOT}`;
 }
@@ -186,6 +226,7 @@ export async function lireContenu(): Promise<FichierContenu> {
   }
   const { token, repo, branch } = configGithub();
   const res = await appelGithub(`${urlContenu(repo)}?ref=${encodeURIComponent(branch)}`, token);
+  if (res.status === 404) throw await diagnostic404(token, repo, branch);
   if (!res.ok) throw erreurGithub(res);
   const json: unknown = await res.json();
   if (typeof json !== "object" || json === null || !("content" in json) || !("sha" in json)) {
