@@ -22,12 +22,6 @@
       "note": "Première action de l'association, dans le centre-ville.",
       "photos": [
         {
-          "src": "/photos/megothon-groupe.jpg",
-          "alt": "Les bénévoles du Mégothon réunis devant la mairie de Saint-Nazaire.",
-          "w": 1200,
-          "h": 900
-        },
-        {
           "src": "/photos/sorties/2026-05-23-af4816b6.jpg",
           "alt": "Six bouteilles remplies de mégots ramassés, posées sur un muret.",
           "w": 1600,
@@ -36,6 +30,12 @@
         {
           "src": "/photos/sorties/2026-05-23-b99f398c.jpg",
           "alt": "Un bénévole ramasse des mégots au sol, à la pince.",
+          "w": 1200,
+          "h": 1600
+        },
+        {
+          "src": "/photos/sorties/2026-05-23-c3efb9e1.jpg",
+          "alt": "Les bénévoles du Mégothon réunis devant la mairie de Saint-Nazaire.",
           "w": 1200,
           "h": 1600
         }
