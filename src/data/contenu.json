@@ -42,13 +42,23 @@
       ]
     },
     {
-      "date": "Date à préciser",
-      "libelle": "Deuxième sortie",
-      "lieu": "lieu à préciser",
+      "date": "4 octobre 2026",
+      "iso": "2026-10-04",
+      "libelle": "Nettoyons La Nature",
+      "lieu": "Commune de Besné",
+      "duree": "2h",
       "litres": 1.25,
       "megots": 1000,
       "benevoles": 5,
-      "note": "Détails à venir."
+      "note": "",
+      "photos": [
+        {
+          "src": "/photos/sorties/2026-10-04-0f3ad52a.jpg",
+          "alt": "Photos des bénévoles qui ont dépollués les rue de Besné",
+          "w": 1024,
+          "h": 768
+        }
+      ]
     }
   ],
   "temoignages": [
