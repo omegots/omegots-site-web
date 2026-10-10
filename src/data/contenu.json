@@ -28,16 +28,16 @@
           "h": 900
         },
         {
-          "src": "/photos/megothon-ramassage.jpg",
-          "alt": "Un bénévole ramasse des mégots au sol, à la pince.",
-          "w": 1200,
-          "h": 900
+          "src": "/photos/sorties/2026-05-23-af4816b6.jpg",
+          "alt": "Six bouteilles remplies de mégots ramassés, posées sur un muret.",
+          "w": 1600,
+          "h": 1200
         },
         {
-          "src": "/photos/megothon-bouteilles.jpg",
-          "alt": "Six bouteilles remplies de mégots ramassés, posées sur un muret.",
+          "src": "/photos/sorties/2026-05-23-b99f398c.jpg",
+          "alt": "Un bénévole ramasse des mégots au sol, à la pince.",
           "w": 1200,
-          "h": 1026
+          "h": 1600
         }
       ]
     },
@@ -57,6 +57,18 @@
           "alt": "Photos des bénévoles qui ont dépollués les rue de Besné",
           "w": 1024,
           "h": 768
+        },
+        {
+          "src": "/photos/sorties/2026-10-04-e485ba1c.jpg",
+          "alt": "Photo des mégots récoltés",
+          "w": 1600,
+          "h": 1200
+        },
+        {
+          "src": "/photos/sorties/2026-10-04-3cad503e.jpg",
+          "alt": "Photo des mégots récoltées dans un contenant à megots",
+          "w": 1200,
+          "h": 1600
         }
       ]
     }
