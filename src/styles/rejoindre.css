@@ -234,6 +234,21 @@
   width: 100%;
 }
 
+.adherer-dossier {
+  display: block;
+  margin-top: 14px;
+  text-align: center;
+  font: 600 14px/1.4 var(--font-body);
+  color: var(--vert);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.adherer-dossier:hover,
+.adherer-dossier:focus-visible {
+  color: var(--navy);
+}
+
 .adherer-securite {
   margin-top: 12px;
   font-size: 13px;

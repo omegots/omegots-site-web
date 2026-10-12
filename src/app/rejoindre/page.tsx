@@ -10,7 +10,7 @@ import { WaveDivider } from "@/components/WaveDivider";
 import { FaireUnDon } from "@/components/rejoindre/FaireUnDon";
 import { HeroRejoindre } from "@/components/rejoindre/HeroRejoindre";
 import { Partager } from "@/components/rejoindre/Partager";
-import { aides, etapes, faqRejoindre, implique, PAYASSO_ADHESION } from "@/data/rejoindre";
+import { aides, DOSSIER_ADHESION, etapes, faqRejoindre, implique, PAYASSO_ADHESION } from "@/data/rejoindre";
 import { reseaux } from "@/data/reseaux";
 import "@/styles/megot.css";
 import "@/styles/ramassages.css";
@@ -129,6 +129,9 @@ export default function RejoindrePage() {
               </ul>
               <a className="btn btn-lg" href={PAYASSO_ADHESION} target="_blank" rel="noopener noreferrer">
                 Adhérer en ligne
+              </a>
+              <a className="adherer-dossier" href={DOSSIER_ADHESION} download>
+                Télécharger le dossier d&apos;adhésion
               </a>
               <p className="adherer-securite">
                 Paiement sécurisé par Crédit Mutuel Pay Asso, solution dédiée aux associations. Vos informations servent

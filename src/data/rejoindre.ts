@@ -7,6 +7,8 @@ import type { FaqItem } from "@/data/faq";
  */
 export const PAYASSO_ADHESION = "https://www.payasso.fr/association-o-megots/adhesion";
 export const PAYASSO_DON = "https://www.payasso.fr/association-o-megots/nous-soutenir";
+/** Dossier d'adhésion PDF, servi depuis public/. */
+export const DOSSIER_ADHESION = "/adhesion.pdf";
 
 export const etapes = [
   {

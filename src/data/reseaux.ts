@@ -7,7 +7,7 @@ export type Reseau = {
   href: string;
 };
 
-/** Réseaux de l'association : Instagram, Facebook, la chaîne WhatsApp et l'e-mail (cartes de la page Nous rejoindre). */
+/** Réseaux de l'association : Instagram, Facebook, la communauté WhatsApp et l'e-mail (cartes de la page Nous rejoindre). */
 export const reseaux: Reseau[] = [
   {
     id: "instagram",
@@ -19,13 +19,13 @@ export const reseaux: Reseau[] = [
     id: "facebook",
     nom: "Facebook",
     texte: "Les annonces, les événements et les articles qui parlent de nous.",
-    href: "",
+    href: "https://www.facebook.com/profile.php?id=61590220027067",
   },
   {
     id: "whatsapp",
-    nom: "Chaîne WhatsApp",
+    nom: "Communauté WhatsApp",
     texte: "Les prochaines dates en direct, pour ne rater aucune sortie.",
-    href: "",
+    href: "https://chat.whatsapp.com/InUWPAxymyt4Yvk10tto9c",
   },
   {
     id: "email",
