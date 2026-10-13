@@ -11,7 +11,7 @@ import {
   useScroll,
   useSpring,
 } from "motion/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Logo } from "./Logo";
 import { useMediaQuery } from "./motion/useMediaQuery";
 
@@ -42,6 +42,8 @@ const itemVariants = {
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
   const reduce = useReducedMotion();
   const mobile = useMediaQuery("(max-width: 900px)");
   const pathname = usePathname();
@@ -72,10 +74,24 @@ export function Header() {
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key !== "Escape") return;
+      setOpen(false);
+      toggleRef.current?.focus();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  /* Menu ouvert : la page derrière devient inerte, la touche Tab reste dans
+     le menu au lieu de partir sur des liens cachés par le panneau. */
+  useEffect(() => {
+    if (!open) return;
+    const header = headerRef.current;
+    const autres = [...(header?.parentElement?.children ?? [])].filter(
+      (el): el is HTMLElement => el !== header && el instanceof HTMLElement,
+    );
+    autres.forEach((el) => (el.inert = true));
+    return () => autres.forEach((el) => (el.inert = false));
   }, [open]);
 
   /* Fermer le menu si on repasse en desktop. */
@@ -90,7 +106,7 @@ export function Header() {
   const showList = !mobile || open;
 
   return (
-    <header className={`site-header${scrolled ? " is-scrolled" : ""}${open ? " is-nav-open" : ""}`}>
+    <header ref={headerRef} className={`site-header${scrolled ? " is-scrolled" : ""}${open ? " is-nav-open" : ""}`}>
       <div className="wrap nav">
         <Link
           href="/#top"
@@ -103,6 +119,7 @@ export function Header() {
         </Link>
 
         <button
+          ref={toggleRef}
           type="button"
           className={`nav-toggle${open ? " is-open" : ""}`}
           aria-expanded={open}
