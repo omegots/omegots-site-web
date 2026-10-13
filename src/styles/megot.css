@@ -254,7 +254,10 @@
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.02em;
-  white-space: nowrap;
+  /* Une ligne tant que ça tient, deux sur les petits téléphones (320 px). */
+  width: max-content;
+  max-width: calc(100% - 24px);
+  text-align: center;
   box-shadow: 0 10px 28px rgba(15, 53, 80, 0.2);
   animation: aqua-pulse 2.4s ease-in-out infinite;
   pointer-events: none;

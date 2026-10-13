@@ -362,6 +362,14 @@
   font-weight: 600;
 }
 
+/* Tant que la page n'a pas de marge autour du .wrap (< 1230 px), l'étiquette
+   sortait de 22 px et touchait le bord de l'écran (tablette paysage). */
+@media (max-width: 1230px) {
+  .hero-notif {
+    right: -8px;
+  }
+}
+
 @media (max-width: 860px) {
   .hero-visuel {
     width: 100%;

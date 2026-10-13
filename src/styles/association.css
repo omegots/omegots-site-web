@@ -346,7 +346,8 @@
 .contact-form select,
 .contact-form textarea {
   width: 100%;
-  font: 500 15px/1.4 var(--font-body);
+  /* 16 px minimum : en dessous, Safari iOS zoome la page au focus du champ. */
+  font: 500 16px/1.4 var(--font-body);
   color: var(--ink);
   padding: 12px 14px;
   border-radius: 12px;
@@ -406,7 +407,7 @@
   .mission-actions,
   .identite,
   .contact {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .valeurs {

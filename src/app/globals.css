@@ -59,6 +59,9 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
+  /* Un mot plus large que sa colonne (adresse e-mail sur un petit écran) passe
+     à la ligne au lieu d'être rogné par le overflow-x: clip ci-dessus. */
+  overflow-wrap: break-word;
 }
 
 a {
@@ -1109,7 +1112,8 @@ html:has(.site-header.is-nav-open) {
 .prevenir-form input[type="email"] {
   flex: 1;
   min-width: 0;
-  font: 500 15px var(--font-body);
+  /* 16 px minimum : en dessous, Safari iOS zoome la page au focus du champ. */
+  font: 500 16px var(--font-body);
   color: var(--ink);
   padding: 14px 16px;
   border-radius: 999px;

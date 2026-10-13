@@ -455,6 +455,13 @@ section:target .eyebrow::before {
   text-wrap: balance;
 }
 
+/* Petits téléphones : « confidentialité. » en 34 px dépassait de l'écran. */
+@media (max-width: 380px) {
+  .page-head h1 {
+    font-size: clamp(28px, 9.4vw, 34px);
+  }
+}
+
 /* Mot mis en avant dans un titre de page : l'orange de la charte. */
 .page-head h1 .accent-orange {
   color: var(--orange);
@@ -977,6 +984,7 @@ section:target .eyebrow::before {
 
 .reseaux.is-cartes {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
 }
 
@@ -1006,10 +1014,14 @@ section:target .eyebrow::before {
 .reseaux.is-cartes .reseau-texte {
   display: grid;
   gap: 2px;
+  min-width: 0;
 }
 
+/* L'adresse e-mail est un seul « mot » : elle se coupe plutôt que
+   d'élargir la carte au-delà de l'écran sur téléphone. */
 .reseaux.is-cartes .reseau-nom {
   font-weight: 600;
+  overflow-wrap: anywhere;
 }
 
 .reseaux.is-cartes .reseau-desc {
@@ -1043,7 +1055,7 @@ section:target .eyebrow::before {
 
 .page-head-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
   gap: clamp(24px, 4vw, 56px);
 }
@@ -1128,7 +1140,7 @@ section:target .eyebrow::before {
 
 @media (max-width: 860px) {
   .page-head.has-visuel .page-head-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   /* Dès qu'on est en une colonne : titre, texte et CTA centrés (toutes pages PageShell). */
