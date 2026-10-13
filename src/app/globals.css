@@ -1707,7 +1707,8 @@ html:has(.site-header.is-nav-open) {
     letter-spacing: 0.08em;
     color: var(--vert-ink);
     opacity: 0.75;
-    min-width: 1.5em;
+    /* Plus large que « 02 » : « 01 », plus étroit, décalait « Accueil » de 4 px. */
+    min-width: 2.2em;
   }
 
   .nav-menu-label {

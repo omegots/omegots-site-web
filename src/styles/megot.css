@@ -413,6 +413,8 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
+  /* Sans ce reset, le retrait par défaut de la liste (40 px) décalait les cartes. */
+  padding: 0;
 }
 
 .equiv li {
@@ -721,7 +723,8 @@
   color: var(--cream);
 }
 
-.cs-tuile sup {
+/* Le « er » de « 1er » seulement : les renvois aux sources gardent leur taille. */
+.cs-tuile b sup {
   font-size: 0.45em;
   vertical-align: top;
   line-height: 1;

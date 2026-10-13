@@ -584,8 +584,11 @@ section:target .eyebrow::before {
 
 /* --- Mentions légales --------------------------------------------------- */
 
+/* Colonne de lecture centrée sous le titre de page, lui-même centré
+   (sur tablette et au-delà, elle restait collée à gauche). */
 .legal {
   max-width: 760px;
+  margin-inline: auto;
 }
 
 .legal h2 {
@@ -611,7 +614,7 @@ section:target .eyebrow::before {
 }
 
 .legal ul {
-  margin: 0;
+  margin: 8px 0 12px;
   padding-left: 18px;
 }
 
@@ -806,6 +809,15 @@ section:target .eyebrow::before {
 
 .foot-brand .foot-logo {
   margin-bottom: 14px;
+}
+
+/* Tablette (761–960 px), grille à deux colonnes : la marque, centrée, prend
+   toute la largeur, « Le site » et « Contact » se partagent la ligne suivante
+   (sinon Contact passait sous la marque et laissait une colonne vide). */
+@media (min-width: 761px) and (max-width: 960px) {
+  .foot .foot-brand {
+    grid-column: 1 / -1;
+  }
 }
 
 .foot-brand p {

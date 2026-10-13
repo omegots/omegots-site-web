@@ -1,4 +1,5 @@
 import type { FaqItem } from "@/data/faq";
+import { insecables } from "@/data/typo";
 import { Reveal } from "./Reveal";
 
 type FaqProps = {
@@ -46,12 +47,12 @@ export function Faq({ items, titre, lede, id = "faq" }: FaqProps) {
                 <span className="faq-n display" aria-hidden="true">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="faq-q-text">{item.question}</span>
+                <span className="faq-q-text">{insecables(item.question)}</span>
                 <span className="faq-plus" aria-hidden="true" />
               </summary>
               <div className="faq-a">
                 <div className="faq-a-inner">
-                  <p>{item.reponse}</p>
+                  <p>{insecables(item.reponse)}</p>
                   {item.lien && (
                     <a className="faq-lien" href={item.lien.href}>
                       {item.lien.label}

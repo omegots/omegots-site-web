@@ -439,6 +439,18 @@
   justify-self: start;
 }
 
+/* La section est sur bleu nuit, mais la carte est crème : sans ce retour à
+   l'encre, « .surface-navy .btn.ghost » rendait les boutons crème sur crème. */
+.surface-navy .aide .btn.ghost {
+  color: var(--ink);
+  border-color: currentColor;
+}
+
+.surface-navy .aide .btn.ghost:hover {
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  border-color: currentColor;
+}
+
 /* --- Tablette et mobile -------------------------------------------------- */
 
 @media (max-width: 960px) {

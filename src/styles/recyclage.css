@@ -408,7 +408,9 @@
 
 .lim-barre {
   display: grid;
-  grid-template-columns: 1fr auto;
+  /* Colonne des valeurs à largeur fixe : avec « auto », la piste de « 15 t »
+     était plus longue que celle de « 25 000 t » et faussait la comparaison. */
+  grid-template-columns: minmax(0, 1fr) 5.5em;
   gap: 6px 16px;
   align-items: center;
 }

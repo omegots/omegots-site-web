@@ -308,3 +308,13 @@
     margin-inline: auto;
   }
 }
+
+/* Téléphone à l'horizontale (390 px de haut) : le plateau et le score tiennent
+   ensemble sous l'en-tête collant (le min-height de 340 px les faisait déborder). */
+@media (orientation: landscape) and (max-height: 500px) {
+  .maree-plateau,
+  .jeu-page .maree-plateau {
+    height: calc(100svh - var(--header-h) - 64px);
+    min-height: 220px;
+  }
+}

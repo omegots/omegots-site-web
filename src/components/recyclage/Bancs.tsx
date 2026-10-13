@@ -15,8 +15,8 @@ export function Bancs() {
           <span>mégots pour fabriquer un banc</span>
         </p>
         <p className="bancs-texte">
-          C&apos;est le rapport constaté sur deux bancs livrés à la mairie du 9e arrondissement de Paris : 15 000
-          mégots, soit 4,5 kg d&apos;acétate de cellulose dépollué.
+          C&apos;est le rapport constaté sur deux bancs livrés à la mairie du 9e arrondissement de Paris&nbsp;:
+          15&nbsp;000&nbsp;mégots, soit 4,5 kg d&apos;acétate de cellulose dépollué.
           <Ref ids={[3]} liste={sourcesRecyclage} />
         </p>
       </div>

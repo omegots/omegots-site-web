@@ -58,7 +58,9 @@ export function Megothon() {
                         alt={r.photos[0].alt}
                         fill
                         quality={60}
-                        sizes="(max-width: 860px) 120px, 380px"
+                        /* Sous 860 px, la case fait 120 px de large mais jusqu'à 300 px de haut :
+                           la photo, recadrée en hauteur, a besoin d'une source plus large. */
+                        sizes="(max-width: 860px) 320px, 380px"
                       />
                     ) : (
                       <svg viewBox="-30 -30 60 40" aria-hidden="true">

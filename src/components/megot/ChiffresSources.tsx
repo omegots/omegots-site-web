@@ -27,7 +27,8 @@ function Tuile({ tuile, active }: { tuile: (typeof chiffresSources)[number]; act
               {valeur.toLocaleString("fr-FR", { minimumFractionDigits: decimal ? 1 : 0 })}
             </span>
             <span className="sr-only">{tuile.valeur.toLocaleString("fr-FR")}</span>
-            {tuile.unite === "%" ? " %" : ` ${tuile.unite}`}
+            {/* Espace insécable : « 23 milliards » ne se coupe pas entre le nombre et l'unité. */}
+            {tuile.unite === "%" ? "\u00a0%" : `\u00a0${tuile.unite}`}
           </>
         )}
       </b>

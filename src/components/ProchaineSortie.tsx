@@ -1,4 +1,5 @@
 import { prochaineSortie } from "@/data/ramassages";
+import { insecables } from "@/data/typo";
 import { FormPrevenir, type EtatPrevenir } from "./FormPrevenir";
 import { Reveal } from "./Reveal";
 
@@ -34,7 +35,9 @@ export function ProchaineSortie({
   const p = prochaineSortie();
   const annoncee = p.statut === "annoncee";
 
-  const titre = annoncee ? `${p.libelle || "Prochain ramassage"} : ${p.date}.` : "Le prochain ramassage arrive.";
+  const titre = insecables(
+    annoncee ? `${p.libelle || "Prochain ramassage"} : ${p.date}.` : "Le prochain ramassage arrive.",
+  );
   const texte = annoncee
     ? [
         p.heure ? `Rendez-vous à ${p.heure}, ${p.lieu}` : `Horaire à venir, ${p.lieu}`,
@@ -55,7 +58,7 @@ export function ProchaineSortie({
         ) : (
           <p className="megothon-next-title display">{titre}</p>
         )}
-        <p className="megothon-next-text">{texte}</p>
+        <p className="megothon-next-text">{insecables(texte)}</p>
         {details && (
           <p className="prochaine-quand">
             <span>
