@@ -562,6 +562,32 @@ section:target .eyebrow::before {
   }
 }
 
+/* Page 404 : les cartes sont des liens vers les pages principales. */
+.introuvable-chemins {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a.voie-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s var(--ease-out);
+}
+
+a.voie-card:hover {
+  border-color: var(--orange);
+  transform: translateY(-2px);
+}
+
+a.voie-card:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+
 /* Crédit GHIS (logo « GHIS! ») : logo en pixels, lien dofollow (contrepartie contractuelle). */
 .foot-legal .foot-ghis {
   display: inline-flex;
