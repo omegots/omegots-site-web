@@ -1,4 +1,5 @@
 import { pageMetadata } from "@/data/seo";
+import { avecCoupureArobase } from "@/components/Arobase";
 import { PageShell } from "@/components/PageShell";
 
 export const metadata = pageMetadata({
@@ -30,7 +31,7 @@ export default function MentionsLegalesPage() {
             <li>Numéro de SIRET : 104 488 408 00014</li>
             <li>Siège social : 12 rue de la Gériais, 44160 Besné</li>
             <li>
-              Adresse e-mail : <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+              Adresse e-mail : <a href={`mailto:${EMAIL}`}>{avecCoupureArobase(EMAIL)}</a>
             </li>
             <li>
               Téléphone : <a href={TEL_HREF}>{TEL}</a>
@@ -43,7 +44,7 @@ export default function MentionsLegalesPage() {
             Le directeur de la publication est Romain Perrais, président de
             l&apos;association. Pour tout contact,{" "}
             <a href="/contact">écrivez-nous via le formulaire</a> ou à{" "}
-            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
+            <a href={`mailto:${EMAIL}`}>{avecCoupureArobase(EMAIL)}</a>.
           </p>
 
           <h2>Hébergement</h2>
@@ -119,7 +120,7 @@ export default function MentionsLegalesPage() {
             d&apos;un droit d&apos;accès, de rectification, d&apos;effacement,
             de limitation, d&apos;opposition et de portabilité des données vous
             concernant. Pour les exercer, écrivez à{" "}
-            <a href={`mailto:${EMAIL}`}>{EMAIL}</a> : nous répondons dans un
+            <a href={`mailto:${EMAIL}`}>{avecCoupureArobase(EMAIL)}</a> : nous répondons dans un
             délai d&apos;un mois. Si vous estimez, après nous avoir contactés,
             que vos droits ne sont pas respectés, vous pouvez adresser une
             réclamation à la CNIL (<a href="https://www.cnil.fr">www.cnil.fr</a>).

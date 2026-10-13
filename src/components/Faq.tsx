@@ -1,5 +1,6 @@
 import type { FaqItem } from "@/data/faq";
 import { insecables } from "@/data/typo";
+import { avecCoupureArobase } from "./Arobase";
 import { Reveal } from "./Reveal";
 
 type FaqProps = {
@@ -52,7 +53,7 @@ export function Faq({ items, titre, lede, id = "faq" }: FaqProps) {
               </summary>
               <div className="faq-a">
                 <div className="faq-a-inner">
-                  <p>{insecables(item.reponse)}</p>
+                  <p>{avecCoupureArobase(insecables(item.reponse))}</p>
                   {item.lien && (
                     <a className="faq-lien" href={item.lien.href}>
                       {item.lien.label}

@@ -1,4 +1,5 @@
 import { reseaux, type Reseau } from "@/data/reseaux";
+import { avecCoupureArobase } from "./Arobase";
 
 function Icone({ id }: { id: Reseau["id"] }) {
   const common = { viewBox: "0 0 24 24", "aria-hidden": true, focusable: false } as const;
@@ -65,7 +66,7 @@ export function Reseaux({ variant }: Props) {
               <Icone id={r.id} />
             </span>
             <span className="reseau-texte">
-              <span className="reseau-nom">{r.nom}</span>
+              <span className="reseau-nom">{avecCoupureArobase(r.nom)}</span>
               {cartes && <span className="reseau-desc">{r.texte}</span>}
             </span>
           </>
