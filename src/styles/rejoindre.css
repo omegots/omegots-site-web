@@ -193,7 +193,10 @@
   margin-bottom: 14px;
 }
 
+/* « 1 € » ne se coupe jamais entre le chiffre et le symbole. */
 .adherer-prix b {
+  flex: none;
+  white-space: nowrap;
   font: 800 clamp(48px, 5vw, 64px) / 1 var(--font-display);
   letter-spacing: -0.03em;
   color: var(--vert);

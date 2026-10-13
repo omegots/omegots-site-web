@@ -290,7 +290,7 @@
   display: grid;
   gap: 3px;
   width: max-content;
-  max-width: 290px;
+  max-width: 310px;
   padding: 12px 18px 14px 16px;
   border: 2.5px solid var(--ink);
   border-radius: 14px;
@@ -341,8 +341,10 @@
   overflow: visible;
 }
 
+/* La date passe à la ligne plutôt que de déborder de l'étiquette
+   (« mercredi 30 septembre » ne tient pas sur une ligne). */
 .hero-notif-date {
-  white-space: nowrap;
+  text-wrap: balance;
   font-size: 22px;
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -370,7 +372,11 @@
   .hero-notif {
     top: -20px;
     right: 6px;
-    max-width: 240px;
+    max-width: min(280px, calc(100% - 16px));
+  }
+
+  .hero-notif-date {
+    font-size: 19px;
   }
 }
 
