@@ -71,6 +71,25 @@
           "h": 1600
         }
       ]
+    },
+    {
+      "date": "7 novembre 2026",
+      "iso": "2026-11-07",
+      "libelle": "Mois sans tabac",
+      "lieu": "Pontchâteau et Crossac",
+      "duree": "2 h",
+      "litres": 4,
+      "megots": 4000,
+      "benevoles": 15,
+      "note": "",
+      "photos": [
+        {
+          "src": "/photos/sorties/2026-11-07-6717f7bb.jpg",
+          "alt": "Crossac se mélange à nous.",
+          "w": 1200,
+          "h": 1600
+        }
+      ]
     }
   ],
   "temoignages": [
