@@ -84,14 +84,20 @@
       "note": "",
       "photos": [
         {
-          "src": "/photos/sorties/2026-11-07-8ceb82fe.jpg",
-          "alt": "Petit plaisir sucré",
+          "src": "/photos/sorties/2026-11-07-1b9428f3.jpg",
+          "alt": "Photo de groupe.",
+          "w": 1200,
+          "h": 1600
+        },
+        {
+          "src": "/photos/sorties/2026-11-07-d0fb5eef.jpg",
+          "alt": "petit plaisir sucrée",
           "w": 1600,
           "h": 1018
         },
         {
-          "src": "/photos/sorties/2026-11-07-65437783.jpg",
-          "alt": "Crossac se rejoint à nous",
+          "src": "/photos/sorties/2026-11-07-acfdfc9d.jpg",
+          "alt": "Crossac se rejoint à nous.",
           "w": 1200,
           "h": 1600
         }
